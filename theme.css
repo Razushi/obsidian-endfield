@@ -300,8 +300,13 @@
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+.workspace-split.mod-left-split .workspace-tab-header-container-inner {
+  display: flex;
+  width: 100%;
+}
+
 .workspace-split.mod-left-split .workspace-tab-header {
-  color: #ffffff !important;
+  color: rgba(255,255,255,0.68) !important;
   padding: 5px;
   border-radius: 6px;
   position: relative;
@@ -310,12 +315,14 @@
   margin: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  transition: color 0.12s, background 0.12s;
+  background: transparent !important;
+  transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header svg {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
+  color: currentColor !important;
+  stroke: currentColor !important;
+  transition: color 0.15s, stroke 0.15s;
 }
 
 /* Suppress Obsidian's inner hover highlight — we style the outer element */
@@ -326,8 +333,9 @@
 }
 
 .workspace-split.mod-left-split .workspace-tab-header:hover {
-  color: #ffffff !important;
-  background: rgba(212,200,0, 0.3) !important;
+  color: #d4c800 !important;
+  background: rgba(212,200,0,0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.5) !important;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header.is-active {
@@ -349,18 +357,21 @@
   height: 16px !important;
 }
 
-/* New tab + button vertically centred with the icons */
+/* New tab + button pushed to far right */
 .workspace-split.mod-left-split .workspace-tab-header-new-tab {
+  margin-left: auto;
   align-self: center;
-  color: var(--ef-chrome-text-faint);
+  color: rgba(255,255,255,0.68);
   border-radius: 6px;
   padding: 4px 6px;
-  transition: color 0.12s, background 0.12s;
+  background: transparent;
+  transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header-new-tab:hover {
-  color: var(--ef-chrome-text);
-  background: rgba(255,255,255,0.05);
+  color: #d4c800;
+  background: rgba(212,200,0,0.04);
+  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.5);
 }
 
 
@@ -370,10 +381,10 @@
 
 /* Section-label chrome — file explorer is panel depth, outline is editor depth */
 .workspace-leaf-content[data-type="file-explorer"] .view-header {
-  background: var(--ef-bg-panel);
+  background: transparent;
 }
 .workspace-leaf-content[data-type="outline"] .view-header {
-  background: var(--ef-bg-editor);
+  background: transparent;
 }
 .workspace-leaf-content[data-type="file-explorer"] .view-header,
 .workspace-leaf-content[data-type="outline"] .view-header {
@@ -390,9 +401,9 @@
 .workspace-leaf-content[data-type="outline"] .view-header::before {
   display: block;
   order: 1;
-  font-size: 9px;
+  font-size: var(--ef-ui-size);
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: #d4c800;
   font-family: var(--font-interface);
@@ -410,17 +421,8 @@
 
 .workspace-leaf-content[data-type="file-explorer"] .view-header::after,
 .workspace-leaf-content[data-type="outline"] .view-header::after {
-  content: '';
-  order: 2;
-  flex: 1 1 auto;
-  height: 1px;
-  margin: 0 12px;
-  background: linear-gradient(
-    90deg,
-    rgba(212,200,0,0.22) 0%,
-    rgba(255,255,255,0.09) 24%,
-    rgba(255,255,255,0.02) 100%
-  );
+  content: none;
+  display: none;
 }
 
 .workspace-leaf-content[data-type="file-explorer"] .view-header-title-container,
@@ -428,6 +430,57 @@
 .workspace-leaf-content[data-type="file-explorer"] .view-header-title,
 .workspace-leaf-content[data-type="outline"] .view-header-title {
   display: none;
+}
+
+/* Plugin-backed panel labels: plain text only, no header slab */
+.view-header.endfield-panel-header-ready,
+.endfield-panel-header,
+.endfield-file-explorer-chrome {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.view-header.endfield-panel-header-ready {
+  min-height: auto !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.endfield-panel-header,
+.endfield-file-explorer-chrome {
+  min-height: auto !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-right: 8px !important;
+}
+
+.endfield-panel-title,
+.endfield-file-explorer-title {
+  font-size: var(--ef-ui-size) !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+  white-space: nowrap !important;
+}
+
+.endfield-panel-rule,
+.endfield-file-explorer-rule {
+  display: none !important;
+}
+
+.endfield-file-explorer-title {
+  margin-left: 34px !important;
+}
+
+.workspace-leaf-content[data-type="outline"] .endfield-panel-title {
+  margin-left: 28px !important;
 }
 
 .workspace-leaf-content[data-type="file-explorer"] .view-actions,
@@ -1547,6 +1600,11 @@ li[data-task="x"] > p {
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+.workspace-split.mod-right-split .workspace-tab-header-container-inner {
+  display: flex;
+  width: 100%;
+}
+
 .workspace-split.mod-right-split .workspace-tab-header {
   color: #ffffff !important;
   padding: 5px;
@@ -1571,8 +1629,9 @@ li[data-task="x"] > p {
 }
 
 .workspace-split.mod-right-split .workspace-tab-header:hover {
-  color: #ffffff !important;
-  background: rgba(255,255,255,0.08) !important;
+  color: #d4c800 !important;
+  background: rgba(212,200,0,0.08) !important;
+  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.5) !important;
 }
 
 .workspace-split.mod-right-split .workspace-tab-header.is-active {
@@ -1599,6 +1658,7 @@ li[data-task="x"] > p {
 }
 
 .workspace-split.mod-right-split .workspace-tab-header-new-tab {
+  margin-left: auto;
   align-self: center;
   color: var(--ef-chrome-text-faint);
   border-radius: 6px;
@@ -2172,17 +2232,19 @@ button {
    Plugin owns file tree + outline header chrome.
    ============================================================ */
 body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header {
-  background: var(--ef-bg-panel);
+  background: transparent !important;
 }
 body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header {
-  background: var(--ef-bg-editor);
+  background: transparent !important;
 }
 body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header,
 body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header {
   border-bottom: none;
-  min-height: 34px;
+  min-height: auto;
   height: auto;
   padding: 0 12px;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header::before,
