@@ -1,0 +1,2269 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — OBSIDIAN THEME
+   v0.1.0 · Dark mode · Razushi
+
+   Structure:
+     01  Font import
+     02  Design tokens
+     03  Workspace chrome
+     04  Left ribbon (icon rail)
+     05  Left sidebar
+     06  File explorer
+     07  Outline panel (TOC)
+     08  Tab bar
+     09  View header + breadcrumbs
+     10  Editor controls (vertical dock)
+     11  Editor — Live Preview (CM6)
+     12  Editor — Reading view
+     13  Inline title
+     14  Headings
+     15  Blockquotes
+     16  Tables
+     17  Code
+     18  Tasks / checkboxes
+     19  Links
+     20  Tags
+     21  Images
+     22  Lists + inline formatting
+     23  Horizontal rules
+     24  Right sidebar
+     25  Calendar plugin
+     26  Status bar
+     27  Command palette
+     28  Settings modal
+     29  General modals
+     30  Buttons
+     31  Scrollbars
+     32  Dataview
+   ============================================================ */
+
+
+/* ============================================================
+   01  FONT IMPORT
+   Fira Code for code/mono. Geist is set by user's system.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+
+
+/* ============================================================
+   02  DESIGN TOKENS
+   ============================================================ */
+.theme-dark {
+  /* --- Backgrounds (deep → shallow) --- */
+  --background-primary:               #161618;
+  --background-primary-alt:           #1c1c1e;
+  --background-secondary:             #131316;
+  --background-secondary-alt:         #1c1c1e;
+
+  /* --- Theme-specific depth tokens --- */
+  --ef-bg-void:   #111114;   /* ribbon, titlebar, statusbar — deepest */
+  --ef-bg-panel:  #131316;   /* file tree, right sidebar — mid chrome */
+  --ef-bg-editor: #161618;   /* outline, editor — elevated content */
+  --background-modifier-hover:        rgba(255,255,255,0.04);
+  --background-modifier-active-hover: rgba(212,200,0,0.07);
+  --background-modifier-border:       rgba(255,255,255,0.06);
+  --background-modifier-border-hover: rgba(255,255,255,0.10);
+  --background-modifier-error:        rgba(204,34,0,0.12);
+  --background-modifier-error-hover:  rgba(204,34,0,0.18);
+  --background-modifier-success:      rgba(60,160,80,0.12);
+
+  /* --- Text --- */
+  --text-normal:                      #e8e8e8;
+  --text-muted:                       #b5b5bb;
+  --text-faint:                       #75757d;
+  --text-on-accent:                   #0d0d0f;
+  --text-accent:                      #d4c800;
+  --text-accent-hover:                #e8da00;
+  --text-error:                       #e84040;
+  --text-warning:                     #e8803a;
+  --text-success:                     #5aba6a;
+  --text-selection:                   rgba(212,200,0,0.18);
+  --text-highlight-bg:                rgba(212,200,0,0.14);
+
+  /* --- Interactive --- */
+  --interactive-accent:               #d4c800;
+  --interactive-accent-hover:         #e8da00;
+  --interactive-accent-rgb:           212, 200, 0;
+  --interactive-normal:               #161618;
+  --interactive-hover:                #1c1c1e;
+
+  /* --- Typography --- */
+  --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
+  --font-text:                        'Geist', -apple-system, 'Segoe UI', sans-serif;
+  --font-monospace:                   'Fira Code', 'Courier New', monospace;
+  --font-text-size:                   14px;
+  --line-height-normal:               1.7;
+
+  /* --- UI chrome contrast --- */
+  --ef-chrome-text:                   #d8d8dd;
+  --ef-chrome-text-muted:             #b8b8bf;
+  --ef-chrome-text-faint:             #8b8b94;
+  --ef-ui-label-size:                 9px;
+  --ef-ui-size:                       12px;
+  --ef-ui-size-compact:               11px;
+
+  /* --- Heading sizes --- */
+  --h1-size:   1.75em;
+  --h2-size:   1.25em;
+  --h3-size:   1.05em;
+  --h4-size:   1em;
+  --h5-size:   0.9em;
+  --h6-size:   0.85em;
+
+  /* --- Heading colours --- */
+  --h1-color:  #f0f0f0;
+  --h2-color:  #e0e0e0;
+  --h3-color:  #c8c8c8;
+  --h4-color:  #d4c800;
+  --h5-color:  #888888;
+  --h6-color:  #555555;
+
+  /* --- Heading weights --- */
+  --h1-weight: 700;
+  --h2-weight: 600;
+  --h3-weight: 600;
+  --h4-weight: 600;
+  --h5-weight: 500;
+  --h6-weight: 500;
+
+  /* --- Ribbon --- */
+  --ribbon-width: 44px;
+
+  /* --- Tab dividers --- */
+  --tab-divider-color:   transparent;
+  --tab-outline-color:   transparent;
+  --tab-curve:           0px;
+
+  /* --- Editor tab pills --- */
+  --ef-tab-pill-bg:                   rgba(255,255,255,0.04);
+  --ef-tab-pill-bg-hover:             rgba(255,255,255,0.18);
+  --ef-tab-pill-bg-active:            #e7e3e0;
+  --ef-tab-pill-border:               rgba(255,255,255,0.08);
+  --ef-tab-pill-border-hover:         rgba(255,255,255,0.13);
+  --ef-tab-pill-border-active:        rgba(66,66,70,0.5);
+  --ef-tab-pill-inner-border:         rgba(255,255,255,0.035);
+  --ef-tab-pill-inner-border-active:  rgba(255,255,255,0.52);
+
+  /* --- Radius --- */
+  --radius-s:  4px;
+  --radius-m:  8px;
+  --radius-l:  12px;
+
+  /* --- Border --- */
+  --border-width: 1px;
+
+  /* --- Scrollbar --- */
+  --scrollbar-bg:              transparent;
+  --scrollbar-thumb-bg:        rgba(255,255,255,0.07);
+  --scrollbar-active-thumb-bg: rgba(255,255,255,0.14);
+
+  /* --- Indentation guides --- */
+  --indentation-guide-color:        rgba(255,255,255,0.04);
+  --indentation-guide-color-active: rgba(212,200,0,0.18);
+
+  /* --- Nav --- */
+  --nav-collapse-icon-color: var(--ef-chrome-text-faint);
+
+  /* --- Tags --- */
+  --tag-color:            #888888;
+  --tag-background:       transparent;
+  --tag-background-hover: rgba(212,200,0,0.06);
+  --tag-border-color:     rgba(255,255,255,0.10);
+  --tag-border-color-hover: rgba(212,200,0,0.5);
+  --tag-color-hover:      #d4c800;
+  --tag-radius:           4px;
+  --tag-padding-x:        6px;
+  --tag-padding-y:        2px;
+  --tag-font-size:        0.8em;
+
+  /* --- Checkboxes --- */
+  --checkbox-radius:       3px;
+  --checkbox-border-color: rgba(255,255,255,0.15);
+  --checkbox-color:        #d4c800;
+  --checkbox-marker-color: #0d0d0f;
+}
+
+
+/* ============================================================
+   03  WORKSPACE CHROME
+   ============================================================ */
+.theme-dark body {
+  font-family: var(--font-text);
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+  background: var(--background-primary);
+}
+
+.workspace {
+  background: var(--background-primary);
+}
+
+/* Windows titlebar */
+.titlebar {
+  background: var(--ef-bg-void);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.titlebar-text {
+  color: var(--ef-chrome-text-faint);
+  font-size: 11px;
+  font-family: var(--font-interface);
+}
+
+/* Dot-grid texture on the root editor split only */
+.workspace-split.mod-root {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-color: var(--background-primary);
+}
+
+
+/* ============================================================
+   04  LEFT RIBBON (icon rail)
+   ============================================================ */
+.workspace-ribbon {
+  background: transparent;
+}
+
+.workspace-ribbon.mod-left {
+  background: #1c1b1d !important;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0px 0 0px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
+}
+
+.workspace-ribbon.mod-right {
+  display: none !important;
+}
+
+/* Circle button tight around default icon size — no SVG override */
+.workspace-ribbon.mod-left .side-dock-ribbon-tab,
+.workspace-ribbon.mod-left .side-dock-ribbon-action {
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  margin: 3px auto !important;
+  padding: 5px !important;
+  width: auto !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.workspace-ribbon.mod-left .side-dock-ribbon-tab:hover,
+.workspace-ribbon.mod-left .side-dock-ribbon-action:hover {
+  color: #ffffff !important;
+  background: #424242 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+}
+
+.workspace-ribbon.mod-left .side-dock-ribbon-tab.is-active,
+.workspace-ribbon.mod-left .side-dock-ribbon-action.is-active {
+  color: #ffffff !important;
+  background: #424242 !important;
+  border-radius: 50% !important;
+}
+
+/* Ribbon toggle button */
+.workspace-ribbon-collapse-btn {
+  color: rgba(255,255,255,0.4);
+  transition: color 0.15s;
+}
+.workspace-ribbon-collapse-btn:hover {
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   05  LEFT SIDEBAR — container
+   ============================================================ */
+.workspace-split.mod-left-split {
+  background: var(--ef-bg-panel);
+  position: relative;
+  box-shadow: 6px 0 24px rgba(0,0,0,0.6), 2px 0 6px rgba(0,0,0,0.35);
+}
+
+/* Radial vignette on left sidebar */
+.workspace-split.mod-left-split::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.30) 100%);
+  z-index: 10;
+}
+
+/* Sidebar tab bar (when multiple panels stacked) */
+.workspace-split.mod-left-split .workspace-tab-header-container {
+  background: var(--ef-bg-panel);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.workspace-split.mod-left-split .workspace-tab-header {
+  color: #ffffff !important;
+  padding: 5px;
+  border-radius: 6px;
+  position: relative;
+  top: 0 !important;
+  transform: none !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Suppress Obsidian's inner hover highlight — we style the outer element */
+.workspace-split.mod-left-split .workspace-tab-header-inner,
+.workspace-split.mod-left-split .workspace-tab-header-inner:hover {
+  background: transparent !important;
+  border-radius: 6px;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header:hover {
+  color: #ffffff !important;
+  background: rgba(212,200,0, 0.3) !important;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header.is-active {
+  color: #212121 !important;
+  background: #d4c800 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header.is-active svg {
+  color: #212121 !important;
+  stroke: #212121 !important;
+}
+
+/* Uniform icon size */
+.workspace-split.mod-left-split .workspace-tab-header svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* New tab + button vertically centred with the icons */
+.workspace-split.mod-left-split .workspace-tab-header-new-tab {
+  align-self: center;
+  color: var(--ef-chrome-text-faint);
+  border-radius: 6px;
+  padding: 4px 6px;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header-new-tab:hover {
+  color: var(--ef-chrome-text);
+  background: rgba(255,255,255,0.05);
+}
+
+
+/* ============================================================
+   06  FILE EXPLORER
+   ============================================================ */
+
+/* Section-label chrome — file explorer is panel depth, outline is editor depth */
+.workspace-leaf-content[data-type="file-explorer"] .view-header {
+  background: var(--ef-bg-panel);
+}
+.workspace-leaf-content[data-type="outline"] .view-header {
+  background: var(--ef-bg-editor);
+}
+.workspace-leaf-content[data-type="file-explorer"] .view-header,
+.workspace-leaf-content[data-type="outline"] .view-header {
+  border-bottom: none;
+  min-height: 34px;
+  padding: 8px 10px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-header::before,
+.workspace-leaf-content[data-type="outline"] .view-header::before {
+  display: block;
+  order: 1;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4c800;
+  font-family: var(--font-interface);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-header::before {
+  content: '// Vault Index';
+}
+
+.workspace-leaf-content[data-type="outline"] .view-header::before {
+  content: '// Outline';
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-header::after,
+.workspace-leaf-content[data-type="outline"] .view-header::after {
+  content: '';
+  order: 2;
+  flex: 1 1 auto;
+  height: 1px;
+  margin: 0 12px;
+  background: linear-gradient(
+    90deg,
+    rgba(212,200,0,0.22) 0%,
+    rgba(255,255,255,0.09) 24%,
+    rgba(255,255,255,0.02) 100%
+  );
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-header-title-container,
+.workspace-leaf-content[data-type="outline"] .view-header-title-container,
+.workspace-leaf-content[data-type="file-explorer"] .view-header-title,
+.workspace-leaf-content[data-type="outline"] .view-header-title {
+  display: none;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions,
+.workspace-leaf-content[data-type="outline"] .view-actions {
+  order: 3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: auto;
+  width: 28px;
+  max-height: 24px;
+  padding: 28px 4px 4px;
+  overflow: hidden;
+  gap: 2px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: max-height 0.14s ease, background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.workspace-leaf-content[data-type="outline"] .view-actions {
+  display: none;
+}
+
+.workspace-leaf.mod-active .workspace-leaf-content[data-type="file-explorer"] .view-header::before,
+.workspace-leaf.mod-active .workspace-leaf-content[data-type="outline"] .view-header::before {
+  color: #d4c800;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover,
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within,
+.workspace-leaf-content[data-type="outline"] .view-actions:hover,
+.workspace-leaf-content[data-type="outline"] .view-actions:focus-within {
+  width: 34px;
+  max-height: 320px;
+  background: #1c1c1e;
+  border-color: rgba(255,255,255,0.10);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04),
+              0 8px 20px rgba(0,0,0,0.42);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions::before,
+.workspace-leaf-content[data-type="outline"] .view-actions::before {
+  content: '▾';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  color: #f3f3f5;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  font-size: 13px;
+  line-height: 1;
+  transform: translateY(-1px);
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover::before,
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within::before,
+.workspace-leaf-content[data-type="outline"] .view-actions:hover::before,
+.workspace-leaf-content[data-type="outline"] .view-actions:focus-within::before {
+  color: #d4c800;
+  background: rgba(212,200,0,0.08);
+  border-color: rgba(212,200,0,0.28);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions .view-action,
+.workspace-leaf-content[data-type="outline"] .view-actions .view-action {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  color: #f3f3f5;
+  border-radius: 6px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: color 0.12s, background 0.12s, opacity 0.12s;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover .view-action,
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within .view-action,
+.workspace-leaf-content[data-type="outline"] .view-actions:hover .view-action,
+.workspace-leaf-content[data-type="outline"] .view-actions:focus-within .view-action {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions .view-action:hover,
+.workspace-leaf-content[data-type="outline"] .view-actions .view-action:hover {
+  color: #d4c800;
+  background: rgba(212,200,0,0.10);
+}
+
+/* Search bar inside file explorer */
+.search-input-container input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  color: var(--ef-chrome-text);
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size);
+}
+
+.search-input-container input::placeholder {
+  color: var(--ef-chrome-text-faint);
+}
+
+.search-input-container input:focus {
+  border-color: rgba(212,200,0,0.35);
+  color: #e8e8e8;
+  outline: none;
+}
+
+/* Nav folder / file items — D-shape (sharp left, rounded right) */
+.nav-folder-title,
+.nav-file-title {
+  border-radius: 0 6px 6px 0;
+  margin-right: 8px;
+  padding: 4px 10px 4px 10px;
+  color: var(--ef-chrome-text);
+  font-size: var(--ef-ui-size);
+  font-weight: 500;
+  line-height: 1.5;
+  transition: background 0.12s, color 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-folder-title:hover,
+.nav-file-title:hover {
+  color: #f0f0f0;
+  background: rgba(255,255,255,0.04);
+}
+
+.nav-folder-title.is-active,
+.nav-file-title.is-active {
+  background: rgba(212,200,0,0.08);
+  color: #d4c800;
+  border-right: 2px solid #d4c800;
+  box-shadow: inset 0 0 14px rgba(212,200,0,0.04),
+              3px 0 10px rgba(212,200,0,0.07);
+}
+
+/* Collapse arrows */
+.nav-folder-collapse-indicator {
+  color: var(--ef-chrome-text-faint);
+  flex-shrink: 0;
+  width: 14px;
+  transition: color 0.12s;
+}
+
+.nav-folder-title:hover .nav-folder-collapse-indicator {
+  color: var(--ef-chrome-text-muted);
+}
+
+.nav-folder-title.is-active .nav-folder-collapse-indicator {
+  color: #d4c800;
+}
+
+/* Children indent guide */
+.nav-folder-children {
+  border-left: 1px solid rgba(255,255,255,0.04);
+  margin-left: 14px;
+}
+
+/* Notification badges */
+.nav-file-title .nav-file-tag {
+  background: #d4c800;
+  color: #0d0d0f;
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  font-size: 0;
+  box-shadow: 0 0 5px rgba(212,200,0,0.6);
+  margin-left: auto;
+}
+
+/* Bookmarked / pinned files */
+.nav-file-title.is-being-renamed {
+  background: rgba(212,200,0,0.06);
+  color: #e8e8e8;
+}
+
+
+/* ============================================================
+   07  OUTLINE PANEL (TOC)
+   ============================================================ */
+
+/* Outline is col 2 — same depth as the editor */
+.workspace-leaf-content[data-type="outline"],
+.workspace-leaf-content[data-type="outline"] .view-content {
+  background: var(--ef-bg-editor);
+}
+
+/* Outline tree items */
+.outline-item {
+  font-size: var(--ef-ui-size);
+  color: var(--ef-chrome-text);
+  padding: 3px 10px;
+  border-radius: 0 4px 4px 0;
+  margin-right: 6px;
+  cursor: pointer;
+  line-height: 1.5;
+  transition: color 0.12s, background 0.12s;
+}
+
+.outline-item:hover {
+  color: #f0f0f0;
+}
+
+.outline-item.is-active {
+  color: #d4c800;
+  background: transparent;
+  font-weight: 600;
+}
+
+.outline-item-children {
+  padding-left: 12px;
+}
+
+/* Heading level indentation in outline */
+.outline-item[data-depth="1"] { padding-left: 10px; }
+.outline-item[data-depth="2"] {
+  padding-left: 20px;
+  font-size: var(--ef-ui-size-compact);
+  color: var(--ef-chrome-text-muted);
+}
+.outline-item[data-depth="3"] {
+  padding-left: 30px;
+  font-size: var(--ef-ui-size-compact);
+  color: var(--ef-chrome-text-faint);
+}
+
+
+/* ============================================================
+   08  TAB BAR (main editor tabs) — floating pills
+   ============================================================ */
+.workspace-split.mod-root .workspace-tab-header-container {
+  background: #111113;
+  border-bottom: none;
+  padding: 5px 8px;
+  gap: 0;
+  align-items: center;
+}
+
+.workspace-split.mod-root .workspace-tab-header {
+  background: var(--ef-tab-pill-bg);
+  color: #f3f3f5;
+  border-radius: 999px;
+  font-size: var(--ef-ui-size-compact);
+  padding: 4px 12px;
+  border: 1px solid var(--ef-tab-pill-border);
+  box-shadow: inset 0 0 0 1px var(--ef-tab-pill-inner-border) !important;
+  position: relative;
+  margin: 0 3px 5px !important;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+  max-width: 200px;
+  min-height: 31px;
+}
+
+/* Strip Obsidian's inner wrapper background so it doesn't override the pill */
+.workspace-split.mod-root .workspace-tab-header-inner {
+  background: transparent !important;
+  border-radius: 999px;
+}
+
+.workspace-split.mod-root .workspace-tab-header:hover {
+  color: #ffffff;
+  background: var(--ef-tab-pill-bg-hover);
+  border-color: var(--ef-tab-pill-border-hover);
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active {
+  background: var(--ef-tab-pill-bg-active);
+  color: #242428 !important;
+  border-color: var(--ef-tab-pill-border-active);
+  box-shadow: inset 0 0 0 1px var(--ef-tab-pill-inner-border-active),
+              inset 0 0 0 2px rgba(255,255,255,0.08) !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active:hover {
+  background: var(--ef-tab-pill-bg-active);
+  color: #242428 !important;
+  border-color: var(--ef-tab-pill-border-active);
+}
+
+.workspace-split.mod-root .workspace-tab-header-separator {
+  display: none !important;
+}
+
+/* Tab title text */
+.workspace-tab-header-inner-title {
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size-compact);
+}
+
+.workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-title {
+  color: #f3f3f5 !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header[aria-label^="Outline of"] .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header[aria-label^="Outline of"] svg,
+.workspace-split.mod-root .workspace-tab-header[title^="Outline of"] .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header[title^="Outline of"] svg,
+.workspace-split.mod-root .workspace-tab-header[data-type="outline"] .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header[data-type="outline"] svg {
+  display: none !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header:hover .workspace-tab-header-inner-title {
+  color: #ffffff !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title,
+.workspace-split.mod-root .workspace-tab-header.is-active.is-active .workspace-tab-header-inner-title {
+  color: #242428 !important;
+  font-weight: 600;
+}
+
+/* Tab close */
+.workspace-tab-header-inner-close-btn {
+  color: var(--ef-chrome-text-faint);
+  opacity: 0;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  transition: opacity 0.12s, color 0.12s, background 0.12s;
+}
+
+.workspace-tab-header:hover .workspace-tab-header-inner-close-btn,
+.workspace-tab-header.is-active .workspace-tab-header-inner-close-btn {
+  opacity: 1;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn {
+  color: #2a2a2e;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-btn {
+  color: #2a2a2e;
+}
+
+.workspace-tab-header-inner-close-btn:hover {
+  color: #ffffff;
+  background: rgba(232,64,64,0.14);
+  box-shadow: inset 0 0 0 1px rgba(232,64,64,0.18);
+}
+
+/* New tab button */
+.workspace-tab-header-new-tab {
+  color: var(--ef-chrome-text-faint);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-tab-header-new-tab:hover {
+  color: var(--ef-chrome-text);
+  background: rgba(255,255,255,0.05);
+}
+
+
+/* ============================================================
+   09  VIEW HEADER + BREADCRUMBS (per-leaf header bar)
+   ============================================================ */
+.view-header {
+  background: var(--background-primary);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  min-height: 34px;
+}
+
+/* Breadcrumb path — global default */
+.view-header-breadcrumb {
+  font-size: var(--ef-ui-size-compact);
+  color: var(--ef-chrome-text-faint);
+  font-family: var(--font-interface);
+}
+
+.view-header-breadcrumb-separator {
+  color: #2a2a2c;
+}
+
+/* Nav back/forward buttons */
+.view-header-nav-buttons .clickable-icon {
+  color: var(--ef-chrome-text-faint);
+}
+
+.view-header-nav-buttons .clickable-icon:hover {
+  color: var(--ef-chrome-text);
+}
+
+/* ── Outline panel: hide breadcrumb entirely, show only // OUTLINE label ── */
+.workspace-leaf-content[data-type="outline"] .view-header-nav-buttons {
+  display: none;
+}
+
+.workspace-leaf-content[data-type="outline"] .view-header-title-container {
+  display: flex;
+}
+
+.workspace-leaf-content[data-type="outline"] .view-header-breadcrumb {
+  display: none;
+}
+
+/* ── Markdown editor: merge view-header with content so breadcrumb
+      reads as being inside the note, just above the inline title ── */
+.workspace-split.mod-root
+  .workspace-leaf-content[data-type="markdown"]
+  .view-header {
+  border-bottom: none;
+  padding: 8px 28px 0;
+  background: var(--background-primary);
+  min-height: 34px;
+}
+
+.workspace-split.mod-root
+  .workspace-leaf-content[data-type="markdown"]
+  .view-header-nav-buttons {
+  display: none;
+}
+
+.workspace-split.mod-root
+  .workspace-leaf-content[data-type="markdown"]
+  .view-header-breadcrumb {
+  font-size: var(--ef-ui-label-size);
+  font-weight: 600;
+  color: #d4c800;
+  letter-spacing: 0.8px;
+}
+
+.workspace-split.mod-root
+  .workspace-leaf-content[data-type="markdown"]
+  .view-header-breadcrumb::before {
+  content: '// ';
+}
+
+.workspace-split.mod-root
+  .workspace-leaf-content[data-type="markdown"]
+  .view-header-title-container {
+  justify-content: flex-start;
+  padding: 0;
+}
+
+
+/* ============================================================
+   10  EDITOR CONTROLS — VERTICAL DOCK
+
+   The source/reading toggle + other view actions are pulled
+   into a floating vertical pill on the right edge of the
+   editor view header. Positioned absolutely within the
+   view-header which is set to overflow: visible.
+   ============================================================ */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+  overflow: visible;
+  position: relative;
+  background: var(--background-primary);
+}
+
+/* Allow the absolute-positioned vertical dock to escape its ancestors */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"],
+.workspace-split.mod-root .workspace-leaf[data-type="markdown"],
+.workspace-split.mod-root .workspace-leaf,
+.workspace-split.mod-root {
+  overflow: visible;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  align-items: center;
+  background: #1c1c1e;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04),
+              0 4px 16px rgba(0,0,0,0.5),
+              0 1px 4px rgba(0,0,0,0.3);
+  border-radius: 16px;
+  padding: 5px;
+  gap: 1px;
+  z-index: 20;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-action {
+  color: var(--ef-chrome-text-muted);
+  border-radius: 10px;
+  padding: 5px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-action:hover {
+  color: #d4c800;
+  background: rgba(212,200,0,0.10);
+}
+
+/* Active mode (reading view) */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-action.is-active {
+  color: #d4c800;
+  background: rgba(212,200,0,0.12);
+}
+
+
+/* ============================================================
+   11  EDITOR — LIVE PREVIEW (CodeMirror 6)
+   ============================================================ */
+.cm-editor {
+  background: var(--background-primary) !important;
+}
+
+.cm-scroller {
+  font-family: var(--font-text) !important;
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+}
+
+/* Line number gutter */
+.cm-gutters {
+  background: var(--background-primary) !important;
+  border-right: 1px solid rgba(255,255,255,0.04) !important;
+  color: #2a2a2c;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+  padding: 0 10px 0 4px;
+  color: #2a2a2c;
+  font-family: var(--font-monospace);
+  font-size: var(--ef-ui-size-compact);
+  min-width: 36px;
+  user-select: none;
+}
+
+/* Active line */
+.cm-activeLine {
+  background: rgba(212,200,0,0.02) !important;
+}
+
+.cm-activeLineGutter {
+  background: rgba(212,200,0,0.04) !important;
+  color: #444 !important;
+}
+
+/* Cursor */
+.cm-cursor,
+.cm-dropCursor {
+  border-left: 2px solid #d4c800 !important;
+}
+
+/* Selection highlight */
+.cm-selectionBackground {
+  background: rgba(212,200,0,0.15) !important;
+}
+.cm-focused .cm-selectionBackground {
+  background: rgba(212,200,0,0.18) !important;
+}
+::selection {
+  background: rgba(212,200,0,0.18) !important;
+}
+
+/* Fold gutter */
+.cm-foldGutter .cm-gutterElement {
+  color: #2a2a2c;
+  transition: color 0.12s;
+}
+.cm-foldGutter .cm-gutterElement:hover {
+  color: #d4c800;
+}
+
+/* Search match highlight */
+.cm-searchMatch {
+  background: rgba(212,200,0,0.20);
+  border-radius: 2px;
+}
+.cm-searchMatch.cm-searchMatch-selected {
+  background: rgba(212,200,0,0.38);
+}
+
+/* Matching brackets */
+.cm-matchingBracket {
+  background: rgba(212,200,0,0.12);
+  color: #d4c800 !important;
+  border-radius: 2px;
+}
+
+/* Embedded code background in live preview */
+.HyperMD-codeblock {
+  background: rgba(255,255,255,0.02) !important;
+}
+.HyperMD-codeblock.cm-line {
+  font-family: var(--font-monospace) !important;
+  font-size: 0.88em;
+}
+
+/* Inline code in live preview */
+.cm-inline-code {
+  font-family: var(--font-monospace);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 0.88em;
+  color: #e8e8e8;
+}
+
+/* Blockquote line in live preview */
+.HyperMD-quote.cm-line {
+  border-left: 2px solid #d4c800;
+  background: rgba(212,200,0,0.03);
+  padding-left: 14px;
+  color: #999;
+}
+
+/* Frontmatter */
+.cm-hmd-frontmatter {
+  color: #3a3a3c;
+  font-family: var(--font-monospace);
+  font-size: 0.88em;
+}
+
+/* Hashtag / tag in editor */
+.cm-hashtag {
+  color: #888;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 0.82em;
+}
+.cm-hashtag:hover {
+  color: #d4c800;
+  border-color: rgba(212,200,0,0.4);
+}
+
+/* Internal link in live preview */
+.cm-hmd-internal-link {
+  color: #d4c800;
+}
+
+
+/* ============================================================
+   12  EDITOR — READING VIEW
+   ============================================================ */
+.markdown-reading-view {
+  background: var(--background-primary);
+}
+
+.markdown-preview-view {
+  padding: 24px 28px 48px;
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+  color: var(--text-normal);
+  font-family: var(--font-text);
+}
+
+.markdown-preview-section {
+  max-width: 100%;
+}
+
+
+/* ============================================================
+   13  INLINE TITLE (file name at top of editor)
+   ============================================================ */
+.inline-title {
+  font-family: var(--font-text);
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #f0f0f0;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #d4c800;
+  outline: none;
+}
+
+/* Breadcrumb above inline title */
+.mod-header .view-header-title-container {
+  font-size: var(--ef-ui-size-compact);
+  color: var(--ef-chrome-text-faint);
+  padding: 6px 0 2px;
+}
+
+
+/* ============================================================
+   14  HEADINGS
+   ============================================================ */
+
+/* --- H1 --- */
+.markdown-rendered h1,
+.cm-line.HyperMD-header-1 .cm-header {
+  font-family: var(--font-text);
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  color: var(--h1-color);
+  letter-spacing: -0.4px;
+  line-height: 1.3;
+  margin: 0 0 16px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #d4c800;
+}
+
+/* --- H2 --- */
+.markdown-rendered h2,
+.cm-line.HyperMD-header-2 .cm-header {
+  font-family: var(--font-text);
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  color: var(--h2-color);
+  margin: 24px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* --- H3 --- */
+.markdown-rendered h3,
+.cm-line.HyperMD-header-3 .cm-header {
+  font-family: var(--font-text);
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  color: var(--h3-color);
+  margin: 18px 0 6px;
+}
+
+/* --- H4 --- */
+.markdown-rendered h4,
+.cm-line.HyperMD-header-4 .cm-header {
+  font-family: var(--font-text);
+  font-size: var(--h4-size);
+  font-weight: var(--h4-weight);
+  color: var(--h4-color);
+  margin: 14px 0 4px;
+}
+
+/* --- H5 / H6 --- */
+.markdown-rendered h5,
+.cm-line.HyperMD-header-5 .cm-header {
+  font-size: var(--h5-size);
+  font-weight: var(--h5-weight);
+  color: var(--h5-color);
+  margin: 10px 0 4px;
+}
+
+.markdown-rendered h6,
+.cm-line.HyperMD-header-6 .cm-header {
+  font-size: var(--h6-size);
+  font-weight: var(--h6-weight);
+  color: var(--h6-color);
+  margin: 8px 0 4px;
+}
+
+
+/* ============================================================
+   15  BLOCKQUOTES
+   ============================================================ */
+.markdown-rendered blockquote {
+  border: none;
+  border-left: 2px solid #d4c800;
+  background: rgba(212,200,0,0.04);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 16px;
+  margin: 14px 0;
+  color: #999;
+  font-style: normal;
+}
+
+.markdown-rendered blockquote p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Nested blockquote */
+.markdown-rendered blockquote blockquote {
+  border-left-color: rgba(212,200,0,0.4);
+  background: rgba(212,200,0,0.02);
+  margin: 8px 0;
+}
+
+
+/* ============================================================
+   16  TABLES
+   ============================================================ */
+.markdown-rendered table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.markdown-rendered thead {
+  background: #111113;
+}
+
+.markdown-rendered th {
+  color: #d4c800;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  text-align: left;
+  font-family: var(--font-interface);
+}
+
+.markdown-rendered td {
+  padding: 7px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #ccc;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.markdown-rendered tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-rendered tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.015);
+}
+
+.markdown-rendered tbody tr:hover {
+  background: rgba(212,200,0,0.03);
+}
+
+
+/* ============================================================
+   17  CODE
+   ============================================================ */
+
+/* Inline code */
+.markdown-rendered code {
+  font-family: var(--font-monospace);
+  font-size: 0.87em;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: #e0e0e0;
+}
+
+/* Code block */
+.markdown-rendered pre {
+  background: #111113;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 14px 0;
+  overflow-x: auto;
+}
+
+.markdown-rendered pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: var(--font-monospace);
+  font-size: 0.87em;
+  line-height: 1.65;
+  color: #ccc;
+}
+
+/* Code block language tag */
+.markdown-rendered pre[class*="language-"]::before {
+  content: attr(class);
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #3a3a3c;
+  margin-bottom: 10px;
+  font-family: var(--font-interface);
+}
+
+
+/* ============================================================
+   18  TASKS / CHECKBOXES
+   ============================================================ */
+input[type="checkbox"].task-list-item-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 6px;
+  flex-shrink: 0;
+  transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
+}
+
+input[type="checkbox"].task-list-item-checkbox:hover {
+  border-color: rgba(212,200,0,0.5);
+}
+
+input[type="checkbox"].task-list-item-checkbox:checked {
+  background: rgba(212,200,0,0.12);
+  border-color: #d4c800;
+  box-shadow: 0 0 6px rgba(212,200,0,0.28);
+}
+
+input[type="checkbox"].task-list-item-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 5px;
+  height: 8px;
+  border: 2px solid #d4c800;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* Completed task text */
+.task-list-item.is-checked .task-list-item-inner,
+li[data-task="x"] > p {
+  color: #3a3a3c;
+  text-decoration: line-through;
+  text-decoration-color: #3a3a3c;
+}
+
+
+/* ============================================================
+   19  LINKS
+   ============================================================ */
+.markdown-rendered a.internal-link,
+.markdown-rendered a.external-link {
+  color: #d4c800;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212,200,0,0.3);
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.markdown-rendered a.internal-link:hover,
+.markdown-rendered a.external-link:hover {
+  color: #e8da00;
+  border-bottom-color: #d4c800;
+}
+
+/* Unresolved (red-link) */
+.markdown-rendered a.is-unresolved {
+  color: #555;
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.markdown-rendered a.is-unresolved:hover {
+  color: #888;
+}
+
+/* External link icon */
+.markdown-rendered a.external-link::after {
+  content: '↗';
+  font-size: 0.75em;
+  margin-left: 2px;
+  opacity: 0.5;
+}
+
+
+/* ============================================================
+   20  TAGS
+   ============================================================ */
+.tag {
+  font-size: 0.8em;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 4px;
+  color: #888;
+  padding: 1px 6px;
+  text-decoration: none;
+  font-family: var(--font-interface);
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+}
+
+.tag:hover {
+  color: #d4c800;
+  border-color: rgba(212,200,0,0.45);
+  background: rgba(212,200,0,0.05);
+}
+
+
+/* ============================================================
+   21  IMAGES
+   ============================================================ */
+.markdown-rendered img {
+  border-radius: 8px;
+  max-width: 100%;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.3);
+  margin: 12px 0;
+}
+
+
+/* ============================================================
+   22  LISTS + INLINE FORMATTING
+   ============================================================ */
+.markdown-rendered ul,
+.markdown-rendered ol {
+  padding-left: 22px;
+  margin: 8px 0;
+}
+
+.markdown-rendered li {
+  margin-bottom: 4px;
+  line-height: 1.7;
+}
+
+.markdown-rendered ul li::marker {
+  color: #d4c800;
+}
+
+.markdown-rendered ol li::marker {
+  color: #888;
+  font-family: var(--font-monospace);
+  font-size: 0.88em;
+}
+
+/* Bold */
+.markdown-rendered strong {
+  color: #f0f0f0;
+  font-weight: 700;
+}
+
+/* Italic */
+.markdown-rendered em {
+  color: #ccc;
+}
+
+/* Highlight */
+.markdown-rendered mark {
+  background: rgba(212,200,0,0.22);
+  color: #f0f0f0;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Strikethrough */
+.markdown-rendered del {
+  color: #444;
+  text-decoration-color: #444;
+}
+
+
+/* ============================================================
+   23  HORIZONTAL RULES
+   ============================================================ */
+.markdown-rendered hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin: 24px 0;
+  position: relative;
+}
+
+/* Subtle center diamond on hr */
+.markdown-rendered hr::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  color: rgba(212,200,0,0.3);
+  background: var(--background-primary);
+  padding: 0 6px;
+}
+
+
+/* ============================================================
+   24  RIGHT SIDEBAR — container
+   ============================================================ */
+.workspace-split.mod-right-split {
+  background: var(--ef-bg-panel);
+  position: relative;
+  box-shadow: -6px 0 24px rgba(0,0,0,0.6), -2px 0 6px rgba(0,0,0,0.35);
+}
+
+/* Radial vignette on right sidebar */
+.workspace-split.mod-right-split::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.30) 100%);
+  z-index: 10;
+}
+
+/* Right sidebar tab bar — same treatment as left */
+.workspace-split.mod-right-split .workspace-tab-header-container {
+  background: var(--ef-bg-panel);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.workspace-split.mod-right-split .workspace-tab-header {
+  color: #ffffff !important;
+  padding: 5px;
+  border-radius: 6px;
+  position: relative;
+  top: 0 !important;
+  transform: none !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header-inner,
+.workspace-split.mod-right-split .workspace-tab-header-inner:hover {
+  background: transparent !important;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header:hover {
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.08) !important;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header.is-active {
+  color: #212121 !important;
+  background: #d4c800 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header.is-active svg {
+  color: #212121 !important;
+  stroke: #212121 !important;
+}
+
+/* Uniform icon size */
+.workspace-split.mod-right-split .workspace-tab-header svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header.is-active::after {
+  display: none;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header-new-tab {
+  align-self: center;
+  color: var(--ef-chrome-text-faint);
+  border-radius: 6px;
+  padding: 4px 6px;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header-new-tab:hover {
+  color: var(--ef-chrome-text);
+  background: rgba(255,255,255,0.05);
+}
+
+
+/* ============================================================
+   25  CALENDAR PLUGIN
+   ============================================================ */
+
+/* Calendar grid container */
+#calendar-container,
+.calendar {
+  padding: 8px;
+  background: transparent;
+}
+
+/* Month/year header */
+.calendar .title {
+  font-size: var(--ef-ui-size);
+  font-weight: 600;
+  color: #e8e8e8;
+  font-family: var(--font-interface);
+}
+
+/* Nav arrows */
+.calendar .nav {
+  color: var(--ef-chrome-text-faint);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: color 0.12s, background 0.12s;
+}
+
+.calendar .nav:hover {
+  color: #d4c800;
+  background: rgba(212,200,0,0.08);
+}
+
+/* Day-of-week headers */
+.calendar .day-of-week {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 4px 0;
+  font-family: var(--font-interface);
+}
+
+/* Calendar day cells */
+.calendar td.day,
+.calendar .day {
+  text-align: center;
+}
+
+.calendar .day > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin: auto;
+  font-size: var(--ef-ui-size);
+  color: var(--ef-chrome-text);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+  position: relative;
+}
+
+.calendar .day > a:hover {
+  background: rgba(255,255,255,0.06);
+  color: #f0f0f0;
+}
+
+/* Today */
+.calendar .today > a {
+  background: #d4c800;
+  color: #0d0d0f;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(212,200,0,0.4);
+}
+
+/* Day outside current month */
+.calendar .adjacent-month > a {
+  color: #2a2a2c;
+}
+
+/* Day that has a note */
+.calendar .has-note > a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d4c800;
+  box-shadow: 0 0 4px rgba(212,200,0,0.5);
+}
+
+/* Week number column */
+.calendar .week-num {
+  color: #2a2a2c;
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+}
+
+
+/* ============================================================
+   26  STATUS BAR
+   ============================================================ */
+.status-bar {
+  background: var(--ef-bg-void);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  height: 22px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.status-bar-item {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+  padding: 0 6px;
+  transition: color 0.12s;
+}
+
+.status-bar-item.mod-clickable:hover {
+  color: var(--ef-chrome-text);
+}
+
+/* Word / char count — yellow */
+.status-bar-item.plugin-word-count {
+  color: #d4c800;
+}
+
+
+/* ============================================================
+   27  COMMAND PALETTE
+   ============================================================ */
+.modal-bg {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.55);
+}
+
+.prompt {
+  background: #1c1c1e;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
+  overflow: hidden;
+  padding: 0;
+}
+
+.prompt-input-container {
+  background: #161618;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 12px 16px;
+}
+
+.prompt-input {
+  background: transparent;
+  border: none;
+  color: #e8e8e8;
+  font-family: var(--font-text);
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  caret-color: #d4c800;
+}
+
+.prompt-input::placeholder {
+  color: var(--ef-chrome-text-faint);
+}
+
+.prompt-results {
+  padding: 6px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--ef-chrome-text-muted);
+  font-size: var(--ef-ui-size);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.1s, color 0.1s;
+}
+
+.suggestion-item:hover {
+  background: rgba(255,255,255,0.04);
+  color: #e8e8e8;
+}
+
+.suggestion-item.is-selected {
+  background: rgba(212,200,0,0.08);
+  color: #e8e8e8;
+  border-left: 2px solid #d4c800;
+  padding-left: 10px;
+}
+
+/* Command name */
+.suggestion-title {
+  flex: 1;
+  font-size: var(--ef-ui-size);
+}
+
+/* Hotkey hint */
+.suggestion-hotkey {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+}
+
+/* Section headers in command palette */
+.suggestion-flair {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+}
+
+.prompt-heading {
+  font-size: var(--ef-ui-label-size);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4c800;
+  padding: 8px 12px 4px;
+  font-family: var(--font-interface);
+}
+
+
+/* ============================================================
+   28  SETTINGS MODAL
+   ============================================================ */
+.mod-settings {
+  background: #1c1c1e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+}
+
+.mod-settings .modal-sidebar,
+.mod-settings .vertical-tab-nav {
+  background: #161618;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.vertical-tab-nav-item {
+  color: var(--ef-chrome-text-muted);
+  border-radius: 0 6px 6px 0;
+  margin-right: 8px;
+  font-size: var(--ef-ui-size);
+  padding: 8px 14px;
+  font-family: var(--font-interface);
+  transition: background 0.12s, color 0.12s;
+}
+
+.vertical-tab-nav-item:hover {
+  color: #e8e8e8;
+  background: rgba(255,255,255,0.04);
+}
+
+.vertical-tab-nav-item.is-active {
+  color: #d4c800;
+  background: rgba(212,200,0,0.08);
+  border-right: 2px solid #d4c800;
+}
+
+.mod-settings .modal-content {
+  background: #1c1c1e;
+}
+
+/* Section heading in settings */
+.setting-item.setting-item-heading .setting-item-name {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4c800;
+  font-family: var(--font-interface);
+}
+
+.setting-item {
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.setting-item-name {
+  color: #e8e8e8;
+  font-size: 13px;
+  font-family: var(--font-interface);
+}
+
+.setting-item-description {
+  color: var(--ef-chrome-text-muted);
+  font-size: var(--ef-ui-size-compact);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* Toggle switch */
+.checkbox-container {
+  background: #222226;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.checkbox-container.is-enabled {
+  background: rgba(212,200,0,0.2);
+  border-color: rgba(212,200,0,0.45);
+}
+
+.checkbox-container.is-enabled::after {
+  background: #d4c800;
+  box-shadow: 0 0 6px rgba(212,200,0,0.4);
+}
+
+/* Text inputs in settings */
+.mod-settings input[type="text"],
+.mod-settings input[type="number"],
+.mod-settings textarea {
+  background: #111113;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: #e8e8e8;
+  font-family: var(--font-text);
+  font-size: var(--ef-ui-size);
+  padding: 6px 10px;
+  transition: border-color 0.12s;
+}
+
+.mod-settings input[type="text"]:focus,
+.mod-settings input[type="number"]:focus,
+.mod-settings textarea:focus {
+  border-color: rgba(212,200,0,0.4);
+  outline: none;
+}
+
+/* Dropdown in settings */
+.mod-settings select {
+  background: #111113;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: #e8e8e8;
+  font-family: var(--font-text);
+  font-size: var(--ef-ui-size);
+  padding: 6px 10px;
+}
+
+
+/* ============================================================
+   29  GENERAL MODALS
+   ============================================================ */
+.modal {
+  background: #1c1c1e;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.modal-close-button {
+  color: var(--ef-chrome-text-faint);
+  border-radius: 50%;
+  transition: color 0.12s, background 0.12s;
+}
+
+.modal-close-button:hover {
+  color: #e84040;
+  background: rgba(232,64,64,0.10);
+}
+
+.modal-title {
+  color: #f0f0f0;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-text);
+}
+
+.modal-content {
+  color: var(--text-normal);
+}
+
+/* File open / quick switcher modal */
+.mod-quick-switcher .suggestion-item.is-selected {
+  background: rgba(212,200,0,0.08);
+  border-left: 2px solid #d4c800;
+}
+
+
+/* ============================================================
+   30  BUTTONS
+   ============================================================ */
+
+/* Base — all buttons */
+button {
+  font-family: var(--font-interface);
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  cursor: pointer;
+}
+
+/* Standard button — double border treatment */
+.mod-settings button:not(.mod-cta):not(.clickable-icon),
+.modal button:not(.mod-cta):not(.clickable-icon) {
+  background: #161618;
+  color: var(--ef-chrome-text-muted);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: var(--ef-ui-size);
+}
+
+.mod-settings button:not(.mod-cta):not(.clickable-icon):hover,
+.modal button:not(.mod-cta):not(.clickable-icon):hover {
+  background: #1c1c1e;
+  color: #e8e8e8;
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* CTA / primary button — yellow pill */
+.mod-cta {
+  background: rgba(212,200,0,0.12) !important;
+  color: #d4c800 !important;
+  border: 1px solid rgba(212,200,0,0.4) !important;
+  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.08) !important;
+  border-radius: 20px !important;
+  font-size: var(--ef-ui-size);
+}
+
+.mod-cta:hover {
+  background: rgba(212,200,0,0.20) !important;
+  border-color: rgba(212,200,0,0.65) !important;
+  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.12),
+              0 0 10px rgba(212,200,0,0.15) !important;
+}
+
+/* Icon / clickable-icon buttons */
+.clickable-icon {
+  color: var(--ef-chrome-text-faint);
+  border-radius: 6px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s, background 0.12s;
+}
+
+.clickable-icon:hover {
+  color: #d4c800;
+  background: rgba(212,200,0,0.08);
+}
+
+.clickable-icon.is-active {
+  color: #d4c800;
+  background: rgba(212,200,0,0.10);
+}
+
+
+/* ============================================================
+   31  SCROLLBARS
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.07);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.14);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+/* ============================================================
+   32  DATAVIEW PLUGIN
+   ============================================================ */
+.dataview.table-view-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 14px 0;
+}
+
+.dataview.table-view-table thead th {
+  background: #111113;
+  color: #d4c800;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  text-align: left;
+  font-family: var(--font-interface);
+}
+
+.dataview.table-view-table tbody td {
+  padding: 7px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #ccc;
+  vertical-align: top;
+}
+
+.dataview.table-view-table tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.015);
+}
+
+.dataview.table-view-table tbody tr:hover {
+  background: rgba(212,200,0,0.03);
+}
+
+.dataview.table-view-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Dataview inline result */
+.dataview.inline-query-result {
+  color: #d4c800;
+  font-family: var(--font-monospace);
+  font-size: 0.88em;
+}
+
+/* Dataview list */
+.dataview.list-view-ul {
+  padding-left: 20px;
+}
+
+.dataview.list-view-ul li::marker {
+  color: #d4c800;
+}
+
+
+/* ============================================================
+   33  PLUGIN OVERRIDES — Endfield UI Chrome
+   Plugin owns file tree + outline header chrome.
+   ============================================================ */
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header {
+  background: var(--ef-bg-panel);
+}
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header {
+  background: var(--ef-bg-editor);
+}
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header {
+  border-bottom: none;
+  min-height: 34px;
+  height: auto;
+  padding: 0 12px;
+}
+
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header::before,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header::after,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header::before,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header::after {
+  content: none;
+  display: none;
+}
+
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header-title-container,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header-title,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header-title-container,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header-title,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header-breadcrumb {
+  display: none;
+}
+
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] > .view-header > .view-actions,
+body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] > .view-header > .view-actions {
+  display: none;
+}
+
+/* Calendar should not show a header in this layout */
+.workspace-leaf-content[data-type="calendar"] .view-header {
+  display: none;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-header::before,
+.workspace-leaf-content[data-type="calendar"] .view-header::after {
+  content: none;
+  display: none;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-header-title-container,
+.workspace-leaf-content[data-type="calendar"] .view-header-title {
+  display: flex;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-header-title {
+  color: var(--ef-chrome-text);
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size-compact);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-actions {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  width: auto;
+  max-height: none;
+  padding: 0;
+  overflow: visible;
+  gap: 2px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-actions::before {
+  content: none;
+  display: none;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-actions .view-action {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  opacity: 1;
+  pointer-events: auto;
+  color: var(--ef-chrome-text-faint);
+  border-radius: 6px;
+  background: transparent;
+}
+
+.workspace-leaf-content[data-type="calendar"] .view-actions .view-action:hover {
+  color: #d4c800;
+  background: rgba(212,200,0,0.10);
+}
