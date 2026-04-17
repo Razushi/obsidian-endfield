@@ -161,7 +161,16 @@
   --indentation-guide-color:        rgba(255,255,255,0.04);
   --indentation-guide-color-active: rgba(212,200,0,0.18);
 
+  /* --- Panel shadows --- */
+  --panel-shadow-right: 6px 0 24px rgba(0,0,0,0.6), 2px 0 6px rgba(0,0,0,0.35);
+  --panel-shadow-left:  -6px 0 24px rgba(0,0,0,0.6), -2px 0 6px rgba(0,0,0,0.35);
+
   /* --- Nav --- */
+  --nav-item-size:           14px;
+  --nav-item-weight:         400;
+  --nav-item-color:          #d8d8dd;
+  --nav-item-color-muted:    #b8b8bf;
+  --nav-item-color-faint:    #8b8b94;
   --nav-collapse-icon-color: var(--ef-chrome-text-faint);
 
   /* --- Tags --- */
@@ -210,8 +219,20 @@
   font-family: var(--font-interface);
 }
 
+/* Left-edge shadow overlay — looks like file tree casting onto editor */
+.workspace-split.mod-root::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 16px;
+  background: linear-gradient(to right, rgba(0,0,0,0.50), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
 /* Dot-grid texture on the root editor split only */
 .workspace-split.mod-root {
+  position: relative;
   background-image: radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px);
   background-size: 22px 22px;
   background-color: var(--background-primary);
@@ -228,7 +249,7 @@
 .workspace-ribbon.mod-left {
   background: #1c1b1d !important;
   border-right: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0px 0 0px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
+  box-shadow: 6px 0 28px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
 }
 
 .workspace-ribbon.mod-right {
@@ -281,8 +302,9 @@
 .workspace-split.mod-left-split {
   background: var(--ef-bg-panel);
   position: relative;
-  box-shadow: 6px 0 24px rgba(0,0,0,0.6), 2px 0 6px rgba(0,0,0,0.35);
+  z-index: 10;
 }
+
 
 /* Radial vignette on left sidebar */
 .workspace-split.mod-left-split::after {
@@ -540,7 +562,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-  font-size: 13px;
+  font-size: 20px;
   line-height: 1;
   transform: translateY(-1px);
   transition: color 0.12s, background 0.12s, border-color 0.12s;
@@ -611,9 +633,9 @@
   border-radius: 0 6px 6px 0;
   margin-right: 8px;
   padding: 4px 10px 4px 10px;
-  color: var(--ef-chrome-text);
-  font-size: var(--ef-ui-size);
-  font-weight: 500;
+  color: var(--nav-item-color);
+  font-size: var(--nav-item-size);
+  font-weight: var(--nav-item-weight);
   line-height: 1.5;
   transition: background 0.12s, color 0.12s;
   display: flex;
@@ -631,9 +653,10 @@
 .nav-file-title.is-active {
   background: rgba(212,200,0,0.08);
   color: #d4c800;
-  border-right: 2px solid #d4c800;
+  border-left: 2px solid #d4c800;
+  border-radius: 0 !important;
   box-shadow: inset 0 0 14px rgba(212,200,0,0.04),
-              3px 0 10px rgba(212,200,0,0.07);
+              -3px 0 10px rgba(212,200,0,0.07);
 }
 
 /* Collapse arrows */
@@ -689,8 +712,9 @@
 
 /* Outline tree items */
 .outline-item {
-  font-size: var(--ef-ui-size);
-  color: var(--ef-chrome-text);
+  font-size: var(--nav-item-size);
+  font-weight: var(--nav-item-weight);
+  color: var(--nav-item-color);
   padding: 3px 10px;
   border-radius: 0 4px 4px 0;
   margin-right: 6px;
@@ -717,13 +741,13 @@
 .outline-item[data-depth="1"] { padding-left: 10px; }
 .outline-item[data-depth="2"] {
   padding-left: 20px;
-  font-size: var(--ef-ui-size-compact);
-  color: var(--ef-chrome-text-muted);
+  font-size: var(--nav-item-size);
+  color: var(--nav-item-color-muted);
 }
 .outline-item[data-depth="3"] {
   padding-left: 30px;
-  font-size: var(--ef-ui-size-compact);
-  color: var(--ef-chrome-text-faint);
+  font-size: var(--nav-item-size);
+  color: var(--nav-item-color-faint);
 }
 
 
@@ -870,15 +894,51 @@
   min-height: 34px;
 }
 
-/* Breadcrumb path — global default */
-.view-header-breadcrumb {
-  font-size: var(--ef-ui-size-compact);
-  color: var(--ef-chrome-text-faint);
-  font-family: var(--font-interface);
+/* Breadcrumb — fading horizontal strip (66% wide, centered) */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 17%,
+    rgba(212,200,0,0.10) 25%,
+    rgba(212,200,0,0.16) 50%,
+    rgba(212,200,0,0.10) 75%,
+    transparent 83%,
+    transparent 100%
+  ) !important;
 }
 
-.view-header-breadcrumb-separator {
-  color: #2a2a2c;
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title-container {
+  position: absolute;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb {
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+  font-weight: 500;
+  color: #d4c800;
+  pointer-events: none;
+  user-select: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title {
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+  font-weight: 500;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb-separator {
+  color: rgba(212,200,0,0.4);
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
 }
 
 /* Nav back/forward buttons */
@@ -920,27 +980,7 @@
   display: none;
 }
 
-.workspace-split.mod-root
-  .workspace-leaf-content[data-type="markdown"]
-  .view-header-breadcrumb {
-  font-size: var(--ef-ui-label-size);
-  font-weight: 600;
-  color: #d4c800;
-  letter-spacing: 0.8px;
-}
 
-.workspace-split.mod-root
-  .workspace-leaf-content[data-type="markdown"]
-  .view-header-breadcrumb::before {
-  content: '// ';
-}
-
-.workspace-split.mod-root
-  .workspace-leaf-content[data-type="markdown"]
-  .view-header-title-container {
-  justify-content: flex-start;
-  padding: 0;
-}
 
 
 /* ============================================================
@@ -1011,13 +1051,14 @@
    11  EDITOR — LIVE PREVIEW (CodeMirror 6)
    ============================================================ */
 .cm-editor {
-  background: var(--background-primary) !important;
+  background-color: var(--background-primary) !important;
 }
 
 .cm-scroller {
   font-family: var(--font-text) !important;
   font-size: var(--font-text-size);
   line-height: var(--line-height-normal);
+  background-color: var(--background-primary) !important;
 }
 
 /* Line number gutter */
@@ -1029,7 +1070,7 @@
 
 .cm-lineNumbers .cm-gutterElement {
   padding: 0 10px 0 4px;
-  color: #2a2a2c;
+  color: #ffffff;
   font-family: var(--font-monospace);
   font-size: var(--ef-ui-size-compact);
   min-width: 36px;
@@ -1147,6 +1188,20 @@
    ============================================================ */
 .markdown-reading-view {
   background: var(--background-primary);
+}
+
+/* Dot-grid texture */
+.workspace-leaf-content[data-type="markdown"] .view-content {
+  position: relative;
+}
+.workspace-leaf-content[data-type="markdown"] .view-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .markdown-preview-view {
@@ -1288,7 +1343,7 @@
   border-collapse: collapse;
   width: 100%;
   margin: 16px 0;
-  font-size: 13px;
+  font-size: var(--nav-item-size);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 8px;
   overflow: hidden;
@@ -1581,7 +1636,7 @@ li[data-task="x"] > p {
 .workspace-split.mod-right-split {
   background: var(--ef-bg-panel);
   position: relative;
-  box-shadow: -6px 0 24px rgba(0,0,0,0.6), -2px 0 6px rgba(0,0,0,0.35);
+  box-shadow: var(--panel-shadow-left);
 }
 
 /* Radial vignette on right sidebar */
@@ -1874,6 +1929,7 @@ li[data-task="x"] > p {
   background: rgba(212,200,0,0.08);
   color: #e8e8e8;
   border-left: 2px solid #d4c800;
+  border-radius: 0 !important;
   padding-left: 10px;
 }
 
@@ -1969,7 +2025,7 @@ li[data-task="x"] > p {
 
 .setting-item-name {
   color: #e8e8e8;
-  font-size: 13px;
+  font-size: var(--nav-item-size);
   font-family: var(--font-interface);
 }
 
@@ -2171,7 +2227,7 @@ button {
 .dataview.table-view-table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 13px;
+  font-size: var(--nav-item-size);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 8px;
   overflow: hidden;
