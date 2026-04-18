@@ -212,10 +212,10 @@
   background: var(--background-primary);
 }
 
-/* Windows titlebar */
+/* Windows titlebar — unified with tab strip */
 .titlebar {
   background: var(--ef-bg-void);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: none;
 }
 
 .titlebar-text {
@@ -312,10 +312,10 @@
   z-index: 10;
 }
 
-/* Sidebar tab bar (when multiple panels stacked) */
+/* Sidebar tab bar — top strip must match main tab bar void color */
 .workspace-split.mod-left-split .workspace-tab-header-container {
-  background: var(--ef-bg-panel);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: var(--ef-bg-void);
+  border-bottom: none;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header-container-inner {
@@ -788,10 +788,17 @@
 /* ============================================================
    08  TAB BAR (main editor tabs) — floating pills
    ============================================================ */
-.workspace-split.mod-root .workspace-tab-header-container {
-  background: #111113;
+
+/* Unify the full top strip — tab container, left space, right space all one color */
+.workspace-split.mod-root .workspace-tab-header-container,
+.workspace-tabs.mod-top-left-space,
+.workspace-tabs.mod-top-right-space {
+  background: var(--ef-bg-void);
   border-bottom: none;
-  padding: 5px 8px;
+}
+
+.workspace-split.mod-root .workspace-tab-header-container {
+  padding: 0 8px;
   gap: 0;
   align-items: center;
 }
@@ -808,7 +815,7 @@
     inset 0 0 0 3px var(--ef-tab-pill-inner-border),
     0 2px 8px rgba(0,0,0,0.35) !important;
   position: relative;
-  margin: 0 3px 5px !important;
+  margin: 0 3px !important;
   transition: color 0.12s, background 0.12s, border-color 0.12s;
   max-width: 200px;
   min-height: 31px;
@@ -983,19 +990,12 @@
   font-size: var(--nav-item-size);
 }
 
-/* Nav back/forward buttons */
-.view-header-nav-buttons .clickable-icon {
-  color: var(--ef-chrome-text-faint);
-}
-
-.view-header-nav-buttons .clickable-icon:hover {
-  color: var(--ef-chrome-text);
+/* Back/forward nav buttons hidden globally */
+.view-header-nav-buttons {
+  display: none !important;
 }
 
 /* ── Outline panel: hide breadcrumb entirely, show only // OUTLINE label ── */
-.workspace-leaf-content[data-type="outline"] .view-header-nav-buttons {
-  display: none;
-}
 
 .workspace-leaf-content[data-type="outline"] .view-header-title-container {
   display: flex;
@@ -1016,11 +1016,6 @@
   min-height: 34px;
 }
 
-.workspace-split.mod-root
-  .workspace-leaf-content[data-type="markdown"]
-  .view-header-nav-buttons {
-  display: none;
-}
 
 
 
@@ -1037,6 +1032,13 @@
   overflow: visible;
   position: relative;
   background: var(--background-primary);
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header::after {
@@ -1059,46 +1061,6 @@
   overflow: visible;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  flex-direction: column;
-  align-items: center;
-  background: #1c1c1e;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04),
-              0 4px 16px rgba(0,0,0,0.5),
-              0 1px 4px rgba(0,0,0,0.3);
-  border-radius: 16px;
-  padding: 5px;
-  gap: 1px;
-  z-index: 20;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-action {
-  color: var(--ef-chrome-text-muted);
-  border-radius: 10px;
-  padding: 5px;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.12s, background 0.12s;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-action:hover {
-  color: #d4c800;
-  background: rgba(212,200,0,0.10);
-}
-
-/* Active mode (reading view) */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-action.is-active {
-  color: #d4c800;
-  background: rgba(212,200,0,0.12);
-}
 
 
 /* ============================================================
