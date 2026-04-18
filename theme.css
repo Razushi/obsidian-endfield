@@ -164,8 +164,8 @@
   --indentation-guide-color-active: rgba(212,200,0,0.18);
 
   /* --- Panel shadows --- */
-  --panel-shadow-right: 6px 0 24px rgba(0,0,0,0.6), 2px 0 6px rgba(0,0,0,0.35);
-  --panel-shadow-left:  -6px 0 24px rgba(0,0,0,0.6), -2px 0 6px rgba(0,0,0,0.35);
+  --panel-shadow-right: 6px 0 12px rgba(0,0,0,0.3), 2px 0 6px rgba(0,0,0,0.3);
+  --panel-shadow-left:  -6px 0 12px rgba(0,0,0,0.3), -2px 0 6px rgba(0,0,0,0.35);
 
   /* --- Nav --- */
   --nav-item-size:           14px;
@@ -221,16 +221,6 @@
   font-family: var(--font-interface);
 }
 
-/* Left-edge shadow overlay — looks like file tree casting onto editor */
-.workspace-split.mod-root::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  width: 16px;
-  background: linear-gradient(to right, rgba(0,0,0,0.50), transparent);
-  pointer-events: none;
-  z-index: 10;
-}
 
 /* Dot-grid texture on the root editor split only */
 .workspace-split.mod-root {
@@ -305,6 +295,7 @@
   background: var(--ef-bg-panel);
   position: relative;
   z-index: 10;
+  box-shadow: var(--panel-shadow-right);
 }
 
 
@@ -710,6 +701,14 @@
 .workspace-leaf-content[data-type="outline"],
 .workspace-leaf-content[data-type="outline"] .view-content {
   background: var(--ef-bg-editor);
+}
+
+
+/* Topographic texture overlay on outline panel */
+.workspace-leaf-content[data-type="outline"] .view-content {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M 32 0 L 0 0 0 32' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
+  background-repeat: repeat;
 }
 
 /* Outline tree items */
