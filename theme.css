@@ -145,6 +145,10 @@
   --ef-tab-pill-inner-border:         rgba(255,255,255,0.45);
   --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.45);
   --ef-tab-pill-font-weight:          600;
+  --ef-tab-pill-color:                #f3f3f5;
+  --ef-tab-pill-color-hover:          #ffffff;
+  --ef-tab-pill-color-active:         #1e1e22;
+  --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.35);
 
   /* --- Radius --- */
   --radius-s:  4px;
@@ -245,6 +249,17 @@
   background: #1c1b1d !important;
   border-right: 1px solid rgba(255,255,255,0.05);
   box-shadow: 6px 0 28px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
+  outline: none !important;
+}
+
+.workspace-ribbon.mod-left::before {
+  background: #1c1b1d !important;
+}
+
+/* Kill any background shift on parent wrapper when window loses focus */
+body:not(.is-focused) .workspace-ribbon.mod-left,
+body:not(.is-focused) .sidebar-toggle-button.mod-left {
+  background: #1c1b1d !important;
 }
 
 .workspace-ribbon.mod-right {
@@ -290,6 +305,22 @@
   color: #ffffff;
 }
 
+/* Sidebar toggle button — match ribbon bg/shadow, no focus color shift */
+.sidebar-toggle-button.mod-left {
+  background: #1c1b1d !important;
+  box-shadow: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: 1px solid rgba(255,255,255,0.05) !important;
+  outline: none !important;
+}
+
+.sidebar-toggle-button.mod-left::before,
+.sidebar-toggle-button.mod-left::after {
+  display: none !important;
+}
+
 
 /* ============================================================
    05  LEFT SIDEBAR — container
@@ -316,6 +347,8 @@
 .workspace-split.mod-left-split .workspace-tab-header-container {
   background: var(--ef-bg-void);
   border-bottom: none;
+  align-items: center;
+  padding: 0 8px;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header-container-inner {
@@ -325,12 +358,12 @@
 
 .workspace-split.mod-left-split .workspace-tab-header {
   color: rgba(255,255,255,0.68) !important;
-  padding: 5px;
-  border-radius: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
   position: relative;
   top: 0 !important;
   transform: none !important;
-  margin: 0 !important;
+  margin: 0 3px !important;
   border: none !important;
   box-shadow: none !important;
   background: transparent !important;
@@ -347,7 +380,7 @@
 .workspace-split.mod-left-split .workspace-tab-header-inner,
 .workspace-split.mod-left-split .workspace-tab-header-inner:hover {
   background: transparent !important;
-  border-radius: 6px;
+  border-radius: 999px;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header:hover {
@@ -361,7 +394,7 @@
   background: #d4c800 !important;
   box-shadow: none !important;
   border: none !important;
-  border-radius: 6px !important;
+  border-radius: 999px !important;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header.is-active svg {
@@ -801,40 +834,49 @@
   padding: 0 8px;
   gap: 0;
   align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
+
+/* Obsidian app.css applies margin-top: 6px here which offsets pill centering */
+.workspace-split.mod-root .workspace-tab-header-container-inner {
+  margin: 0 -5px -1px !important;
+  padding: 0 15px !important;
+}
+
 
 .workspace-split.mod-root .workspace-tab-header {
   background: var(--ef-tab-pill-bg);
-  color: #f3f3f5;
+  color: var(--ef-tab-pill-color);
   border-radius: 999px;
   font-size: var(--ef-ui-size-compact);
-  padding: 4px 12px;
+  padding: 5px 12px;
   border: 1px solid var(--ef-tab-pill-border);
   box-shadow:
     inset 0 0 0 2px var(--ef-tab-pill-bg),
     inset 0 0 0 3px var(--ef-tab-pill-inner-border),
-    0 2px 8px rgba(0,0,0,0.35) !important;
+    var(--ef-tab-pill-drop-shadow) !important;
   position: relative;
   margin: 0 3px !important;
   transition: color 0.12s, background 0.12s, border-color 0.12s;
   max-width: 200px;
-  min-height: 31px;
 }
 
-/* Strip Obsidian's inner wrapper background so it doesn't override the pill */
+/* Inner wrapper: centers text + icon vertically inside the pill */
 .workspace-split.mod-root .workspace-tab-header-inner {
   background: transparent !important;
   border-radius: 999px;
+  display: flex;
+  align-items: center;
 }
 
 .workspace-split.mod-root .workspace-tab-header:hover {
-  color: #ffffff;
+  color: var(--ef-tab-pill-color-hover);
   background: var(--ef-tab-pill-bg-hover);
   border-color: var(--ef-tab-pill-border-hover);
   box-shadow:
     inset 0 0 0 2px var(--ef-tab-pill-bg-hover),
-    inset 0 0 0 3px rgba(255,255,255,0.45),
-    0 2px 8px rgba(0,0,0,0.35) !important;
+    inset 0 0 0 3px var(--ef-tab-pill-inner-border),
+    var(--ef-tab-pill-drop-shadow) !important;
 }
 
 .workspace-split.mod-root .workspace-tab-header.is-active,
@@ -844,7 +886,7 @@
   box-shadow:
     inset 0 0 0 2px var(--ef-tab-pill-bg-active),
     inset 0 0 0 3px var(--ef-tab-pill-inner-border-active),
-    0 2px 8px rgba(0,0,0,0.35) !important;
+    var(--ef-tab-pill-drop-shadow) !important;
 }
 
 .workspace-split.mod-root .workspace-tab-header-separator {
@@ -858,27 +900,27 @@
 }
 
 .workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-title {
-  color: #f3f3f5 !important;
+  color: var(--ef-tab-pill-color) !important;
   font-weight: var(--ef-tab-pill-font-weight);
 }
 
 .workspace-split.mod-root .workspace-tab-header[aria-label^="Outline of"] .workspace-tab-header-inner-icon,
-.workspace-split.mod-root .workspace-tab-header[aria-label^="Outline of"] svg,
 .workspace-split.mod-root .workspace-tab-header[title^="Outline of"] .workspace-tab-header-inner-icon,
-.workspace-split.mod-root .workspace-tab-header[title^="Outline of"] svg,
-.workspace-split.mod-root .workspace-tab-header[data-type="outline"] .workspace-tab-header-inner-icon,
-.workspace-split.mod-root .workspace-tab-header[data-type="outline"] svg {
-  display: none !important;
+.workspace-split.mod-root .workspace-tab-header[data-type="outline"] .workspace-tab-header-inner-icon {
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .workspace-split.mod-root .workspace-tab-header:hover .workspace-tab-header-inner-title {
-  color: #ffffff !important;
+  color: var(--ef-tab-pill-color-hover) !important;
 }
 
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
-.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title,
-.workspace-split.mod-root .workspace-tab-header.is-active.is-active .workspace-tab-header-inner-title {
-  color: #242428 !important;
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title {
+  color: var(--ef-tab-pill-color-active) !important;
   font-weight: var(--ef-tab-pill-font-weight);
 }
 
@@ -898,12 +940,9 @@
   opacity: 1;
 }
 
-.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn {
-  color: #2a2a2e;
-}
-
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-btn {
-  color: #2a2a2e;
+  color: var(--ef-tab-pill-color-active);
 }
 
 .workspace-tab-header-inner-close-btn:hover {
@@ -1005,15 +1044,27 @@
   display: none;
 }
 
-/* ── Markdown editor: merge view-header with content so breadcrumb
-      reads as being inside the note, just above the inline title ── */
+/* ── Markdown editor: breadcrumb strip, same height as tab bar ── */
 .workspace-split.mod-root
   .workspace-leaf-content[data-type="markdown"]
   .view-header {
   border-bottom: none;
-  padding: 8px 28px 0;
+  padding: 0;
   background: var(--background-primary);
-  min-height: 34px;
+  overflow: visible;
+}
+
+.workspace-split.mod-root
+  .workspace-leaf-content[data-type="markdown"]
+  .view-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 17%;
+  width: 66%;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.9);
 }
 
 
