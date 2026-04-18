@@ -139,7 +139,7 @@
   --ef-tab-pill-bg:                   #0d0d0f;
   --ef-tab-pill-bg-hover:             #333333;
   --ef-tab-pill-bg-active:            #e7e3e0;
-  --ef-tab-pill-border:               rgba(255,255,255,0.25);
+  --ef-tab-pill-border:               rgba(255,255,255,0.45);
   --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
   --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
   --ef-tab-pill-inner-border:         rgba(255,255,255,0.45);
@@ -166,6 +166,9 @@
   /* --- Panel shadows --- */
   --panel-shadow-right: 6px 0 12px rgba(0,0,0,0.3), 2px 0 6px rgba(0,0,0,0.3);
   --panel-shadow-left:  -6px 0 12px rgba(0,0,0,0.3), -2px 0 6px rgba(0,0,0,0.35);
+
+  /* --- Bottom vignette --- */
+  --ef-bottom-vignette: rgba(0,0,0,0.55);
 
   /* --- Nav --- */
   --nav-item-size:           14px;
@@ -752,6 +755,36 @@
 }
 
 
+
+/* Bottom vignette — outline panel */
+.workspace-leaf-content[data-type="outline"] {
+  position: relative;
+}
+.workspace-leaf-content[data-type="outline"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 0%;
+  background: linear-gradient(to top, var(--ef-bottom-vignette), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Bottom vignette — active editor */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] {
+  position: relative;
+}
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 0%;
+  background: linear-gradient(to top, var(--ef-bottom-vignette), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+
 /* ============================================================
    08  TAB BAR (main editor tabs) — floating pills
    ============================================================ */
@@ -771,8 +804,8 @@
   padding: 4px 12px;
   border: 1px solid var(--ef-tab-pill-border);
   box-shadow:
-    inset 0 0 0 4px var(--ef-tab-pill-bg),
-    inset 0 0 0 5px var(--ef-tab-pill-inner-border),
+    inset 0 0 0 2px var(--ef-tab-pill-bg),
+    inset 0 0 0 3px var(--ef-tab-pill-inner-border),
     0 2px 8px rgba(0,0,0,0.35) !important;
   position: relative;
   margin: 0 3px 5px !important;
@@ -792,8 +825,8 @@
   background: var(--ef-tab-pill-bg-hover);
   border-color: var(--ef-tab-pill-border-hover);
   box-shadow:
-    inset 0 0 0 4px var(--ef-tab-pill-bg-hover),
-    inset 0 0 0 5px rgba(255,255,255,0.45),
+    inset 0 0 0 2px var(--ef-tab-pill-bg-hover),
+    inset 0 0 0 3px rgba(255,255,255,0.45),
     0 2px 8px rgba(0,0,0,0.35) !important;
 }
 
@@ -802,8 +835,8 @@
   background: var(--ef-tab-pill-bg-active);
   border-color: var(--ef-tab-pill-border-active);
   box-shadow:
-    inset 0 0 0 4px var(--ef-tab-pill-bg-active),
-    inset 0 0 0 5px var(--ef-tab-pill-inner-border-active),
+    inset 0 0 0 2px var(--ef-tab-pill-bg-active),
+    inset 0 0 0 3px var(--ef-tab-pill-inner-border-active),
     0 2px 8px rgba(0,0,0,0.35) !important;
 }
 
