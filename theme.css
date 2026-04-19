@@ -407,7 +407,7 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 .workspace-split.mod-left-split .workspace-tab-header {
   color: rgba(255,255,255,0.68) !important;
   padding: 5px 12px;
-  border-radius: var(--ef-radius-pill);
+  border-radius: 6px;
   position: relative;
   top: 0 !important;
   transform: none !important;
@@ -430,7 +430,7 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 .workspace-split.mod-left-split .workspace-tab-header-inner,
 .workspace-split.mod-left-split .workspace-tab-header-inner:hover {
   background: transparent !important;
-  border-radius: var(--ef-radius-pill);
+  border-radius: 6px;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header:hover {
@@ -444,7 +444,7 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
   background: #d4c800 !important;
   box-shadow: none !important;
   border: none !important;
-  border-radius: var(--ef-radius-pill) !important;
+  border-radius: 6px !important;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header.is-active svg {
@@ -473,207 +473,6 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 /* ============================================================
    FILE EXPLORER
    ============================================================ */
-
-/* Section-label chrome — file explorer is panel depth, outline is editor depth */
-.workspace-leaf-content[data-type="file-explorer"] .view-header {
-  background: transparent;
-}
-.workspace-leaf-content[data-type="outline"] .view-header {
-  background: transparent;
-}
-.workspace-leaf-content[data-type="file-explorer"] .view-header,
-.workspace-leaf-content[data-type="outline"] .view-header {
-  border-bottom: none;
-  min-height: 34px;
-  padding: 8px 10px 0 12px;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  position: relative;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-header::before,
-.workspace-leaf-content[data-type="outline"] .view-header::before {
-  display: block;
-  order: 1;
-  font-size: var(--ef-ui-size);
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  color: #d4c800;
-  font-family: var(--font-interface);
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-header::before {
-  content: '// Vault Index';
-}
-
-.workspace-leaf-content[data-type="outline"] .view-header::before {
-  content: '// Outline';
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-header::after,
-.workspace-leaf-content[data-type="outline"] .view-header::after {
-  content: none;
-  display: none;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-header-title-container,
-.workspace-leaf-content[data-type="outline"] .view-header-title-container,
-.workspace-leaf-content[data-type="file-explorer"] .view-header-title,
-.workspace-leaf-content[data-type="outline"] .view-header-title {
-  display: none;
-}
-
-/* Plugin-backed panel labels: plain text only, no header slab.
-   NOTE: endfield-* classes are injected by a companion plugin.
-   These rules are inactive without that plugin present. */
-.view-header.endfield-panel-header-ready,
-.endfield-panel-header,
-.endfield-file-explorer-chrome {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-.view-header.endfield-panel-header-ready {
-  min-height: auto !important;
-  padding: 0 12px !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-.endfield-panel-header,
-.endfield-file-explorer-chrome {
-  min-height: auto !important;
-  padding: 0 !important;
-  gap: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  margin-right: 8px !important;
-}
-
-.endfield-panel-title,
-.endfield-file-explorer-title {
-  font-size: var(--ef-ui-size) !important;
-  letter-spacing: 0 !important;
-  text-shadow: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  line-height: 1.5 !important;
-  white-space: nowrap !important;
-}
-
-.endfield-panel-rule,
-.endfield-file-explorer-rule {
-  display: none !important;
-}
-
-.endfield-file-explorer-title {
-  margin-left: 34px !important;
-}
-
-.workspace-leaf-content[data-type="outline"] .endfield-panel-title {
-  margin-left: 28px !important;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-actions,
-.workspace-leaf-content[data-type="outline"] .view-actions {
-  order: 3;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin-left: auto;
-  width: 28px;
-  max-height: 24px;
-  padding: 28px 4px 4px;
-  overflow: hidden;
-  gap: 2px;
-  border-radius: 8px;
-  background: transparent;
-  border: 1px solid transparent;
-  box-shadow: none;
-  transition: max-height 0.14s ease, background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
-}
-
-/* Outline view-actions hidden — hover/expand rules for outline have been removed (dead) */
-.workspace-leaf-content[data-type="outline"] .view-actions {
-  display: none;
-}
-
-.workspace-leaf.mod-active .workspace-leaf-content[data-type="file-explorer"] .view-header::before,
-.workspace-leaf.mod-active .workspace-leaf-content[data-type="outline"] .view-header::before {
-  color: #d4c800;
-}
-
-/* Expand dropdown — file-explorer only (outline selectors removed, parent is display:none) */
-.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover,
-.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within {
-  width: 34px;
-  max-height: 320px;
-  background: var(--background-primary-alt);
-  border-color: var(--ef-border-mid);
-  box-shadow: inset 0 0 0 1px var(--ef-border-faint),
-              0 8px 20px rgba(0,0,0,0.42);
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-actions::before {
-  content: '▾';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 24px;
-  height: 24px;
-  color: #f3f3f5;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--ef-border-mid);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 0 1px var(--ef-border-faint);
-  font-size: 20px;
-  line-height: 1;
-  transform: translateY(-1px);
-  transition: color 0.12s, background 0.12s, border-color 0.12s;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover::before,
-.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within::before {
-  color: #d4c800;
-  background: var(--ef-accent-bg-dim);
-  border-color: rgba(212,200,0,0.28);
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-actions .view-action {
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  color: #f3f3f5;
-  border-radius: 6px;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: color 0.12s, background 0.12s, opacity 0.12s;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover .view-action,
-.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within .view-action {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.workspace-leaf-content[data-type="file-explorer"] .view-actions .view-action:hover {
-  color: #d4c800;
-  background: var(--ef-accent-bg-active);
-}
 
 /* Search bar inside file explorer */
 .search-input-container input {
@@ -2333,46 +2132,3 @@ button {
   color: #d4c800;
 }
 
-
-/* ============================================================
-   PLUGIN OVERRIDES — Endfield UI Chrome
-   body.endfield-ui-chrome-enabled is set by the companion plugin.
-   These rules override base sidebar styles from sidebar.css.
-   Must remain in this file, which imports last.
-   ============================================================ */
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header {
-  background: transparent !important;
-}
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header {
-  background: transparent !important;
-}
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header {
-  border-bottom: none;
-  min-height: auto;
-  height: auto;
-  padding: 0 12px;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header::before,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header::after,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header::before,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header::after {
-  content: none;
-  display: none;
-}
-
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header-title-container,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] .view-header-title,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header-title-container,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header-title,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] .view-header-breadcrumb {
-  display: none;
-}
-
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="file-explorer"] > .view-header > .view-actions,
-body.endfield-ui-chrome-enabled .workspace-leaf-content[data-type="outline"] > .view-header > .view-actions {
-  display: none;
-}
