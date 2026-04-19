@@ -1,0 +1,139 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — VIEW HEADER
+   Per-leaf header bar, breadcrumbs, vertical dock.
+
+   CASCADE NOTE: Rule order here is load-bearing.
+   1. General .view-header (low specificity, sets defaults)
+   2. Markdown-specific override (higher specificity, !important bg)
+   3. Breadcrumb content rules
+   4. .view-actions vertical dock positioning
+   5. overflow: visible chain (required for dock to escape ancestors)
+
+   The original had four separate blocks addressing the same
+   markdown .view-header selector (§09 blocks 2/3/4 + §10 block).
+   These have been merged into one block below. The two ::after
+   definitions have also been merged into one.
+   ============================================================ */
+
+
+/* ── General view-header ── */
+.view-header {
+  background: var(--background-primary);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  min-height: var(--ef-titlebar-height);
+  max-height: var(--ef-titlebar-height);
+  height: var(--ef-titlebar-height);
+  overflow: hidden;
+}
+
+/* ── Markdown editor: breadcrumb gradient strip ──
+   Merges three redundant blocks from the original (§09 blocks 2, 3, 4
+   and §10 block 1 — all targeted the same selector with different properties).
+   Effective values: gradient bg (!important), border-bottom none,
+   padding 0, overflow visible, position relative. */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 17%,
+    rgba(212,200,0,0.10) 25%,
+    rgba(212,200,0,0.16) 50%,
+    rgba(212,200,0,0.10) 75%,
+    transparent 83%,
+    transparent 100%
+  ) !important;
+  border-bottom: none;
+  padding: 0;
+  overflow: visible;
+}
+
+/* ── Markdown editor: breadcrumb underline rule ──
+   Merged from two ::after definitions in the original (§09 last block + §10 second block).
+   Original block 1 contributed: background rgba(255,255,255,0.07).
+   Original block 2 contributed: box-shadow (override), pointer-events, z-index. */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 17%;
+  width: 66%;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Breadcrumb content positioning ── */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title-container {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb {
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+  font-weight: 500;
+  color: #d4c800;
+  pointer-events: none;
+  user-select: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title {
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+  font-weight: 500;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb-separator {
+  color: rgba(212,200,0,0.4);
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+}
+
+/* Back/forward nav buttons hidden globally */
+.view-header-nav-buttons {
+  display: none !important;
+}
+
+/* ── Outline panel: hide breadcrumb, show only the // OUTLINE label ── */
+.workspace-leaf-content[data-type="outline"] .view-header-title-container {
+  display: flex;
+}
+
+.workspace-leaf-content[data-type="outline"] .view-header-breadcrumb {
+  display: none;
+}
+
+
+/* ============================================================
+   EDITOR CONTROLS — VERTICAL DOCK
+
+   The source/reading toggle + other view actions are positioned
+   as a floating element on the right edge of the view-header.
+   The view-header is set to overflow: visible to allow this.
+   ============================================================ */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Allow the absolute-positioned vertical dock to escape its ancestors.
+   NOTE: overflow: visible on .workspace-split.mod-root is intentionally
+   broad — the floating dock requires it. Do not remove. */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"],
+.workspace-split.mod-root .workspace-leaf[data-type="markdown"],
+.workspace-split.mod-root .workspace-leaf,
+.workspace-split.mod-root {
+  overflow: visible;
+}

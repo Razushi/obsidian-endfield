@@ -1,0 +1,335 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — MODALS
+   Command palette, settings modal, general modals, buttons.
+   ============================================================ */
+
+
+/* ============================================================
+   COMMAND PALETTE
+   ============================================================ */
+.modal-bg {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.55);
+}
+
+.prompt {
+  background: var(--background-primary-alt);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
+  overflow: hidden;
+  padding: 0;
+}
+
+.prompt-input-container {
+  background: var(--background-primary);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 12px 16px;
+}
+
+.prompt-input {
+  background: transparent;
+  border: none;
+  color: var(--text-normal);
+  font-family: var(--font-text);
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  caret-color: #d4c800;
+}
+
+.prompt-input::placeholder {
+  color: var(--ef-chrome-text-faint);
+}
+
+.prompt-results {
+  padding: 6px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.suggestion-item {
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--ef-chrome-text-muted);
+  font-size: var(--ef-ui-size);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.1s, color 0.1s;
+}
+
+.suggestion-item:hover {
+  background: var(--ef-border-faint);
+  color: var(--text-normal);
+}
+
+.suggestion-item.is-selected {
+  background: var(--ef-accent-bg-dim);
+  color: var(--text-normal);
+  border-left: 2px solid #d4c800;
+  border-radius: 0 !important;
+  padding-left: 10px;
+}
+
+/* Command name */
+.suggestion-title {
+  flex: 1;
+  font-size: var(--ef-ui-size);
+}
+
+/* Hotkey hint */
+.suggestion-hotkey {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+}
+
+/* Section headers in command palette */
+.suggestion-flair {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+}
+
+.prompt-heading {
+  font-size: var(--ef-ui-label-size);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4c800;
+  padding: 8px 12px 4px;
+  font-family: var(--font-interface);
+}
+
+
+/* ============================================================
+   SETTINGS MODAL
+   ============================================================ */
+.mod-settings {
+  background: var(--background-primary-alt);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+}
+
+.mod-settings .modal-sidebar,
+.mod-settings .vertical-tab-nav {
+  background: var(--background-primary);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.vertical-tab-nav-item {
+  color: var(--ef-chrome-text-muted);
+  border-radius: 0 6px 6px 0;
+  margin-right: 8px;
+  font-size: var(--ef-ui-size);
+  padding: 8px 14px;
+  font-family: var(--font-interface);
+  transition: background 0.12s, color 0.12s;
+}
+
+.vertical-tab-nav-item:hover {
+  color: var(--text-normal);
+  background: var(--ef-border-faint);
+}
+
+.vertical-tab-nav-item.is-active {
+  color: #d4c800;
+  background: var(--ef-accent-bg-dim);
+  border-right: 2px solid #d4c800;
+}
+
+.mod-settings .modal-content {
+  background: var(--background-primary-alt);
+}
+
+/* Section heading in settings */
+.setting-item.setting-item-heading .setting-item-name {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d4c800;
+  font-family: var(--font-interface);
+}
+
+.setting-item {
+  border-top: 1px solid var(--ef-border-faint);
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.setting-item-name {
+  color: var(--text-normal);
+  font-size: var(--nav-item-size);
+  font-family: var(--font-interface);
+}
+
+.setting-item-description {
+  color: var(--ef-chrome-text-muted);
+  font-size: var(--ef-ui-size-compact);
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* Toggle switch */
+.checkbox-container {
+  background: #222226;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 0 0 1px var(--ef-border-faint);
+}
+
+.checkbox-container.is-enabled {
+  background: rgba(212,200,0,0.2);
+  border-color: var(--ef-accent-border);
+}
+
+.checkbox-container.is-enabled::after {
+  background: #d4c800;
+  box-shadow: 0 0 6px rgba(212,200,0,0.4);
+}
+
+/* Text inputs in settings */
+.mod-settings input[type="text"],
+.mod-settings input[type="number"],
+.mod-settings textarea {
+  background: var(--ef-bg-void);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: var(--text-normal);
+  font-family: var(--font-text);
+  font-size: var(--ef-ui-size);
+  padding: 6px 10px;
+  transition: border-color 0.12s;
+}
+
+.mod-settings input[type="text"]:focus,
+.mod-settings input[type="number"]:focus,
+.mod-settings textarea:focus {
+  border-color: var(--ef-accent-border);
+  outline: none;
+}
+
+/* Dropdown in settings */
+.mod-settings select {
+  background: var(--ef-bg-void);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: var(--text-normal);
+  font-family: var(--font-text);
+  font-size: var(--ef-ui-size);
+  padding: 6px 10px;
+}
+
+
+/* ============================================================
+   GENERAL MODALS
+   ============================================================ */
+.modal {
+  background: var(--background-primary-alt);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.modal-close-button {
+  color: var(--ef-chrome-text-faint);
+  border-radius: 50%;
+  transition: color 0.12s, background 0.12s;
+}
+
+.modal-close-button:hover {
+  color: #e84040;
+  background: rgba(232,64,64,0.10);
+}
+
+.modal-title {
+  color: #f0f0f0;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-text);
+}
+
+.modal-content {
+  color: var(--text-normal);
+}
+
+/* File open / quick switcher modal */
+.mod-quick-switcher .suggestion-item.is-selected {
+  background: var(--ef-accent-bg-dim);
+  border-left: 2px solid #d4c800;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+/* Base — all buttons */
+button {
+  font-family: var(--font-interface);
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  cursor: pointer;
+}
+
+/* Standard button — double border treatment */
+.mod-settings button:not(.mod-cta):not(.clickable-icon),
+.modal button:not(.mod-cta):not(.clickable-icon) {
+  background: var(--background-primary);
+  color: var(--ef-chrome-text-muted);
+  border: 1px solid var(--ef-border-mid);
+  box-shadow: inset 0 0 0 5px var(--ef-border-faint);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: var(--ef-ui-size);
+}
+
+.mod-settings button:not(.mod-cta):not(.clickable-icon):hover,
+.modal button:not(.mod-cta):not(.clickable-icon):hover {
+  background: var(--background-primary-alt);
+  color: var(--text-normal);
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* CTA / primary button — yellow pill */
+.mod-cta {
+  background: rgba(212,200,0,0.12) !important;
+  color: #d4c800 !important;
+  border: 1px solid rgba(212,200,0,0.4) !important;
+  box-shadow: inset 0 0 0 5px rgba(212,200,0,0.08) !important;
+  border-radius: 20px !important;
+  font-size: var(--ef-ui-size);
+}
+
+.mod-cta:hover {
+  background: rgba(212,200,0,0.20) !important;
+  border-color: rgba(212,200,0,0.65) !important;
+  box-shadow: inset 0 0 0 5px rgba(212,200,0,0.12),
+              0 0 10px rgba(212,200,0,0.15) !important;
+}
+
+/* Icon / clickable-icon buttons */
+.clickable-icon {
+  color: var(--ef-chrome-text-faint);
+  border-radius: 6px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s, background 0.12s;
+}
+
+.clickable-icon:hover {
+  color: #d4c800;
+  background: var(--ef-accent-bg-dim);
+}
+
+.clickable-icon.is-active {
+  color: #d4c800;
+  background: var(--ef-accent-bg-active);
+}

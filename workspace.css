@@ -1,0 +1,182 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — WORKSPACE
+   Body, titlebar, dot-grid root, left ribbon,
+   sidebar toggle, status bar, scrollbars.
+   ============================================================ */
+
+
+/* ============================================================
+   WORKSPACE CHROME
+   ============================================================ */
+.theme-dark body {
+  font-family: var(--font-text);
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+  background: var(--background-primary);
+}
+
+.workspace {
+  background: var(--background-primary);
+}
+
+/* Windows titlebar — unified with tab strip */
+.titlebar {
+  background: var(--ef-bg-void);
+  border-bottom: none;
+}
+
+.titlebar-text {
+  color: var(--ef-chrome-text-faint);
+  font-size: 11px;
+  font-family: var(--font-interface);
+}
+
+
+/* Dot-grid texture on the root editor split only */
+.workspace-split.mod-root {
+  position: relative;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-color: var(--background-primary);
+}
+
+
+/* ============================================================
+   LEFT RIBBON (icon rail)
+   ============================================================ */
+.workspace-ribbon {
+  background: transparent;
+}
+
+.workspace-ribbon.mod-left {
+  background: #1c1b1d !important;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 6px 0 28px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
+  outline: none !important;
+}
+
+.workspace-ribbon.mod-left::before {
+  background: #1c1b1d !important;
+}
+
+/* Kill any background shift on parent wrapper when window loses focus */
+body:not(.is-focused) .workspace-ribbon.mod-left,
+body:not(.is-focused) .sidebar-toggle-button.mod-left {
+  background: #1c1b1d !important;
+}
+
+.workspace-ribbon.mod-right {
+  display: none !important;
+}
+
+/* Circle button tight around default icon size — no SVG override */
+.workspace-ribbon.mod-left .side-dock-ribbon-tab,
+.workspace-ribbon.mod-left .side-dock-ribbon-action {
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  margin: 3px auto !important;
+  padding: 5px !important;
+  width: auto !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.workspace-ribbon.mod-left .side-dock-ribbon-tab:hover,
+.workspace-ribbon.mod-left .side-dock-ribbon-action:hover {
+  color: #ffffff !important;
+  background: #424242 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+}
+
+.workspace-ribbon.mod-left .side-dock-ribbon-tab.is-active,
+.workspace-ribbon.mod-left .side-dock-ribbon-action.is-active {
+  color: #ffffff !important;
+  background: #424242 !important;
+  border-radius: 50% !important;
+}
+
+/* Ribbon toggle button */
+.workspace-ribbon-collapse-btn {
+  color: rgba(255,255,255,0.4);
+  transition: color 0.15s;
+}
+.workspace-ribbon-collapse-btn:hover {
+  color: #ffffff;
+}
+
+/* Sidebar toggle button — match ribbon bg/shadow, no focus color shift */
+.sidebar-toggle-button.mod-left {
+  background: #1c1b1d !important;
+  box-shadow: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: 1px solid rgba(255,255,255,0.05) !important;
+  outline: none !important;
+}
+
+.sidebar-toggle-button.mod-left::before,
+.sidebar-toggle-button.mod-left::after {
+  display: none !important;
+}
+
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+.status-bar {
+  background: var(--ef-bg-void);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  height: 22px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.status-bar-item {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+  padding: 0 6px;
+  transition: color 0.12s;
+}
+
+.status-bar-item.mod-clickable:hover {
+  color: var(--ef-chrome-text);
+}
+
+/* Word / char count — yellow */
+.status-bar-item.plugin-word-count {
+  color: #d4c800;
+}
+
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-active-thumb-bg);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

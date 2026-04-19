@@ -1,0 +1,152 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — TABS
+   Main editor floating pill tab bar.
+   ============================================================ */
+
+
+/* Unify the full top strip — tab container, left space, right space all one color */
+.workspace-split.mod-root .workspace-tab-header-container,
+.workspace-tabs.mod-top-left-space,
+.workspace-tabs.mod-top-right-space {
+  background: var(--ef-bg-void);
+  border-bottom: none;
+}
+
+.workspace-split.mod-root .workspace-tab-header-container {
+  padding: 0 8px;
+  gap: 0;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+/* Obsidian app.css applies margin-top: 6px here which offsets pill centering */
+.workspace-split.mod-root .workspace-tab-header-container-inner {
+  margin: 0 -5px -1px !important;
+  padding: 0 15px !important;
+}
+
+
+.workspace-split.mod-root .workspace-tab-header {
+  background: var(--ef-tab-pill-bg);
+  color: var(--ef-tab-pill-color);
+  border-radius: var(--ef-radius-pill);
+  font-size: var(--ef-ui-size-compact);
+  padding: 5px 12px;
+  border: 1px solid var(--ef-tab-pill-border);
+  box-shadow:
+    inset 0 0 0 2px var(--ef-tab-pill-bg),
+    inset 0 0 0 3px var(--ef-tab-pill-inner-border),
+    var(--ef-tab-pill-drop-shadow) !important;
+  position: relative;
+  margin: 0 3px !important;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+  max-width: 200px;
+}
+
+/* Inner wrapper: centers text + icon vertically inside the pill */
+.workspace-split.mod-root .workspace-tab-header-inner {
+  background: transparent !important;
+  border-radius: var(--ef-radius-pill);
+  display: flex;
+  align-items: center;
+}
+
+.workspace-split.mod-root .workspace-tab-header:hover {
+  color: var(--ef-tab-pill-color-hover);
+  background: var(--ef-tab-pill-bg-hover);
+  border-color: var(--ef-tab-pill-border-hover);
+  box-shadow:
+    inset 0 0 0 2px var(--ef-tab-pill-bg-hover),
+    inset 0 0 0 3px var(--ef-tab-pill-inner-border),
+    var(--ef-tab-pill-drop-shadow) !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active,
+.workspace-split.mod-root .workspace-tab-header.is-active:hover {
+  background: var(--ef-tab-pill-bg-active);
+  border-color: var(--ef-tab-pill-border-active);
+  box-shadow:
+    inset 0 0 0 2px var(--ef-tab-pill-bg-active),
+    inset 0 0 0 3px var(--ef-tab-pill-inner-border-active),
+    var(--ef-tab-pill-drop-shadow) !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header-separator {
+  display: none !important;
+}
+
+/* Tab title text */
+.workspace-tab-header-inner-title {
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size-compact);
+}
+
+.workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-title {
+  color: var(--ef-tab-pill-color) !important;
+  font-weight: var(--ef-tab-pill-font-weight);
+}
+
+/* Hide icon for Outline tabs */
+.workspace-split.mod-root .workspace-tab-header[aria-label^="Outline of"] .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header[title^="Outline of"] .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header[data-type="outline"] .workspace-tab-header-inner-icon {
+  width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header:hover .workspace-tab-header-inner-title {
+  color: var(--ef-tab-pill-color-hover) !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title {
+  color: var(--ef-tab-pill-color-active) !important;
+  font-weight: var(--ef-tab-pill-font-weight);
+}
+
+/* Tab close */
+.workspace-tab-header-inner-close-btn {
+  color: var(--ef-chrome-text-faint);
+  opacity: 0;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: 6px;
+  transition: opacity 0.12s, color 0.12s, background 0.12s;
+}
+
+.workspace-tab-header:hover .workspace-tab-header-inner-close-btn,
+.workspace-tab-header.is-active .workspace-tab-header-inner-close-btn {
+  opacity: 1;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn,
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-btn {
+  color: var(--ef-tab-pill-color-active);
+}
+
+.workspace-tab-header-inner-close-btn:hover {
+  color: #ffffff;
+  background: rgba(232,64,64,0.14);
+  box-shadow: inset 0 0 0 1px rgba(232,64,64,0.18);
+}
+
+/* New tab button */
+.workspace-tab-header-new-tab {
+  color: var(--ef-chrome-text-faint);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s, background 0.12s;
+}
+
+.workspace-tab-header-new-tab:hover {
+  color: var(--ef-chrome-text);
+  background: rgba(255,255,255,0.05);
+}
