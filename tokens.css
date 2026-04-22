@@ -181,6 +181,10 @@
   /* --- Code --- */
   --ef-code-size:          0.88em; /* inline and block code font size */
 
+  /* --- Tables (Vestige style) --- */
+  --table-border:     #343434;
+  --table-header-bg:  #252525;
+
   /* --- Semantic palette (tuned for dark theme) --- */
   --semantic-red:     #ed5658;
   --semantic-orange:  #f4af66;
@@ -194,4 +198,10 @@
   --semantic-pink:    #f28fc8;
   --semantic-magenta: #b03366;
   --semantic-brown:   #c7876e;
+}
+
+/* Light-mode table tokens (forward-compat if light theme ever added) */
+.theme-light {
+  --table-border:     #ccc8c1;
+  --table-header-bg:  #dedad4;
 }
