@@ -99,11 +99,6 @@
   font-size: var(--nav-item-size);
 }
 
-/* Back/forward nav buttons hidden globally */
-.view-header-nav-buttons {
-  display: none !important;
-}
-
 /* ── Outline panel: hide breadcrumb, show only the // OUTLINE label ── */
 .workspace-leaf-content[data-type="outline"] .view-header-title-container {
   display: flex;
@@ -123,9 +118,30 @@
    ============================================================ */
 .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
   position: absolute;
-  right: 12px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
+  gap: 6px;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-nav-buttons {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  gap: 6px;
+}
+
+/* Fixed-size 24×24 button boxes. Icons (centered by clickable-icon's default
+   flex) render inside a consistent box, so gap: 6px and right: 6px apply to
+   the boxes uniformly regardless of which icon is inside. */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions > *,
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-nav-buttons > * {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0 !important;  /* Override Commander plugin's --cmdr-spacing margin-right */
 }
 
 /* Allow the absolute-positioned vertical dock to escape its ancestors.

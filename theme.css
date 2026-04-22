@@ -60,8 +60,8 @@
   --line-height-normal:               1.7;
 
   /* --- UI chrome contrast --- */
-  --ef-chrome-text:                   #d8d8dd;
-  --ef-chrome-text-muted:             #b8b8bf;
+  --ef-chrome-text:                   #e5e5e7;
+  --ef-chrome-text-muted:             #bfbfc4;
   --ef-chrome-text-faint:             #8b8b94;
   --ef-ui-label-size:                 9px;   /* defined but section labels currently use --ef-ui-size (12px) — see sidebar.css */
   --ef-ui-size:                       12px;
@@ -142,8 +142,8 @@
   /* --- Nav --- */
   --nav-item-size:           14px;
   --nav-item-weight:         400;
-  --nav-item-color:          #d8d8dd;
-  --nav-item-color-muted:    #b8b8bf;
+  --nav-item-color:          #e5e5e7;
+  --nav-item-color-muted:    #bfbfc4;
   --nav-item-color-faint:    #8b8b94;
   --nav-collapse-icon-color: var(--ef-chrome-text-faint);
 
@@ -536,7 +536,6 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 
 .nav-folder-title:hover,
 .nav-file-title:hover {
-  color: #f0f0f0;
   background: var(--ef-border-faint);
 }
 
@@ -556,10 +555,6 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
   flex-shrink: 0;
   width: 14px;
   transition: color 0.12s;
-}
-
-.nav-folder-title:hover .nav-folder-collapse-indicator {
-  color: var(--ef-chrome-text-muted);
 }
 
 .nav-folder-title.is-active .nav-folder-collapse-indicator {
@@ -752,10 +747,25 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 }
 
 .workspace-split.mod-root .workspace-tab-header-container {
-  padding: 0 8px;
+  padding: 0 6px;
   gap: 0;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+/* Normalize top-row icon gap (Obsidian default is 4px) */
+.workspace-split.mod-root .workspace-tab-header-container .workspace-tab-header-tab-list {
+  margin-right: 6px;
+}
+
+/* Match bottom-row 24×24 icon boxes. The outer tab-strip buttons
+   (sidebar-toggle-button, tab-header-tab-list) are intrinsically taller
+   because the tab strip is, but their inner icon container is 26×26 by
+   default — shrink to 24×24 so top and bottom rows visually match. */
+.workspace-split.mod-root .workspace-tab-header-container .clickable-icon {
+  width: 24px;
+  height: 24px;
+  padding: 0;
 }
 
 /* Obsidian app.css applies margin-top: 6px here which offsets pill centering */
@@ -990,11 +1000,6 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
   font-size: var(--nav-item-size);
 }
 
-/* Back/forward nav buttons hidden globally */
-.view-header-nav-buttons {
-  display: none !important;
-}
-
 /* ── Outline panel: hide breadcrumb, show only the // OUTLINE label ── */
 .workspace-leaf-content[data-type="outline"] .view-header-title-container {
   display: flex;
@@ -1014,9 +1019,30 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
    ============================================================ */
 .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
   position: absolute;
-  right: 12px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
+  gap: 6px;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-nav-buttons {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  gap: 6px;
+}
+
+/* Fixed-size 24×24 button boxes. Icons (centered by clickable-icon's default
+   flex) render inside a consistent box, so gap: 6px and right: 6px apply to
+   the boxes uniformly regardless of which icon is inside. */
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions > *,
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-nav-buttons > * {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0 !important;  /* Override Commander plugin's --cmdr-spacing margin-right */
 }
 
 /* Allow the absolute-positioned vertical dock to escape its ancestors.

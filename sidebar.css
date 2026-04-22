@@ -147,7 +147,6 @@
 
 .nav-folder-title:hover,
 .nav-file-title:hover {
-  color: #f0f0f0;
   background: var(--ef-border-faint);
 }
 
@@ -167,10 +166,6 @@
   flex-shrink: 0;
   width: 14px;
   transition: color 0.12s;
-}
-
-.nav-folder-title:hover .nav-folder-collapse-indicator {
-  color: var(--ef-chrome-text-muted);
 }
 
 .nav-folder-title.is-active .nav-folder-collapse-indicator {

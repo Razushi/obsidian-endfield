@@ -13,10 +13,25 @@
 }
 
 .workspace-split.mod-root .workspace-tab-header-container {
-  padding: 0 8px;
+  padding: 0 6px;
   gap: 0;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+/* Normalize top-row icon gap (Obsidian default is 4px) */
+.workspace-split.mod-root .workspace-tab-header-container .workspace-tab-header-tab-list {
+  margin-right: 6px;
+}
+
+/* Match bottom-row 24×24 icon boxes. The outer tab-strip buttons
+   (sidebar-toggle-button, tab-header-tab-list) are intrinsically taller
+   because the tab strip is, but their inner icon container is 26×26 by
+   default — shrink to 24×24 so top and bottom rows visually match. */
+.workspace-split.mod-root .workspace-tab-header-container .clickable-icon {
+  width: 24px;
+  height: 24px;
+  padding: 0;
 }
 
 /* Obsidian app.css applies margin-top: 6px here which offsets pill centering */

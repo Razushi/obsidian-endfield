@@ -60,8 +60,8 @@
   --line-height-normal:               1.7;
 
   /* --- UI chrome contrast --- */
-  --ef-chrome-text:                   #d8d8dd;
-  --ef-chrome-text-muted:             #b8b8bf;
+  --ef-chrome-text:                   #e5e5e7;
+  --ef-chrome-text-muted:             #bfbfc4;
   --ef-chrome-text-faint:             #8b8b94;
   --ef-ui-label-size:                 9px;   /* defined but section labels currently use --ef-ui-size (12px) — see sidebar.css */
   --ef-ui-size:                       12px;
@@ -142,8 +142,8 @@
   /* --- Nav --- */
   --nav-item-size:           14px;
   --nav-item-weight:         400;
-  --nav-item-color:          #d8d8dd;
-  --nav-item-color-muted:    #b8b8bf;
+  --nav-item-color:          #e5e5e7;
+  --nav-item-color-muted:    #bfbfc4;
   --nav-item-color-faint:    #8b8b94;
   --nav-collapse-icon-color: var(--ef-chrome-text-faint);
 
