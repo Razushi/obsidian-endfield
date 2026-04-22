@@ -380,7 +380,7 @@ li[data-task="x"] > p {
 .callout[data-callout="note"]:not([data-callout-metadata*="label"])      { --gfm-accent: var(--semantic-blue);   }
 .callout[data-callout="tip"]:not([data-callout-metadata*="label"])       { --gfm-accent: var(--semantic-green);  }
 .callout[data-callout="important"]:not([data-callout-metadata*="label"]) { --gfm-accent: var(--semantic-purple); }
-.callout[data-callout="warning"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-orange); }
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-yellow); }
 .callout[data-callout="caution"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-red);    }
 
 
