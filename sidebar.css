@@ -41,12 +41,12 @@
 
 .workspace-split.mod-left-split .workspace-tab-header {
   color: rgba(255,255,255,0.68) !important;
-  padding: 5px 12px;
+  padding: 5px;
   border-radius: 6px;
   position: relative;
   top: 0 !important;
   transform: none !important;
-  margin: 0 3px !important;
+  margin: 0 !important;
   border: none !important;
   box-shadow: none !important;
   background: transparent !important;
@@ -185,13 +185,9 @@
 
 /* Notification badges */
 .nav-file-title .nav-file-tag {
-  background: #d4c800;
-  color: #0d0d0f;
-  border-radius: 50%;
-  width: 6px;
-  height: 6px;
-  font-size: 0;
-  box-shadow: 0 0 5px rgba(212,200,0,0.6);
+  color: #d4c800;
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
   margin-left: auto;
 }
 

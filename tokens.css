@@ -180,4 +180,18 @@
 
   /* --- Code --- */
   --ef-code-size:          0.88em; /* inline and block code font size */
+
+  /* --- Semantic palette (tuned for dark theme) --- */
+  --semantic-red:     #ed5658;
+  --semantic-orange:  #f4af66;
+  --semantic-yellow:  #efe669;
+  --semantic-lime:    #67e64b;
+  --semantic-green:   #7cc55c;
+  --semantic-teal:    #3ccfb0;
+  --semantic-blue:    #369ef8;
+  --semantic-cyan:    #93e3e3;
+  --semantic-purple:  #b58af7;
+  --semantic-pink:    #f28fc8;
+  --semantic-magenta: #b03366;
+  --semantic-brown:   #c7876e;
 }

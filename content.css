@@ -307,6 +307,84 @@ li[data-task="x"] > p {
 
 
 /* ============================================================
+   GFM CALLOUTS
+   GitHub-flavored alerts (note/tip/important/warning/caution):
+   accent bar, colored label, no icon. Excludes `|label` metadata
+   callouts (those use the speaker-dialogue layout snippet).
+   ============================================================ */
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) {
+  background: transparent;
+  border: none;
+  border-left: 3px solid var(--gfm-accent);
+  border-radius: 0;
+  padding: 0 0 0 1rem;
+  margin: 1rem 0;
+  mix-blend-mode: normal;
+  backdrop-filter: none;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-title {
+  padding: 0 0 0.25rem 0;
+  background: transparent;
+  color: var(--gfm-accent);
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) .callout-title-inner {
+  font-weight: 500;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon {
+  display: none;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-content {
+  padding: 0;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"])      { --gfm-accent: var(--semantic-blue);   }
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"])       { --gfm-accent: var(--semantic-green);  }
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) { --gfm-accent: var(--semantic-purple); }
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-orange); }
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-red);    }
+
+
+/* ============================================================
    HORIZONTAL RULES
    ============================================================ */
 .markdown-rendered hr {
