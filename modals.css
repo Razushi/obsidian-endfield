@@ -334,21 +334,23 @@ button {
 
 /* Icon / clickable-icon buttons */
 .clickable-icon {
-  color: var(--ef-chrome-text-faint);
-  border-radius: 6px;
-  padding: 4px;
+  color: var(--nav-item-color);
+  border-radius: 50% !important;
+  padding: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.12s, background 0.12s;
+  transition: background 0.15s, box-shadow 0.15s;
 }
 
 .clickable-icon:hover {
-  color: #d4c800;
-  background: var(--ef-accent-bg-dim);
+  color: var(--nav-item-color);
+  background: #424242 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
 }
 
 .clickable-icon.is-active {
-  color: #d4c800;
-  background: var(--ef-accent-bg-active);
+  color: var(--nav-item-color);
+  background: #424242 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
 }

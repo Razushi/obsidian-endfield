@@ -24,6 +24,7 @@
   --ef-bg-void:   #111114;   /* ribbon, titlebar, statusbar — deepest */
   --ef-bg-panel:  #131316;   /* file tree, right sidebar — mid chrome */
   --ef-bg-editor: #161618;   /* outline, editor — elevated content */
+  --ef-bg-ribbon: #1c1b1d;   /* left ribbon — separate token for shadow control */
   --background-modifier-hover:        rgba(255,255,255,0.04);
   --background-modifier-active-hover: rgba(212,200,0,0.07);
   --background-modifier-border:       rgba(255,255,255,0.06);

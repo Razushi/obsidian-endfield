@@ -49,20 +49,15 @@
 }
 
 .workspace-ribbon.mod-left {
-  background: #1c1b1d !important;
+  background: var(--ef-bg-ribbon) !important;
   border-right: 1px solid rgba(255,255,255,0.05);
   box-shadow: 6px 0 28px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
   outline: none !important;
 }
 
+/* This line, removes a fuckass underline of the ribbon toggle button when obsidian is unfocused. */ 
 .workspace-ribbon.mod-left::before {
-  background: #1c1b1d !important;
-}
-
-/* Kill any background shift on parent wrapper when window loses focus */
-body:not(.is-focused) .workspace-ribbon.mod-left,
-body:not(.is-focused) .sidebar-toggle-button.mod-left {
-  background: #1c1b1d !important;
+  background: var(--ef-bg-ribbon) !important;
 }
 
 .workspace-ribbon.mod-right {
@@ -72,7 +67,7 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 /* Circle button tight around default icon size — no SVG override */
 .workspace-ribbon.mod-left .side-dock-ribbon-tab,
 .workspace-ribbon.mod-left .side-dock-ribbon-action {
-  color: #ffffff !important;
+  color: var(--nav-item-color) !important;
   border-radius: 50% !important;
   margin: 3px auto !important;
   padding: 5px !important;
@@ -109,14 +104,12 @@ body:not(.is-focused) .sidebar-toggle-button.mod-left {
 }
 
 /* Sidebar toggle button — match ribbon bg/shadow, no focus color shift */
+
 .sidebar-toggle-button.mod-left {
-  background: #1c1b1d !important;
-  box-shadow: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-  border-left: none !important;
+  background: var(--ef-bg-ribbon) !important;
   border-right: 1px solid rgba(255,255,255,0.05) !important;
-  outline: none !important;
+  margin: 3px auto !important;
+  padding: 5px !important;
 }
 
 .sidebar-toggle-button.mod-left::before,
