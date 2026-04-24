@@ -16,20 +16,15 @@
   box-shadow: var(--panel-shadow-right);
 }
 
-/* Radial vignette on left sidebar */
-.workspace-split.mod-left-split::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.30) 100%);
-  z-index: 10;
+.workspace-split.mod-left-split .workspace-leaf {
+  background: var(--background-secondary);
 }
 
-/* Sidebar tab bar — top strip must match main tab bar void color */
+
+/* Sidebar tab bar — part of the panel, not the titlebar chrome */
 .workspace-split.mod-left-split .workspace-tab-header-container {
-  background: var(--ef-bg-void);
-  border-bottom: none;
+  background: var(--ef-bg-panel);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   align-items: center;
   padding: 0 8px;
 }
@@ -262,15 +257,10 @@
   box-shadow: var(--panel-shadow-left);
 }
 
-/* Radial vignette on right sidebar */
-.workspace-split.mod-right-split::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.30) 100%);
-  z-index: 10;
+.workspace-split.mod-right-split .workspace-leaf {
+  background: var(--background-secondary);
 }
+
 
 /* Right sidebar tab bar — same treatment as left */
 .workspace-split.mod-right-split .workspace-tab-header-container {

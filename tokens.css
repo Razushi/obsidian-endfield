@@ -21,10 +21,10 @@
   --background-secondary-alt:         #1c1c1e;
 
   /* --- Theme-specific depth tokens --- */
-  --ef-bg-void:   #111114;   /* ribbon, titlebar, statusbar — deepest */
-  --ef-bg-panel:  #131316;   /* file tree, right sidebar — mid chrome */
-  --ef-bg-editor: #161618;   /* outline, editor — elevated content */
-  --ef-bg-ribbon: #1c1b1d;   /* left ribbon — separate token for shadow control */
+  --ef-bg-void:  #111114;  /* ribbon, titlebar, statusbar — deepest */
+  --ef-bg-panel:  #131316;     /* file tree, right sidebar — mid chrome */
+  --ef-bg-editor: #161618;     /* outline, editor — elevated content */
+  --ef-bg-ribbon: #1c1b1d;     /* left ribbon — separate token for shadow control */
   --background-modifier-hover:        rgba(255,255,255,0.04);
   --background-modifier-active-hover: rgba(212,200,0,0.07);
   --background-modifier-border:       rgba(255,255,255,0.06);
@@ -97,9 +97,10 @@
   --ef-titlebar-height: 32px;
 
   /* --- Tab dividers --- */
-  --tab-divider-color:   transparent;
-  --tab-outline-color:   transparent;
-  --tab-curve:           0px;
+  --tab-divider-color:        transparent;
+  --tab-outline-color:        transparent;
+  --tab-curve:                0px;
+  --tab-container-background: var(--ef-bg-panel);
 
   /* --- Editor tab pills --- */
   --ef-tab-pill-bg:                   #0d0d0f;

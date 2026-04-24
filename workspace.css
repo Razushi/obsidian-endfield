@@ -21,7 +21,7 @@
 
 /* Windows titlebar — unified with tab strip */
 .titlebar {
-  background: var(--ef-bg-void);
+  background: var(--ef-bg-titlebar);
   border-bottom: none;
 }
 
@@ -29,6 +29,66 @@
   color: var(--ef-chrome-text-faint);
   font-size: 11px;
   font-family: var(--font-interface);
+}
+
+.titlebar-button.mod-logo {
+  display: none !important;
+}
+
+/* Window control buttons — transparent container so each button is visually separate */
+.titlebar-button-container {
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 8px;
+}
+
+.titlebar-button,
+.is-hidden .titlebar-button {
+  background: transparent !important;
+  color: var(--ef-chrome-text) !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 5px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  transition: color 0.12s, background 0.12s;
+}
+
+.titlebar-button svg,
+.is-hidden .titlebar-button svg {
+  color: var(--ef-chrome-text) !important;
+  fill: var(--ef-chrome-text) !important;
+  stroke: var(--ef-chrome-text) !important;
+  opacity: 1 !important;
+}
+
+/* Matches .workspace-tab-header.is-active — yellow fill, dark icon */
+.titlebar-button:hover {
+  color: #212121 !important;
+  background: #d4c800 !important;
+}
+
+.titlebar-button:hover svg {
+  color: #212121 !important;
+  fill: #212121 !important;
+  stroke: #212121 !important;
+}
+
+.titlebar-button.mod-close:hover {
+  color: #ffffff !important;
+  background: rgba(204, 34, 0, 0.55) !important;
+}
+
+.titlebar-button.mod-close:hover svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 
@@ -122,7 +182,7 @@
    STATUS BAR
    ============================================================ */
 .status-bar {
-  background: var(--ef-bg-void);
+  background: var(--ef-bg-ribbon);
   border-top: 1px solid rgba(255,255,255,0.05);
   height: 22px;
   padding: 0 12px;

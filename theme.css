@@ -21,10 +21,10 @@
   --background-secondary-alt:         #1c1c1e;
 
   /* --- Theme-specific depth tokens --- */
-  --ef-bg-void:   #111114;   /* ribbon, titlebar, statusbar — deepest */
-  --ef-bg-panel:  #131316;   /* file tree, right sidebar — mid chrome */
-  --ef-bg-editor: #161618;   /* outline, editor — elevated content */
-  --ef-bg-ribbon: #1c1b1d;   /* left ribbon — separate token for shadow control */
+  --ef-bg-void:  #111114;  /* ribbon, titlebar, statusbar — deepest */
+  --ef-bg-panel:  #131316;     /* file tree, right sidebar — mid chrome */
+  --ef-bg-editor: #161618;     /* outline, editor — elevated content */
+  --ef-bg-ribbon: #1c1b1d;     /* left ribbon — separate token for shadow control */
   --background-modifier-hover:        rgba(255,255,255,0.04);
   --background-modifier-active-hover: rgba(212,200,0,0.07);
   --background-modifier-border:       rgba(255,255,255,0.06);
@@ -97,9 +97,10 @@
   --ef-titlebar-height: 32px;
 
   /* --- Tab dividers --- */
-  --tab-divider-color:   transparent;
-  --tab-outline-color:   transparent;
-  --tab-curve:           0px;
+  --tab-divider-color:        transparent;
+  --tab-outline-color:        transparent;
+  --tab-curve:                0px;
+  --tab-container-background: var(--ef-bg-panel);
 
   /* --- Editor tab pills --- */
   --ef-tab-pill-bg:                   #0d0d0f;
@@ -229,7 +230,7 @@
 
 /* Windows titlebar — unified with tab strip */
 .titlebar {
-  background: var(--ef-bg-void);
+  background: var(--ef-bg-titlebar);
   border-bottom: none;
 }
 
@@ -237,6 +238,66 @@
   color: var(--ef-chrome-text-faint);
   font-size: 11px;
   font-family: var(--font-interface);
+}
+
+.titlebar-button.mod-logo {
+  display: none !important;
+}
+
+/* Window control buttons — transparent container so each button is visually separate */
+.titlebar-button-container {
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 8px;
+}
+
+.titlebar-button,
+.is-hidden .titlebar-button {
+  background: transparent !important;
+  color: var(--ef-chrome-text) !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 5px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  transition: color 0.12s, background 0.12s;
+}
+
+.titlebar-button svg,
+.is-hidden .titlebar-button svg {
+  color: var(--ef-chrome-text) !important;
+  fill: var(--ef-chrome-text) !important;
+  stroke: var(--ef-chrome-text) !important;
+  opacity: 1 !important;
+}
+
+/* Matches .workspace-tab-header.is-active — yellow fill, dark icon */
+.titlebar-button:hover {
+  color: #212121 !important;
+  background: #d4c800 !important;
+}
+
+.titlebar-button:hover svg {
+  color: #212121 !important;
+  fill: #212121 !important;
+  stroke: #212121 !important;
+}
+
+.titlebar-button.mod-close:hover {
+  color: #ffffff !important;
+  background: rgba(204, 34, 0, 0.55) !important;
+}
+
+.titlebar-button.mod-close:hover svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 
@@ -330,7 +391,7 @@
    STATUS BAR
    ============================================================ */
 .status-bar {
-  background: var(--ef-bg-void);
+  background: var(--ef-bg-ribbon);
   border-top: 1px solid rgba(255,255,255,0.05);
   height: 22px;
   padding: 0 12px;
@@ -399,20 +460,15 @@
   box-shadow: var(--panel-shadow-right);
 }
 
-/* Radial vignette on left sidebar */
-.workspace-split.mod-left-split::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.30) 100%);
-  z-index: 10;
+.workspace-split.mod-left-split .workspace-leaf {
+  background: var(--background-secondary);
 }
 
-/* Sidebar tab bar — top strip must match main tab bar void color */
+
+/* Sidebar tab bar — part of the panel, not the titlebar chrome */
 .workspace-split.mod-left-split .workspace-tab-header-container {
-  background: var(--ef-bg-void);
-  border-bottom: none;
+  background: var(--ef-bg-panel);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   align-items: center;
   padding: 0 8px;
 }
@@ -645,15 +701,10 @@
   box-shadow: var(--panel-shadow-left);
 }
 
-/* Radial vignette on right sidebar */
-.workspace-split.mod-right-split::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.30) 100%);
-  z-index: 10;
+.workspace-split.mod-right-split .workspace-leaf {
+  background: var(--background-secondary);
 }
+
 
 /* Right sidebar tab bar — same treatment as left */
 .workspace-split.mod-right-split .workspace-tab-header-container {
