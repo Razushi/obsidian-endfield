@@ -277,27 +277,21 @@
   opacity: 1 !important;
 }
 
-/* Matches .workspace-tab-header.is-active — yellow fill, dark icon */
 .titlebar-button:hover {
-  color: #212121 !important;
-  background: #d4c800 !important;
+  color: #ffffff !important;
+  background: #424242 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6) !important;
 }
 
 .titlebar-button:hover svg {
-  color: #212121 !important;
-  fill: #212121 !important;
-  stroke: #212121 !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 .titlebar-button.mod-close:hover {
   color: #ffffff !important;
   background: rgba(204, 34, 0, 0.55) !important;
-}
-
-.titlebar-button.mod-close:hover svg {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
 }
 
 
