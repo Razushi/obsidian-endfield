@@ -141,6 +141,28 @@
   /* --- Bottom vignette --- */
   --ef-bottom-vignette: rgba(0,0,0,0.55);
 
+  /* --- Button system ---
+     Two flavors: toggle (stateful) and action (fire-and-forget).
+     All button-rendering rules pull from here — nothing hardcoded downstream. */
+
+  --ef-btn-size:               24px;   /* uniform hit-target */
+  --ef-btn-radius:              6px;   /* rounded-rect; matches sidebar tabs */
+  --ef-btn-transition:          color 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+
+  /* Toggle — has an on/off state (carries .is-active when on) */
+  --ef-btn-toggle-color:        rgba(255,255,255,0.68);
+  --ef-btn-toggle-color-hover:  #d4c800;
+  --ef-btn-toggle-bg-hover:     var(--ef-accent-bg-dim);
+  --ef-btn-toggle-ring-hover:   inset 0 0 0 1px rgba(212,200,0,0.50);
+  --ef-btn-toggle-color-on:     #212121;
+  --ef-btn-toggle-bg-on:        #d4c800;
+
+  /* Action — fires once, no persistent state */
+  --ef-btn-action-color:        rgba(255,255,255,0.68);
+  --ef-btn-action-color-hover:  #ffffff;
+  --ef-btn-action-bg-hover:     #424242;
+  --ef-btn-action-shadow-hover: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+
   /* --- Nav --- */
   --nav-item-size:           14px;
   --nav-item-weight:         400;

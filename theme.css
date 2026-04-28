@@ -141,6 +141,28 @@
   /* --- Bottom vignette --- */
   --ef-bottom-vignette: rgba(0,0,0,0.55);
 
+  /* --- Button system ---
+     Two flavors: toggle (stateful) and action (fire-and-forget).
+     All button-rendering rules pull from here — nothing hardcoded downstream. */
+
+  --ef-btn-size:               24px;   /* uniform hit-target */
+  --ef-btn-radius:              6px;   /* rounded-rect; matches sidebar tabs */
+  --ef-btn-transition:          color 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+
+  /* Toggle — has an on/off state (carries .is-active when on) */
+  --ef-btn-toggle-color:        rgba(255,255,255,0.68);
+  --ef-btn-toggle-color-hover:  #d4c800;
+  --ef-btn-toggle-bg-hover:     var(--ef-accent-bg-dim);
+  --ef-btn-toggle-ring-hover:   inset 0 0 0 1px rgba(212,200,0,0.50);
+  --ef-btn-toggle-color-on:     #212121;
+  --ef-btn-toggle-bg-on:        #d4c800;
+
+  /* Action — fires once, no persistent state */
+  --ef-btn-action-color:        rgba(255,255,255,0.68);
+  --ef-btn-action-color-hover:  #ffffff;
+  --ef-btn-action-bg-hover:     #424242;
+  --ef-btn-action-shadow-hover: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+
   /* --- Nav --- */
   --nav-item-size:           14px;
   --nav-item-weight:         400;
@@ -473,9 +495,9 @@
 }
 
 .workspace-split.mod-left-split .workspace-tab-header {
-  color: rgba(255,255,255,0.68) !important;
+  color: var(--ef-btn-toggle-color) !important;
   padding: 5px;
-  border-radius: 6px;
+  border-radius: var(--ef-btn-radius);
   position: relative;
   top: 0 !important;
   transform: none !important;
@@ -483,7 +505,7 @@
   border: none !important;
   box-shadow: none !important;
   background: transparent !important;
-  transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  transition: var(--ef-btn-transition);
 }
 
 .workspace-split.mod-left-split .workspace-tab-header svg {
@@ -502,40 +524,40 @@
 }
 
 .workspace-split.mod-left-split .workspace-tab-header:hover {
-  color: #d4c800 !important;
-  background: var(--ef-accent-bg-dim) !important;
-  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.5) !important;
+  color: var(--ef-btn-toggle-color-hover) !important;
+  background: var(--ef-btn-toggle-bg-hover) !important;
+  box-shadow: var(--ef-btn-toggle-ring-hover) !important;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header.is-active {
-  color: #212121 !important;
-  background: #d4c800 !important;
+  color: var(--ef-btn-toggle-color-on) !important;
+  background: var(--ef-btn-toggle-bg-on) !important;
   box-shadow: none !important;
   border: none !important;
-  border-radius: 6px !important;
+  border-radius: var(--ef-btn-radius) !important;
 }
 
 .workspace-split.mod-left-split .workspace-tab-header.is-active svg {
-  color: #212121 !important;
-  stroke: #212121 !important;
+  color: var(--ef-btn-toggle-color-on) !important;
+  stroke: var(--ef-btn-toggle-color-on) !important;
 }
 
-/* New tab + button pushed to far right */
+/* New tab + button — action flavor (fires once, no toggle state) */
 .workspace-split.mod-left-split .workspace-tab-header-new-tab {
   margin-left: auto;
   align-self: center;
-  color: var(--nav-item-color);
+  color: var(--ef-btn-action-color);
   border-radius: 50% !important;
   margin: 3px auto !important;
   padding: 5px !important;
   background: transparent;
-  transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  transition: var(--ef-btn-transition);
 }
 
 .workspace-split.mod-left-split .workspace-tab-header-new-tab:hover {
-  color: #ffffff !important;
-  background: #424242 !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+  color: var(--ef-btn-action-color-hover) !important;
+  background: var(--ef-btn-action-bg-hover) !important;
+  box-shadow: var(--ef-btn-action-shadow-hover);
 }
 
 
@@ -712,21 +734,21 @@
 }
 
 .workspace-split.mod-right-split .workspace-tab-header {
-  color: #ffffff !important;
+  color: var(--ef-btn-toggle-color) !important;
   padding: 5px;
-  border-radius: 6px;
+  border-radius: var(--ef-btn-radius);
   position: relative;
   top: 0 !important;
   transform: none !important;
   margin: 0 !important;
   border: none !important;
   box-shadow: none !important;
-  transition: color 0.12s, background 0.12s;
+  transition: var(--ef-btn-transition);
 }
 
 .workspace-split.mod-right-split .workspace-tab-header svg {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
+  color: currentColor !important;
+  stroke: currentColor !important;
   width: 16px !important;
   height: 16px !important;
 }
@@ -737,40 +759,42 @@
 }
 
 .workspace-split.mod-right-split .workspace-tab-header:hover {
-  color: #d4c800 !important;
-  background: var(--ef-accent-bg-dim) !important;
-  box-shadow: inset 0 0 0 1px rgba(212,200,0,0.5) !important;
+  color: var(--ef-btn-toggle-color-hover) !important;
+  background: var(--ef-btn-toggle-bg-hover) !important;
+  box-shadow: var(--ef-btn-toggle-ring-hover) !important;
 }
 
 .workspace-split.mod-right-split .workspace-tab-header.is-active {
-  color: #212121 !important;
-  background: #d4c800 !important;
+  color: var(--ef-btn-toggle-color-on) !important;
+  background: var(--ef-btn-toggle-bg-on) !important;
   box-shadow: none !important;
   border: none !important;
-  border-radius: 6px !important;
+  border-radius: var(--ef-btn-radius) !important;
 }
 
 .workspace-split.mod-right-split .workspace-tab-header.is-active svg {
-  color: #212121 !important;
-  stroke: #212121 !important;
+  color: var(--ef-btn-toggle-color-on) !important;
+  stroke: var(--ef-btn-toggle-color-on) !important;
 }
 
 .workspace-split.mod-right-split .workspace-tab-header.is-active::after {
   display: none;
 }
 
+/* New tab + button — action flavor */
 .workspace-split.mod-right-split .workspace-tab-header-new-tab {
   margin-left: auto;
   align-self: center;
-  color: var(--ef-chrome-text-faint);
-  border-radius: 6px;
+  color: var(--ef-btn-action-color);
+  border-radius: var(--ef-btn-radius);
   padding: 4px 6px;
-  transition: color 0.12s, background 0.12s;
+  transition: var(--ef-btn-transition);
 }
 
 .workspace-split.mod-right-split .workspace-tab-header-new-tab:hover {
-  color: var(--ef-chrome-text);
-  background: rgba(255,255,255,0.05);
+  color: var(--ef-btn-action-color-hover);
+  background: var(--ef-btn-action-bg-hover);
+  box-shadow: var(--ef-btn-action-shadow-hover);
 }
 /* ============================================================
    ARKNIGHTS: ENDFIELD — TABS
@@ -1598,6 +1622,28 @@ input[type="checkbox"].task-list-item-checkbox:checked::after {
   transform: rotate(45deg);
 }
 
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+/* Reading view */
+.markdown-rendered ul li,
+.markdown-rendered ol li {
+  color: var(--text-normal);
+}
+
+/* Live preview (CM6) — list lines and their markers */
+.markdown-source-view.mod-cm6 .HyperMD-list-line {
+  color: var(--text-normal);
+}
+
+.markdown-source-view.mod-cm6 .cm-list-1,
+.markdown-source-view.mod-cm6 .cm-list-2,
+.markdown-source-view.mod-cm6 .cm-list-3 {
+  color: var(--text-normal);
+}
+
+
 /* Completed task text */
 .task-list-item.is-checked .task-list-item-inner,
 li[data-task="x"] > p {
@@ -1689,6 +1735,18 @@ li[data-task="x"] > p {
 .markdown-rendered li {
   margin-bottom: 4px;
   line-height: 1.7;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--text-normal);
+  margin-inline-start: 0 !important;
+}
+
+/* Obsidian wraps list item text in <p> tags in reading view.
+   Without this, paragraph margins stack inside each li and inflate the spacing. */
+.markdown-rendered li > p {
+  margin: 0;
+  line-height: inherit;
+  font-size: inherit;
 }
 
 .markdown-rendered ul li::marker {
@@ -1697,7 +1755,7 @@ li[data-task="x"] > p {
 
 .markdown-rendered ol li::marker {
   color: #888;
-  font-family: var(--font-monospace);
+  font-family: var(--font-text);
   font-size: var(--ef-code-size);
 }
 
