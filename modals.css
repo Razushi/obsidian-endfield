@@ -335,7 +335,7 @@ button {
 /* Icon / clickable-icon buttons */
 .clickable-icon {
   color: var(--nav-item-color);
-  border-radius: 50% !important;
+  border-radius: var(--ef-btn-radius);
   padding: none;
   display: flex;
   align-items: center;
