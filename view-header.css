@@ -153,3 +153,145 @@
 .workspace-split.mod-root {
   overflow: visible;
 }
+
+
+/* ── New tab: matches markdown header layout, sans yellow gradient ── */
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header {
+  position: relative;
+  background: var(--background-primary) !important;
+  border-bottom: none;
+  padding: 0;
+  overflow: visible;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 17%;
+  width: 66%;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-title-container {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-title {
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+  font-weight: 500;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-actions {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 6px;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-nav-buttons {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  gap: 6px;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-actions > *,
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-nav-buttons > * {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0 !important;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="empty"],
+.workspace-split.mod-root .workspace-leaf[data-type="empty"] {
+  overflow: visible;
+}
+
+
+/* ── Excalidraw: same header layout as markdown/empty ── */
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header {
+  position: relative;
+  background: var(--background-primary) !important;
+  border-bottom: none;
+  padding: 0;
+  overflow: visible;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 17%;
+  width: 66%;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-title-container {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-title {
+  font-family: var(--font-interface);
+  font-size: var(--nav-item-size);
+  font-weight: 500;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-actions {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 6px;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-nav-buttons {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  gap: 6px;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-actions > *,
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-nav-buttons > * {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0 !important;
+}
+
+.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"],
+.workspace-split.mod-root .workspace-leaf[data-type="excalidraw"] {
+  overflow: visible;
+}
