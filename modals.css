@@ -342,7 +342,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, box-shadow 0.15s;
 }
 
 .clickable-icon:hover {

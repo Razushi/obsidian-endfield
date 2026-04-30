@@ -77,9 +77,9 @@
   --h6-size:   0.85em;
 
   /* --- Heading colours --- */
-  --h1-color:  #f0f0f0;
-  --h2-color:  #e0e0e0;
-  --h3-color:  #c8c8c8;
+  --h1-color:  var(--text-normal);
+  --h2-color:  var(--text-normal);
+  --h3-color:  var(--text-normal);
   --h4-color:  #d4c800;
   --h5-color:  #888888;
   --h6-color:  #555555;
@@ -1477,6 +1477,10 @@ div.view-content {
   outline: none;
 }
 
+.metadata-container {
+  margin-bottom: 20px !important;
+}
+
 /* Breadcrumb above inline title.
    NOTE: .mod-header may not match current Obsidian DOM — uncertain selector. */
 .mod-header .view-header-title-container {
@@ -1503,17 +1507,18 @@ div.view-content {
 }
 
 .markdown-rendered h1 {
+  display: table;
   margin: 0 0 16px;
   padding-bottom: 5px;
-  border-bottom: 2px solid #d4c800;
+  border-bottom: 2px solid currentColor;
 }
 
-/* Source/live-preview: border on block-level line, not the inline span.
-   Prevents the underline from clipping into the next line. */
 .cm-line.HyperMD-header-1 {
-  padding-bottom: 5px;
   margin-bottom: 16px;
-  border-bottom: 2px solid #d4c800;
+}
+.cm-line.HyperMD-header-1 .cm-header {
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 5px;
 }
 
 /* --- H2 --- */
@@ -1526,15 +1531,18 @@ div.view-content {
 }
 
 .markdown-rendered h2 {
+  display: table;
   margin: 24px 0 8px;
   padding-bottom: 4px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid currentColor;
 }
 
 .cm-line.HyperMD-header-2 {
-  padding-bottom: 4px;
   margin-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.cm-line.HyperMD-header-2 .cm-header {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 4px;
 }
 
 /* --- H3 --- */
@@ -1545,6 +1553,17 @@ div.view-content {
   font-weight: var(--h3-weight);
   color: var(--h3-color);
   margin: 18px 0 6px;
+}
+
+.markdown-rendered h3 {
+  display: table;
+  padding-bottom: 3px;
+  border-bottom: 1px solid currentColor;
+}
+
+.cm-line.HyperMD-header-3 .cm-header {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
 }
 
 /* --- H4 --- */
@@ -2029,8 +2048,9 @@ li[data-task="x"] > p {
    ============================================================ */
 .markdown-rendered hr {
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  margin: 24px 0;
+  border-top: 2px solid #d4c800;
+  width: 66%;
+  margin: 24px auto;
   position: relative;
 }
 
@@ -2042,7 +2062,7 @@ li[data-task="x"] > p {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 8px;
-  color: rgba(212,200,0,0.3);
+  color: #d4c800;
   background: var(--background-primary);
   padding: 0 6px;
 }
@@ -2390,7 +2410,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, box-shadow 0.15s;
 }
 
 .clickable-icon:hover {
