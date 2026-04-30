@@ -141,20 +141,6 @@
   gap: 4px;
 }
 
-.nav-folder-title:hover,
-.nav-file-title:hover {
-  background: var(--ef-border-faint);
-}
-
-.nav-folder-title.is-active,
-.nav-file-title.is-active {
-  background: var(--ef-accent-bg-dim);
-  color: #d4c800;
-  border-left: 2px solid #d4c800;
-  border-radius: 0 !important;
-  box-shadow: inset 0 0 14px rgba(212,200,0,0.04),
-              -3px 0 10px rgba(212,200,0,0.07);
-}
 
 /* Collapse arrows */
 .nav-folder-collapse-indicator {

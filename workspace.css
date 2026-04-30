@@ -244,3 +244,14 @@
   background-repeat: repeat;
   background-attachment: local;
 }
+
+
+/* ============================================================
+   VIEW CONTENT — global 3px dot-grid texture
+   O X X O X X — 2×2 filled squares, 1px gaps
+   ============================================================ */
+div.view-content {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='3'%3E%3Crect x='0' y='0' width='1' height='3' fill='rgba(255,255,255,0.01)'/%3E%3Crect x='0' y='0' width='3' height='1' fill='rgba(255,255,255,0.01)'/%3E%3C/svg%3E");
+  background-size: 3px 3px;
+  background-repeat: repeat;
+}
