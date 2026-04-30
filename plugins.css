@@ -87,23 +87,14 @@
   box-shadow: 0 0 8px rgba(var(--ef-accent-rgb),0.4);
 }
 
+.calendar .day.active,
+.calendar .week-num.active {
+  --color-dot: #0d0d0f;
+}
+
 /* Day outside current month */
 .calendar .adjacent-month > a {
   color: #2a2a2c;
-}
-
-/* Day that has a note */
-.calendar .has-note > a::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--ef-accent);
-  box-shadow: 0 0 4px rgba(var(--ef-accent-rgb),0.5);
 }
 
 /* Week number column */

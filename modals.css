@@ -8,8 +8,7 @@
    COMMAND PALETTE
    ============================================================ */
 .modal-bg {
-  backdrop-filter: blur(4px) saturate(1.6);
-  background: rgba(0,0,0,0.1);
+  background: rgba(0,0,0, 0);
 }
 
 .prompt {
