@@ -227,27 +227,6 @@
 }
 
 
-/* Pane resize handles */
-.workspace-leaf-resize-handle {
-  background: transparent;
-  border-color: transparent;
-}
-
-.workspace-split.mod-horizontal > * > .workspace-leaf-resize-handle {
-  width: 2px;
-  right: -1px;
-}
-
-.workspace-split.mod-vertical > * > .workspace-leaf-resize-handle {
-  height: 2px;
-  bottom: -1px;
-}
-
-.workspace-leaf-resize-handle:hover {
-  background: rgba(255,255,255,0.12);
-}
-
-
 /* ============================================================
    NEW TAB PAGE
    ============================================================ */
