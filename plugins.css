@@ -37,7 +37,7 @@
 }
 
 .calendar .nav:hover {
-  color: #d4c800;
+  color: var(--ef-accent);
   background: var(--ef-accent-bg-dim);
 }
 
@@ -81,10 +81,10 @@
 
 /* Today */
 .calendar .today > a {
-  background: #d4c800;
+  background: var(--ef-accent);
   color: #0d0d0f;
   font-weight: 700;
-  box-shadow: 0 0 8px rgba(212,200,0,0.4);
+  box-shadow: 0 0 8px rgba(var(--ef-accent-rgb),0.4);
 }
 
 /* Day outside current month */
@@ -102,8 +102,8 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d4c800;
-  box-shadow: 0 0 4px rgba(212,200,0,0.5);
+  background: var(--ef-accent);
+  box-shadow: 0 0 4px rgba(var(--ef-accent-rgb),0.5);
 }
 
 /* Week number column */
@@ -136,7 +136,7 @@
 
 .dataview.table-view-table thead th {
   background: var(--ef-bg-void);
-  color: #d4c800;
+  color: var(--ef-accent);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.8px;
@@ -159,7 +159,7 @@
 }
 
 .dataview.table-view-table tbody tr:hover {
-  background: rgba(212,200,0,0.03);
+  background: rgba(var(--ef-accent-rgb),0.03);
 }
 
 .dataview.table-view-table tbody tr:last-child td {
@@ -168,7 +168,7 @@
 
 /* Dataview inline result */
 .dataview.inline-query-result {
-  color: #d4c800;
+  color: var(--ef-accent);
   font-family: var(--font-monospace);
   font-size: var(--ef-code-size);
 }
@@ -179,6 +179,5 @@
 }
 
 .dataview.list-view-ul li::marker {
-  color: #d4c800;
+  color: var(--ef-accent);
 }
-

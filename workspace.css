@@ -32,11 +32,13 @@
 }
 
 .titlebar-button.mod-logo {
-  display: none !important;
+  display: none;
 }
 
 /* Window control buttons — transparent container so each button is visually separate */
-.titlebar-button-container {
+.titlebar-button-container,
+.is-focused .titlebar-button-container,
+.is-hidden .titlebar-button-container {
   background: transparent !important;
   display: flex;
   align-items: center;
@@ -47,41 +49,38 @@
 .titlebar-button,
 .is-hidden .titlebar-button {
   background: transparent !important;
-  color: var(--ef-chrome-text) !important;
-  opacity: 1 !important;
-  width: auto !important;
-  height: auto !important;
-  padding: 5px !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-sizing: border-box !important;
-  transition: color 0.12s, background 0.12s;
+  color: var(--ef-chrome-text);
+  opacity: 1;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+  padding: 0 !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: color 0.12s, background 0.12s, box-shadow 0.12s;
 }
 
 .titlebar-button svg,
 .is-hidden .titlebar-button svg {
-  color: var(--ef-chrome-text) !important;
-  fill: var(--ef-chrome-text) !important;
-  stroke: var(--ef-chrome-text) !important;
-  opacity: 1 !important;
+  color: currentColor;
+  fill: currentColor;
+  stroke: currentColor;
+  opacity: 1;
 }
 
 .titlebar-button:hover {
-  color: #ffffff !important;
-  background: #424242 !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6) !important;
-}
-
-.titlebar-button:hover svg {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+  color: var(--ef-text-white);
+  background: var(--ef-btn-action-bg-hover) !important;
+  box-shadow: var(--ef-btn-action-shadow-hover);
 }
 
 .titlebar-button.mod-close:hover {
-  color: #ffffff !important;
   background: rgba(204, 34, 0, 0.55) !important;
 }
 
@@ -103,49 +102,49 @@
 }
 
 .workspace-ribbon.mod-left {
-  background: var(--ef-bg-ribbon) !important;
+  background: var(--ef-bg-ribbon);
   border-right: 1px solid rgba(255,255,255,0.05);
   box-shadow: 6px 0 28px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
-  outline: none !important;
+  outline: none;
 }
 
 /* This line, removes a fuckass underline of the ribbon toggle button when obsidian is unfocused. */ 
 .workspace-ribbon.mod-left::before {
-  background: var(--ef-bg-ribbon) !important;
+  background: var(--ef-bg-ribbon);
 }
 
 .workspace-ribbon.mod-right {
-  display: none !important;
+  display: none;
 }
 
 /* Circle button tight around default icon size — no SVG override */
 .workspace-ribbon.mod-left .side-dock-ribbon-tab,
 .workspace-ribbon.mod-left .side-dock-ribbon-action {
-  color: var(--nav-item-color) !important;
-  border-radius: 50% !important;
-  margin: 3px auto !important;
-  padding: 5px !important;
-  width: auto !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-sizing: border-box !important;
+  color: var(--nav-item-color);
+  border-radius: 50%;
+  margin: 3px auto;
+  padding: 5px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   transition: background 0.15s, box-shadow 0.15s;
 }
 
 .workspace-ribbon.mod-left .side-dock-ribbon-tab:hover,
 .workspace-ribbon.mod-left .side-dock-ribbon-action:hover {
-  color: #ffffff !important;
-  background: #424242 !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+  color: var(--ef-text-white);
+  background: var(--ef-btn-action-bg-hover);
+  box-shadow: var(--ef-btn-action-shadow-hover);
 }
 
 .workspace-ribbon.mod-left .side-dock-ribbon-tab.is-active,
 .workspace-ribbon.mod-left .side-dock-ribbon-action.is-active {
-  color: #ffffff !important;
-  background: #424242 !important;
-  border-radius: 50% !important;
+  color: var(--ef-text-white);
+  background: var(--ef-btn-action-bg-hover);
+  border-radius: 50%;
 }
 
 /* Ribbon toggle button */
@@ -160,15 +159,15 @@
 /* Sidebar toggle button — match ribbon bg/shadow, no focus color shift */
 
 .sidebar-toggle-button.mod-left {
-  background: var(--ef-bg-ribbon) !important;
-  border-right: 1px solid rgba(255,255,255,0.05) !important;
-  margin: 3px auto !important;
-  padding: 5px !important;
+  background: var(--ef-bg-ribbon);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  margin: 3px auto;
+  padding: 5px;
 }
 
 .sidebar-toggle-button.mod-left::before,
 .sidebar-toggle-button.mod-left::after {
-  display: none !important;
+  display: none;
 }
 
 
@@ -199,7 +198,7 @@
 
 /* Word / char count — yellow */
 .status-bar-item.plugin-word-count {
-  color: #d4c800;
+  color: var(--ef-accent);
 }
 
 

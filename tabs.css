@@ -36,8 +36,8 @@
 
 /* Obsidian app.css applies margin-top: 6px here which offsets pill centering */
 .workspace-split.mod-root .workspace-tab-header-container-inner {
-  margin: 0 -5px -1px !important;
-  padding: 0 15px !important;
+  margin: 0 -5px -1px;
+  padding: 0 15px;
 }
 
 
@@ -51,16 +51,16 @@
   box-shadow:
     inset 0 0 0 2px var(--ef-tab-pill-bg),
     inset 0 0 0 3px var(--ef-tab-pill-inner-border),
-    var(--ef-tab-pill-drop-shadow) !important;
+    var(--ef-tab-pill-drop-shadow);
   position: relative;
-  margin: 0 3px !important;
+  margin: 0 3px;
   transition: color 0.12s, background 0.12s, border-color 0.12s;
   max-width: 200px;
 }
 
 /* Inner wrapper: centers text + icon vertically inside the pill */
 .workspace-split.mod-root .workspace-tab-header-inner {
-  background: transparent !important;
+  background: transparent;
   border-radius: var(--ef-radius-pill);
   display: flex;
   align-items: center;
@@ -73,21 +73,22 @@
   box-shadow:
     inset 0 0 0 2px var(--ef-tab-pill-bg-hover),
     inset 0 0 0 3px var(--ef-tab-pill-inner-border),
-    var(--ef-tab-pill-drop-shadow) !important;
+    var(--ef-tab-pill-drop-shadow);
 }
 
 .workspace-split.mod-root .workspace-tab-header.is-active,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover {
+  color: var(--ef-tab-pill-color-active);
   background: var(--ef-tab-pill-bg-active);
   border-color: var(--ef-tab-pill-border-active);
   box-shadow:
     inset 0 0 0 2px var(--ef-tab-pill-bg-active),
     inset 0 0 0 3px var(--ef-tab-pill-inner-border-active),
-    var(--ef-tab-pill-drop-shadow) !important;
+    var(--ef-tab-pill-drop-shadow);
 }
 
 .workspace-split.mod-root .workspace-tab-header-separator {
-  display: none !important;
+  display: none;
 }
 
 /* Tab title text */
@@ -97,7 +98,7 @@
 }
 
 .workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-title {
-  color: var(--ef-tab-pill-color) !important;
+  color: inherit;
   font-weight: var(--ef-tab-pill-font-weight);
 }
 
@@ -105,21 +106,11 @@
 .workspace-split.mod-root .workspace-tab-header[aria-label^="Outline of"] .workspace-tab-header-inner-icon,
 .workspace-split.mod-root .workspace-tab-header[title^="Outline of"] .workspace-tab-header-inner-icon,
 .workspace-split.mod-root .workspace-tab-header[data-type="outline"] .workspace-tab-header-inner-icon {
-  width: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.workspace-split.mod-root .workspace-tab-header:hover .workspace-tab-header-inner-title {
-  color: var(--ef-tab-pill-color-hover) !important;
-}
-
-.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
-.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title {
-  color: var(--ef-tab-pill-color-active) !important;
-  font-weight: var(--ef-tab-pill-font-weight);
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* Tab close */

@@ -1,22 +1,12 @@
 /* ============================================================
-   ARKNIGHTS: ENDFIELD — VIEW HEADER
-   Per-leaf header bar, breadcrumbs, vertical dock.
-
-   CASCADE NOTE: Rule order here is load-bearing.
-   1. General .view-header (low specificity, sets defaults)
-   2. Markdown-specific override (higher specificity, !important bg)
-   3. Breadcrumb content rules
-   4. .view-actions vertical dock positioning
-   5. overflow: visible chain (required for dock to escape ancestors)
-
-   The original had four separate blocks addressing the same
-   markdown .view-header selector (§09 blocks 2/3/4 + §10 block).
-   These have been merged into one block below. The two ::after
-   definitions have also been merged into one.
+   ARKNIGHTS: ENDFIELD - VIEW HEADER
+   Per-leaf header bar, breadcrumbs, and root editor controls.
    ============================================================ */
 
 
-/* ── General view-header ── */
+/* ============================================================
+   BASE HEADER
+   ============================================================ */
 .view-header {
   background: var(--background-primary);
   border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -26,80 +16,86 @@
   overflow: hidden;
 }
 
-/* ── Markdown editor: breadcrumb gradient strip ──
-   Merges three redundant blocks from the original (§09 blocks 2, 3, 4
-   and §10 block 1 — all targeted the same selector with different properties).
-   Effective values: gradient bg (!important), border-bottom none,
-   padding 0, overflow visible, position relative. */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+
+/* ============================================================
+   ROOT LEAF HEADER LAYOUT
+   ============================================================ */
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-header {
   position: relative;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    transparent 17%,
-    rgba(212,200,0,0.10) 25%,
-    rgba(212,200,0,0.16) 50%,
-    rgba(212,200,0,0.10) 75%,
-    transparent 83%,
-    transparent 100%
-  ) !important;
+  background: var(--background-primary);
   border-bottom: none;
   padding: 0;
   overflow: visible;
 }
 
-/* ── Markdown editor: breadcrumb underline rule ──
-   Merged from two ::after definitions in the original (§09 last block + §10 second block).
-   Original block 1 contributed: background rgba(255,255,255,0.07).
-   Original block 2 contributed: box-shadow (override), pointer-events, z-index. */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header::after {
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 17%,
+    rgba(var(--ef-accent-rgb),0.10) 25%,
+    rgba(var(--ef-accent-rgb),0.16) 50%,
+    rgba(var(--ef-accent-rgb),0.10) 75%,
+    transparent 83%,
+    transparent 100%
+  );
+}
+
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-header::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 17%;
   width: 66%;
   height: 1px;
-  background: rgba(255,255,255,0.07);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
+  background: var(--ef-header-rule);
+  box-shadow: var(--ef-header-rule-shadow);
   pointer-events: none;
   z-index: 1;
 }
 
-/* ── Breadcrumb content positioning ── */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title-container {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-header-title-container {
   position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-header-title {
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
   font-weight: 500;
-  color: #d4c800;
+  color: var(--ef-header-label-color);
   pointer-events: none;
   user-select: none;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title {
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb {
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
   font-weight: 500;
-  color: #ffffff;
+  color: var(--ef-accent);
   pointer-events: none;
   user-select: none;
 }
 
 .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb-separator {
-  color: rgba(212,200,0,0.4);
+  color: rgba(var(--ef-accent-rgb),0.4);
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
 }
 
-/* ── Outline panel: hide breadcrumb, show only the // OUTLINE label ── */
+/* Outline panel: the active snippet supplies the custom "// Outline" label. */
 .workspace-leaf-content[data-type="outline"] .view-header-title-container {
   display: flex;
 }
@@ -110,13 +106,11 @@
 
 
 /* ============================================================
-   EDITOR CONTROLS — VERTICAL DOCK
-
-   The source/reading toggle + other view actions are positioned
-   as a floating element on the right edge of the view-header.
-   The view-header is set to overflow: visible to allow this.
+   ROOT LEAF CONTROLS
    ============================================================ */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-actions {
   position: absolute;
   right: 6px;
   top: 50%;
@@ -124,7 +118,9 @@
   gap: 6px;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-nav-buttons {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-header-nav-buttons {
   position: absolute;
   left: 6px;
   top: 50%;
@@ -133,165 +129,24 @@
   gap: 6px;
 }
 
-/* Fixed-size 24×24 button boxes. Icons (centered by clickable-icon's default
-   flex) render inside a consistent box, so gap: 6px and right: 6px apply to
-   the boxes uniformly regardless of which icon is inside. */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-actions > *,
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-nav-buttons > * {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-actions > *,
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .view-header-nav-buttons > * {
   width: 24px;
   height: 24px;
   padding: 0;
-  margin: 0 !important;  /* Override Commander plugin's --cmdr-spacing margin-right */
+  margin: 0 !important; /* Commander injects margin-right through --cmdr-spacing. */
 }
 
-/* Allow the absolute-positioned vertical dock to escape its ancestors.
-   NOTE: overflow: visible on .workspace-split.mod-root is intentionally
-   broad — the floating dock requires it. Do not remove. */
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"],
-.workspace-split.mod-root .workspace-leaf[data-type="markdown"],
+/* The floating editor controls need to escape these ancestors. */
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"]),
+.workspace-split.mod-root
+  .workspace-leaf:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"]),
 .workspace-split.mod-root .workspace-leaf,
 .workspace-split.mod-root {
-  overflow: visible;
-}
-
-
-/* ── New tab: matches markdown header layout, sans yellow gradient ── */
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header {
-  position: relative;
-  background: var(--background-primary) !important;
-  border-bottom: none;
-  padding: 0;
-  overflow: visible;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 17%;
-  width: 66%;
-  height: 1px;
-  background: rgba(255,255,255,0.07);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-title-container {
-  position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-title {
-  font-family: var(--font-interface);
-  font-size: var(--nav-item-size);
-  font-weight: 500;
-  color: #ffffff;
-  pointer-events: none;
-  user-select: none;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-actions {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  gap: 6px;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-nav-buttons {
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  gap: 6px;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-actions > *,
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"] .view-header-nav-buttons > * {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0 !important;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="empty"],
-.workspace-split.mod-root .workspace-leaf[data-type="empty"] {
-  overflow: visible;
-}
-
-
-/* ── Excalidraw: same header layout as markdown/empty ── */
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header {
-  position: relative;
-  background: var(--background-primary) !important;
-  border-bottom: none;
-  padding: 0;
-  overflow: visible;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 17%;
-  width: 66%;
-  height: 1px;
-  background: rgba(255,255,255,0.07);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-title-container {
-  position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-title {
-  font-family: var(--font-interface);
-  font-size: var(--nav-item-size);
-  font-weight: 500;
-  color: #ffffff;
-  pointer-events: none;
-  user-select: none;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-actions {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  gap: 6px;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-nav-buttons {
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  gap: 6px;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-actions > *,
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"] .view-header-nav-buttons > * {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0 !important;
-}
-
-.workspace-split.mod-root .workspace-leaf-content[data-type="excalidraw"],
-.workspace-split.mod-root .workspace-leaf[data-type="excalidraw"] {
   overflow: visible;
 }

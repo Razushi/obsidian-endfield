@@ -25,6 +25,7 @@
   --ef-bg-panel:  #131316;     /* file tree, right sidebar — mid chrome */
   --ef-bg-editor: #161618;     /* outline, editor — elevated content */
   --ef-bg-ribbon: #1c1b1d;     /* left ribbon — separate token for shadow control */
+  --ef-bg-titlebar: var(--ef-bg-void);
   --background-modifier-hover:        rgba(255,255,255,0.04);
   --background-modifier-active-hover: rgba(212,200,0,0.07);
   --background-modifier-border:       rgba(255,255,255,0.06);
@@ -52,6 +53,12 @@
   --interactive-accent-rgb:           212, 200, 0;
   --interactive-normal:               #161618;
   --interactive-hover:                #1c1c1e;
+
+  /* --- Endfield accent aliases --- */
+  --ef-accent:                         var(--text-accent);
+  --ef-accent-hover:                   var(--text-accent-hover);
+  --ef-accent-rgb:                     var(--interactive-accent-rgb);
+  --ef-text-white:                     #ffffff;
 
   /* --- Typography --- */
   --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
@@ -155,6 +162,7 @@
   --ef-btn-toggle-bg-hover:     var(--ef-accent-bg-dim);
   --ef-btn-toggle-ring-hover:   inset 0 0 0 1px rgba(212,200,0,0.50);
   --ef-btn-toggle-color-on:     #212121;
+  --ef-btn-toggle-color-on-hover: #ffffff;
   --ef-btn-toggle-bg-on:        #d4c800;
 
   /* Action — fires once, no persistent state */
@@ -162,6 +170,15 @@
   --ef-btn-action-color-hover:  #ffffff;
   --ef-btn-action-bg-hover:     #424242;
   --ef-btn-action-shadow-hover: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+
+  /* --- Header chrome --- */
+  --ef-header-label-color:      #ffffff;
+  --ef-header-rule:             rgba(255,255,255,0.07);
+  --ef-header-rule-shadow:      0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
+
+  /* --- Content helpers --- */
+  --ef-table-font-size:         0.875rem;
+  --ef-completed-text:          #3a3a3c;
 
   /* --- Nav --- */
   --nav-item-size:           14px;

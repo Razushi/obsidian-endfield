@@ -10,7 +10,7 @@
    ============================================================ */
 .markdown-rendered blockquote {
   border: none;
-  border-left: 2px solid #d4c800;
+  border-left: 2px solid var(--ef-accent);
   background: var(--ef-accent-bg-faint);
   border-radius: 0 6px 6px 0;
   padding: 10px 16px;
@@ -26,8 +26,8 @@
 
 /* Nested blockquote */
 .markdown-rendered blockquote blockquote {
-  border-left-color: rgba(212,200,0,0.4);
-  background: rgba(212,200,0,0.02);
+  border-left-color: rgba(var(--ef-accent-rgb),0.4);
+  background: rgba(var(--ef-accent-rgb),0.02);
   margin: 8px 0;
 }
 
@@ -41,7 +41,7 @@
 .markdown-source-view.mod-cm6 .cm-table-widget table {
   width: 100%;
   margin: 16px 0;
-  font-size: 0.875rem;
+  font-size: var(--ef-table-font-size);
   font-family: var(--font-text);
   border-collapse: separate;
   border-spacing: 2px;
@@ -66,26 +66,26 @@
    cell background on only some cells (the ones with enough content to wrap). */
 .markdown-rendered table th > *,
 .markdown-rendered table td > * {
-  background: transparent !important;
+  background: transparent;
 }
 
 .markdown-rendered table th,
 .markdown-rendered table thead tr:first-child > *,
 .markdown-source-view.mod-cm6 .cm-table-widget th {
-  background: var(--table-header-bg) !important;
+  background: var(--table-header-bg);
   font-family: var(--font-text);
   font-weight: bold;
   color: var(--text-normal);
   text-transform: none;
   letter-spacing: normal;
-  font-size: 0.875rem;
+  font-size: var(--ef-table-font-size);
 }
 
 /* Live preview: kill the active-line yellow tint inside table widgets.
    Otherwise clicking a cell paints it yellow via .cm-activeLine. */
 .cm-table-widget .cm-activeLine,
 .markdown-source-view.mod-cm6 .cm-table-widget .cm-activeLine {
-  background: transparent !important;
+  background: transparent;
 }
 
 /* Live preview: preserve cell styling when a cell becomes active/edited.
@@ -95,20 +95,20 @@
 .markdown-source-view.mod-cm6 .cm-table-widget td *,
 .markdown-source-view.mod-cm6 .cm-table-widget.cm-active td,
 .markdown-source-view.mod-cm6 .cm-active .cm-table-widget td {
-  background: var(--background-primary) !important;
-  font-family: var(--font-text) !important;
-  font-size: 0.875rem !important;
-  line-height: 1.6 !important;
+  background: var(--background-primary);
+  font-family: var(--font-text);
+  font-size: var(--ef-table-font-size);
+  line-height: 1.6;
 }
 
 .markdown-source-view.mod-cm6 .cm-table-widget th,
 .markdown-source-view.mod-cm6 .cm-table-widget th *,
 .markdown-source-view.mod-cm6 .cm-table-widget.cm-active th,
 .markdown-source-view.mod-cm6 .cm-active .cm-table-widget th {
-  background: var(--table-header-bg) !important;
-  font-family: var(--font-text) !important;
-  font-size: 0.875rem !important;
-  line-height: 1.6 !important;
+  background: var(--table-header-bg);
+  font-family: var(--font-text);
+  font-size: var(--ef-table-font-size);
+  line-height: 1.6;
 }
 
 
@@ -185,13 +185,13 @@ input[type="checkbox"].task-list-item-checkbox {
 }
 
 input[type="checkbox"].task-list-item-checkbox:hover {
-  border-color: rgba(212,200,0,0.5);
+  border-color: rgba(var(--ef-accent-rgb),0.5);
 }
 
 input[type="checkbox"].task-list-item-checkbox:checked {
-  background: rgba(212,200,0,0.12);
-  border-color: #d4c800;
-  box-shadow: 0 0 6px rgba(212,200,0,0.28);
+  background: rgba(var(--ef-accent-rgb),0.12);
+  border-color: var(--ef-accent);
+  box-shadow: 0 0 6px rgba(var(--ef-accent-rgb),0.28);
 }
 
 input[type="checkbox"].task-list-item-checkbox:checked::after {
@@ -201,7 +201,7 @@ input[type="checkbox"].task-list-item-checkbox:checked::after {
   top: 1px;
   width: 5px;
   height: 8px;
-  border: 2px solid #d4c800;
+  border: 2px solid var(--ef-accent);
   border-top: none;
   border-left: none;
   transform: rotate(45deg);
@@ -232,9 +232,9 @@ input[type="checkbox"].task-list-item-checkbox:checked::after {
 /* Completed task text */
 .task-list-item.is-checked .task-list-item-inner,
 li[data-task="x"] > p {
-  color: #3a3a3c;
+  color: var(--ef-completed-text);
   text-decoration: line-through;
-  text-decoration-color: #3a3a3c;
+  text-decoration-color: var(--ef-completed-text);
 }
 
 
@@ -243,16 +243,16 @@ li[data-task="x"] > p {
    ============================================================ */
 .markdown-rendered a.internal-link,
 .markdown-rendered a.external-link {
-  color: #d4c800;
+  color: var(--ef-accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(212,200,0,0.3);
+  border-bottom: 1px solid rgba(var(--ef-accent-rgb),0.3);
   transition: color 0.12s, border-color 0.12s;
 }
 
 .markdown-rendered a.internal-link:hover,
 .markdown-rendered a.external-link:hover {
-  color: #e8da00;
-  border-bottom-color: #d4c800;
+  color: var(--ef-accent-hover);
+  border-bottom-color: var(--ef-accent);
 }
 
 /* Unresolved (red-link) */
@@ -290,9 +290,9 @@ li[data-task="x"] > p {
 }
 
 .tag:hover {
-  color: #d4c800;
+  color: var(--ef-accent);
   border-color: var(--ef-accent-border);
-  background: rgba(212,200,0,0.05);
+  background: rgba(var(--ef-accent-rgb),0.05);
 }
 
 
@@ -323,7 +323,7 @@ li[data-task="x"] > p {
   font-family: inherit;
   font-size: inherit;
   color: var(--text-normal);
-  margin-inline-start: 0 !important;
+  margin-inline-start: 0;
 }
 
 /* Obsidian wraps list item text in <p> tags in reading view.
@@ -335,7 +335,7 @@ li[data-task="x"] > p {
 }
 
 .markdown-rendered ul li::marker {
-  color: #d4c800;
+  color: var(--ef-accent);
 }
 
 .markdown-rendered ol li::marker {
@@ -357,7 +357,7 @@ li[data-task="x"] > p {
 
 /* Highlight */
 .markdown-rendered mark {
-  background: rgba(212,200,0,0.22);
+  background: rgba(var(--ef-accent-rgb),0.22);
   color: #f0f0f0;
   border-radius: 2px;
   padding: 0 2px;
@@ -453,7 +453,7 @@ li[data-task="x"] > p {
    ============================================================ */
 .markdown-rendered hr {
   border: none;
-  border-top: 2px solid #d4c800;
+  border-top: 2px solid var(--ef-accent);
   width: 66%;
   margin: 24px auto;
   position: relative;
@@ -467,7 +467,7 @@ li[data-task="x"] > p {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 8px;
-  color: #d4c800;
+  color: var(--ef-accent);
   background: var(--background-primary);
   padding: 0 6px;
 }
