@@ -2059,15 +2059,15 @@ li[data-task="x"] > p {
    COMMAND PALETTE
    ============================================================ */
 .modal-bg {
-  backdrop-filter: blur(6px);
-  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px) saturate(1.6);
+  background: rgba(0,0,0,0.1);
 }
 
 .prompt {
   background: var(--background-primary-alt);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 12px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.5);
+  box-shadow: none;
   overflow: hidden;
   padding: 0;
 }
@@ -2161,7 +2161,6 @@ li[data-task="x"] > p {
   background: #18171a;
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 12px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
 }
 
 .mod-settings .modal-sidebar,
@@ -2191,27 +2190,29 @@ li[data-task="x"] > p {
   padding-left: 12px;
 }
 
-.mod-settings .modal-content {
+.mod-settings .modal-content,
+.mod-settings .vertical-tab-content {
   background: #18171a;
 }
 
-/* Section heading in settings */
-.setting-item.setting-item-heading .setting-item-name {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #d4c800;
-  font-family: var(--font-interface);
+.mod-settings .vertical-tab-content,
+.mod-settings .vertical-tab-content-container {
+  padding-left: 18px;
+  padding-right: 18px;
 }
+
 
 .setting-item {
   border-top: 1px solid var(--ef-border-faint);
-  padding: 12px 0;
+  padding: 12px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.setting-item.setting-item-heading {
+  border-top: none;
 }
 
 .setting-item-name {
@@ -2301,11 +2302,12 @@ li[data-task="x"] > p {
 /* ============================================================
    GENERAL MODALS
    ============================================================ */
-.modal {
+.modal,
+.modal-container.mod-dim .modal {
   background: var(--background-primary-alt);
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 12px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 2px 12px rgba(0,0,0,0.5);
+  box-shadow: none;
 }
 
 .modal-close-button {
