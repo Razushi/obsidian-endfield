@@ -1337,7 +1337,6 @@ div.view-content {
 .markdown-rendered h1 {
   display: table;
   margin: 0 0 16px;
-  padding-bottom: 5px;
   border-bottom: 2px solid currentColor;
 }
 
@@ -1346,7 +1345,6 @@ div.view-content {
 }
 .cm-line.HyperMD-header-1 .cm-header {
   border-bottom: 2px solid currentColor;
-  padding-bottom: 5px;
 }
 
 /* --- H2 --- */
@@ -1361,7 +1359,6 @@ div.view-content {
 .markdown-rendered h2 {
   display: table;
   margin: 24px 0 8px;
-  padding-bottom: 4px;
   border-bottom: 1px solid currentColor;
 }
 
@@ -1370,7 +1367,6 @@ div.view-content {
 }
 .cm-line.HyperMD-header-2 .cm-header {
   border-bottom: 1px solid currentColor;
-  padding-bottom: 4px;
 }
 
 /* --- H3 --- */
@@ -1385,13 +1381,11 @@ div.view-content {
 
 .markdown-rendered h3 {
   display: table;
-  padding-bottom: 3px;
   border-bottom: 1px solid currentColor;
 }
 
 .cm-line.HyperMD-header-3 .cm-header {
   border-bottom: 1px solid currentColor;
-  padding-bottom: 3px;
 }
 
 /* --- H4 --- */
