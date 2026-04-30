@@ -172,3 +172,31 @@
 .dataview.list-view-ul li::marker {
   color: var(--ef-accent);
 }
+
+
+/* ============================================================
+   BANNERS PLUGIN
+   ============================================================ */
+
+/* Reserve scrollbar gutter so the thumb never overlays the right edge of the banner */
+.markdown-preview-view:has(img.banner-image) {
+  scrollbar-gutter: stable;
+}
+
+/* Strip side padding from the view so the banner reaches the edges,
+   then restore it on the actual content sections below */
+.markdown-preview-view:has(img.banner-image) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.markdown-preview-view:has(img.banner-image) .markdown-preview-section {
+  padding-left: 46px;
+  padding-right: 28px;
+}
+
+img.banner-image {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
