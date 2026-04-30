@@ -43,7 +43,7 @@
 /* Obsidian app.css applies margin-top: 6px here which offsets pill centering */
 .workspace-split.mod-root .workspace-tab-header-container-inner {
   margin: 0 -5px -1px;
-  padding: 0 15px;
+  padding: 0 6px;
 }
 
 
