@@ -59,6 +59,8 @@
   --ef-accent-hover:                   var(--text-accent-hover);
   --ef-accent-rgb:                     var(--interactive-accent-rgb);
   --ef-text-white:                     #ffffff;
+  --ef-icon-color:                     var(--ef-text-white);
+  --ef-icon-disabled:                  var(--ef-chrome-text-faint);
 
   /* --- Typography --- */
   --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
@@ -120,7 +122,7 @@
   --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.45);
   --ef-tab-pill-font-weight:          600;
   --ef-tab-pill-color:                #f3f3f5;
-  --ef-tab-pill-color-hover:          #ffffff;
+  --ef-tab-pill-color-hover:          var(--ef-icon-color);
   --ef-tab-pill-color-active:         #1e1e22;
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.35);
 
@@ -157,22 +159,22 @@
   --ef-btn-transition:          color 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
 
   /* Toggle — has an on/off state (carries .is-active when on) */
-  --ef-btn-toggle-color:        rgba(255,255,255,0.68);
+  --ef-btn-toggle-color:        var(--ef-icon-color);
   --ef-btn-toggle-color-hover:  #d4c800;
   --ef-btn-toggle-bg-hover:     var(--ef-accent-bg-dim);
   --ef-btn-toggle-ring-hover:   inset 0 0 0 1px rgba(212,200,0,0.50);
   --ef-btn-toggle-color-on:     #212121;
-  --ef-btn-toggle-color-on-hover: #ffffff;
+  --ef-btn-toggle-color-on-hover: var(--ef-icon-color);
   --ef-btn-toggle-bg-on:        #d4c800;
 
   /* Action — fires once, no persistent state */
-  --ef-btn-action-color:        rgba(255,255,255,0.68);
-  --ef-btn-action-color-hover:  #ffffff;
+  --ef-btn-action-color:        var(--ef-icon-color);
+  --ef-btn-action-color-hover:  var(--ef-icon-color);
   --ef-btn-action-bg-hover:     #424242;
   --ef-btn-action-shadow-hover: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
 
   /* --- Header chrome --- */
-  --ef-header-label-color:      #ffffff;
+  --ef-header-label-color:      var(--ef-icon-color);
   --ef-header-rule:             rgba(255,255,255,0.07);
   --ef-header-rule-shadow:      0 4px 8px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3);
 
@@ -183,10 +185,10 @@
   /* --- Nav --- */
   --nav-item-size:           14px;
   --nav-item-weight:         400;
-  --nav-item-color:          #e5e5e7;
+  --nav-item-color:          var(--ef-icon-color);
   --nav-item-color-muted:    #bfbfc4;
   --nav-item-color-faint:    #8b8b94;
-  --nav-collapse-icon-color: var(--ef-chrome-text-faint);
+  --nav-collapse-icon-color: var(--ef-icon-disabled);
 
   /* --- Tags --- */
   --tag-color:            #888888;
@@ -297,7 +299,7 @@
 .titlebar-button,
 .is-hidden .titlebar-button {
   background: transparent !important;
-  color: var(--ef-chrome-text);
+  color: var(--ef-icon-color);
   opacity: 1;
   width: 24px !important;
   height: 24px !important;
@@ -397,15 +399,14 @@
 
 /* Ribbon toggle button */
 .workspace-ribbon-collapse-btn {
-  color: rgba(255,255,255,0.4);
+  color: var(--ef-icon-disabled);
   transition: color 0.15s;
 }
 .workspace-ribbon-collapse-btn:hover {
-  color: #ffffff;
+  color: var(--ef-icon-color);
 }
 
-/* Sidebar toggle button — match ribbon bg/shadow, no focus color shift */
-
+/* Sidebar toggle button — restored to the pre-refactor treatment */
 .sidebar-toggle-button.mod-left {
   background: var(--ef-bg-ribbon);
   border-right: 1px solid rgba(255,255,255,0.05);
@@ -603,10 +604,14 @@ div.view-content {
   box-shadow: none;
 }
 
-.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active svg,
-.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover svg {
-  color: currentColor;
-  stroke: currentColor;
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active :is(.workspace-tab-header-inner-icon, svg) {
+  color: var(--ef-btn-toggle-color-on) !important;
+  stroke: currentColor !important;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover :is(.workspace-tab-header-inner-icon, svg) {
+  color: var(--ef-btn-toggle-color-on-hover) !important;
+  stroke: currentColor !important;
 }
 
 .workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active::after {
@@ -797,6 +802,12 @@ div.view-content {
   width: 24px;
   height: 24px;
   padding: 0;
+  color: var(--ef-icon-color);
+}
+
+.workspace-split.mod-root .workspace-tab-header-container .clickable-icon.is-disabled,
+.workspace-split.mod-root .workspace-tab-header-container .clickable-icon[aria-disabled="true"] {
+  color: var(--ef-icon-disabled);
 }
 
 /* Obsidian app.css applies margin-top: 6px here which offsets pill centering */
@@ -843,7 +854,7 @@ div.view-content {
 
 .workspace-split.mod-root .workspace-tab-header.is-active,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover {
-  color: var(--ef-tab-pill-color-active);
+  color: var(--ef-tab-pill-color-active) !important;
   background: var(--ef-tab-pill-bg-active);
   border-color: var(--ef-tab-pill-border-active);
   box-shadow:
@@ -865,6 +876,18 @@ div.view-content {
 .workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-title {
   color: inherit;
   font-weight: var(--ef-tab-pill-font-weight);
+}
+
+.workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-icon,
+.workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-icon svg {
+  color: inherit !important;
+  stroke: currentColor !important;
+  opacity: 1;
+}
+
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title {
+  color: var(--ef-tab-pill-color-active) !important;
 }
 
 /* Hide icon for Outline tabs */
@@ -900,14 +923,14 @@ div.view-content {
 }
 
 .workspace-tab-header-inner-close-btn:hover {
-  color: #ffffff;
+  color: var(--ef-icon-color);
   background: rgba(232,64,64,0.14);
   box-shadow: inset 0 0 0 1px rgba(232,64,64,0.18);
 }
 
 /* New tab button */
 .workspace-tab-header-new-tab {
-  color: var(--ef-chrome-text-faint);
+  color: var(--ef-icon-color);
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -918,7 +941,7 @@ div.view-content {
 }
 
 .workspace-tab-header-new-tab:hover {
-  color: var(--ef-chrome-text);
+  color: var(--ef-icon-color);
   background: rgba(255,255,255,0.05);
 }
 /* ============================================================
@@ -944,7 +967,7 @@ div.view-content {
    ROOT LEAF HEADER LAYOUT
    ============================================================ */
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header {
   position: relative;
   background: var(--background-primary);
@@ -953,7 +976,9 @@ div.view-content {
   overflow: visible;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"])
+  .view-header {
   background: linear-gradient(
     to right,
     transparent 0%,
@@ -967,7 +992,7 @@ div.view-content {
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header::after {
   content: '';
   position: absolute;
@@ -982,7 +1007,7 @@ div.view-content {
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-title-container {
   position: absolute;
   inset: 0;
@@ -993,7 +1018,7 @@ div.view-content {
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-title {
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
@@ -1003,7 +1028,9 @@ div.view-content {
   user-select: none;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"])
+  .view-header-breadcrumb {
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
   font-weight: 500;
@@ -1012,7 +1039,9 @@ div.view-content {
   user-select: none;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb-separator {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"])
+  .view-header-breadcrumb-separator {
   color: rgba(var(--ef-accent-rgb),0.4);
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
@@ -1032,7 +1061,7 @@ div.view-content {
    ROOT LEAF CONTROLS
    ============================================================ */
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-actions {
   position: absolute;
   right: 6px;
@@ -1042,7 +1071,7 @@ div.view-content {
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-nav-buttons {
   position: absolute;
   left: 6px;
@@ -1053,10 +1082,10 @@ div.view-content {
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-actions > *,
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-nav-buttons > * {
   width: 24px;
   height: 24px;
@@ -1066,9 +1095,9 @@ div.view-content {
 
 /* The floating editor controls need to escape these ancestors. */
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"]),
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"]),
 .workspace-split.mod-root
-  .workspace-leaf:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"]),
+  .workspace-leaf:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"]),
 .workspace-split.mod-root .workspace-leaf,
 .workspace-split.mod-root {
   overflow: visible;
@@ -2203,7 +2232,7 @@ button {
 
 /* Icon / clickable-icon buttons */
 .clickable-icon {
-  color: var(--nav-item-color);
+  color: var(--ef-icon-color);
   border-radius: var(--ef-btn-radius);
   display: flex;
   align-items: center;
@@ -2211,15 +2240,31 @@ button {
 }
 
 .clickable-icon:hover {
-  color: var(--nav-item-color);
+  color: var(--ef-icon-color);
   background: var(--ef-btn-action-bg-hover);
   box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
 }
 
 .clickable-icon.is-active {
-  color: var(--nav-item-color);
+  color: var(--ef-icon-color);
   background: var(--ef-btn-action-bg-hover);
   box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+}
+
+.clickable-icon.is-disabled,
+.clickable-icon[aria-disabled="true"],
+.view-action.is-disabled,
+.view-action[aria-disabled="true"],
+.nav-action-button.is-disabled,
+.nav-action-button[aria-disabled="true"] {
+  color: var(--ef-icon-disabled);
+  opacity: 1;
+}
+
+.clickable-icon.is-disabled:hover,
+.clickable-icon[aria-disabled="true"]:hover {
+  background: transparent;
+  box-shadow: none;
 }
 /* ============================================================
    ARKNIGHTS: ENDFIELD — PLUGINS

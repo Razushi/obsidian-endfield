@@ -21,7 +21,7 @@
    ROOT LEAF HEADER LAYOUT
    ============================================================ */
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header {
   position: relative;
   background: var(--background-primary);
@@ -30,7 +30,9 @@
   overflow: visible;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"])
+  .view-header {
   background: linear-gradient(
     to right,
     transparent 0%,
@@ -44,7 +46,7 @@
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header::after {
   content: '';
   position: absolute;
@@ -59,7 +61,7 @@
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-title-container {
   position: absolute;
   inset: 0;
@@ -70,7 +72,7 @@
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-title {
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
@@ -80,7 +82,9 @@
   user-select: none;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"])
+  .view-header-breadcrumb {
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
   font-weight: 500;
@@ -89,7 +93,9 @@
   user-select: none;
 }
 
-.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-breadcrumb-separator {
+.workspace-split.mod-root
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"])
+  .view-header-breadcrumb-separator {
   color: rgba(var(--ef-accent-rgb),0.4);
   font-family: var(--font-interface);
   font-size: var(--nav-item-size);
@@ -109,7 +115,7 @@
    ROOT LEAF CONTROLS
    ============================================================ */
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-actions {
   position: absolute;
   right: 6px;
@@ -119,7 +125,7 @@
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-nav-buttons {
   position: absolute;
   left: 6px;
@@ -130,10 +136,10 @@
 }
 
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-actions > *,
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"])
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"])
   .view-header-nav-buttons > * {
   width: 24px;
   height: 24px;
@@ -143,9 +149,9 @@
 
 /* The floating editor controls need to escape these ancestors. */
 .workspace-split.mod-root
-  .workspace-leaf-content:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"]),
+  .workspace-leaf-content:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"]),
 .workspace-split.mod-root
-  .workspace-leaf:is([data-type="markdown"], [data-type="empty"], [data-type="excalidraw"]),
+  .workspace-leaf:is([data-type="markdown"], [data-type="image"], [data-type="empty"], [data-type="excalidraw"]),
 .workspace-split.mod-root .workspace-leaf,
 .workspace-split.mod-root {
   overflow: visible;

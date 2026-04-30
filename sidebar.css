@@ -99,10 +99,14 @@
   box-shadow: none;
 }
 
-.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active svg,
-.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover svg {
-  color: currentColor;
-  stroke: currentColor;
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active :is(.workspace-tab-header-inner-icon, svg) {
+  color: var(--ef-btn-toggle-color-on) !important;
+  stroke: currentColor !important;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover :is(.workspace-tab-header-inner-icon, svg) {
+  color: var(--ef-btn-toggle-color-on-hover) !important;
+  stroke: currentColor !important;
 }
 
 .workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active::after {

@@ -336,7 +336,7 @@ button {
 
 /* Icon / clickable-icon buttons */
 .clickable-icon {
-  color: var(--nav-item-color);
+  color: var(--ef-icon-color);
   border-radius: var(--ef-btn-radius);
   display: flex;
   align-items: center;
@@ -344,13 +344,29 @@ button {
 }
 
 .clickable-icon:hover {
-  color: var(--nav-item-color);
+  color: var(--ef-icon-color);
   background: var(--ef-btn-action-bg-hover);
   box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
 }
 
 .clickable-icon.is-active {
-  color: var(--nav-item-color);
+  color: var(--ef-icon-color);
   background: var(--ef-btn-action-bg-hover);
   box-shadow: 0 2px 6px rgba(0,0,0,0.9), inset 0 1px 0 rgba(0,0,0,0.6);
+}
+
+.clickable-icon.is-disabled,
+.clickable-icon[aria-disabled="true"],
+.view-action.is-disabled,
+.view-action[aria-disabled="true"],
+.nav-action-button.is-disabled,
+.nav-action-button[aria-disabled="true"] {
+  color: var(--ef-icon-disabled);
+  opacity: 1;
+}
+
+.clickable-icon.is-disabled:hover,
+.clickable-icon[aria-disabled="true"]:hover {
+  background: transparent;
+  box-shadow: none;
 }
