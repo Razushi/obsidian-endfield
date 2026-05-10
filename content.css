@@ -147,22 +147,6 @@
   color: #ccc;
 }
 
-/* Code block language tag.
-   UNCERTAIN: attr(class) returns the full class string (e.g. "language-javascript"),
-   not just the language name. Also uncertain whether Obsidian applies
-   language-* classes directly to pre elements. Likely never fires or renders
-   unformatted output. */
-.markdown-rendered pre[class*="language-"]::before {
-  content: attr(class);
-  display: block;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #3a3a3c;
-  margin-bottom: 10px;
-  font-family: var(--font-interface);
-}
 
 
 /* ============================================================
