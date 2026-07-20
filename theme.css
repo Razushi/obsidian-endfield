@@ -902,31 +902,71 @@ div.view-content {
   margin: 0;
 }
 
-/* Tab close */
+/* Tab close — Endfield circular badge (echoes the ⊗ ring on the reference
+   Cancel/Confirm buttons). Obsidian's live element is ...close-button; the
+   old ...close-btn is kept as a harmless fallback for older builds. */
+.workspace-tab-header-inner-close-button,
 .workspace-tab-header-inner-close-btn {
   color: var(--ef-chrome-text-faint);
   opacity: 0;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;        /* stop the flex row squishing width → keep it round */
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  padding: 0;
   margin-left: 6px;
-  transition: opacity 0.12s, color 0.12s, background 0.12s;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transition: opacity 0.12s, color 0.12s, background 0.12s, border-color 0.12s;
 }
 
+/* Shrink the × so it sits cleanly inside the ring, crisp Endfield stroke. */
+.workspace-tab-header-inner-close-button svg,
+.workspace-tab-header-inner-close-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1px;
+}
+
+/* Reveal on hovered/active tab (unchanged behaviour). */
+.workspace-tab-header:hover .workspace-tab-header-inner-close-button,
+.workspace-tab-header.is-active .workspace-tab-header-inner-close-button,
 .workspace-tab-header:hover .workspace-tab-header-inner-close-btn,
 .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn {
   opacity: 1;
 }
 
+/* Active (yellow) tab: black ring + × to echo the Confirm button. */
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-button,
+.workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-button,
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-btn {
   color: var(--ef-tab-pill-color-active);
 }
 
-.workspace-tab-header-inner-close-btn:hover {
-  color: var(--ef-icon-color);
-  background: rgba(232,64,64,0.14);
-  box-shadow: inset 0 0 0 1px rgba(232,64,64,0.18);
+/* Button hover fills into a solid disc (Endfield press feel). Inactive tab:
+   light disc, dark × cut-out. */
+.workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-button:hover,
+.workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-btn:hover {
+  color: var(--ef-tab-pill-bg);
+  background: var(--ef-icon-color);
+  border-color: var(--ef-icon-color);
+}
+
+/* Active (yellow) tab hover: black disc, white × cut-out. Needs the
+   .workspace-split.mod-root prefix to outrank the active-tab colour rule
+   above (5 classes), otherwise the × stays black and vanishes on the disc. */
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-button:hover,
+.workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn:hover {
+  color: #fff;
+  background: var(--ef-tab-pill-color-active);
+  border-color: var(--ef-tab-pill-color-active);
 }
 
 /* New tab button */
