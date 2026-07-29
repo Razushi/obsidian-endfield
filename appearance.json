@@ -1,0 +1,16 @@
+{
+  "theme": "obsidian",
+  "cssTheme": "ArknightsEndfield",
+  "accentColor": "#ffeb00",
+  "textFontFamily": "",
+  "interfaceFontFamily": "",
+  "monospaceFontFamily": "",
+  "enabledCssSnippets": [
+    "ColouredSidebar",
+    "endfield-chrome"
+  ],
+  "showRibbon": true,
+  "showViewHeader": true,
+  "baseFontSize": 18,
+  "baseFontSizeAction": false
+}

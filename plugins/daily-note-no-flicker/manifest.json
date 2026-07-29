@@ -1,0 +1,9 @@
+{
+  "id": "daily-note-no-flicker",
+  "name": "Daily Note No Flicker",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Focuses an already-open daily note before falling back to Obsidian's Daily Notes command.",
+  "author": "Razushi",
+  "isDesktopOnly": false
+}

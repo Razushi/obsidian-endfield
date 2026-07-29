@@ -1,0 +1,91 @@
+.view-header.endfield-panel-header-ready {
+  background: transparent;
+  border-bottom: none;
+  min-height: 34px;
+  padding: 0 12px;
+  display: flex;
+  align-items: stretch;
+}
+
+.view-header.endfield-panel-header-ready::before,
+.view-header.endfield-panel-header-ready::after {
+  content: none;
+  display: none;
+}
+
+.view-header.endfield-panel-header-ready .view-header-title-container,
+.view-header.endfield-panel-header-ready .view-header-title,
+.view-header.endfield-panel-header-ready .view-header-breadcrumb,
+.view-header.endfield-panel-header-ready .view-header-nav-buttons {
+  display: none;
+}
+
+.endfield-panel-header {
+  position: relative;
+  width: 100%;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 0;
+}
+
+.endfield-panel-title {
+  flex: 0 0 auto;
+  color: #d4c800;
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size, 12px);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+.endfield-panel-rule {
+  display: none;
+}
+
+.endfield-panel-rule::after {
+  display: none;
+}
+
+.view-header.endfield-note-header {
+  border-bottom: none;
+  min-height: 34px;
+  padding: 8px 28px 0;
+  background: var(--background-primary);
+}
+
+
+.workspace-leaf-content[data-type="file-explorer"] .nav-header {
+  border-bottom: none;
+}
+
+.endfield-file-explorer-chrome {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 34px;
+  padding: 8px 12px 0;
+  background: transparent;
+}
+
+.endfield-file-explorer-title {
+  flex: 0 0 auto;
+  color: #d4c800;
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size, 12px);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+.endfield-file-explorer-rule {
+  display: none;
+}
+
+.endfield-file-explorer-rule::after {
+  display: none;
+}
+

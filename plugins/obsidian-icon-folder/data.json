@@ -1,0 +1,63 @@
+{
+  "settings": {
+    "migrated": 6,
+    "iconPacksPath": ".obsidian/icons",
+    "fontSize": 16,
+    "emojiStyle": "native",
+    "iconColor": null,
+    "recentlyUsedIcons": [
+      "LiPencil",
+      "LiActivitySquare",
+      "LiFile",
+      "LiFolder",
+      "LiUniversity"
+    ],
+    "recentlyUsedIconsSize": 5,
+    "rules": [
+      {
+        "rule": ".*",
+        "icon": "LiFolder",
+        "for": "folders",
+        "order": 0
+      },
+      {
+        "rule": ".*",
+        "icon": "LiFile",
+        "for": "files",
+        "order": 1
+      }
+    ],
+    "extraMargin": {
+      "top": 0,
+      "right": 4,
+      "bottom": 0,
+      "left": 0
+    },
+    "iconInTabsEnabled": false,
+    "iconInTitleEnabled": false,
+    "iconInTitlePosition": "above",
+    "iconInFrontmatterEnabled": false,
+    "iconInFrontmatterFieldName": "icon",
+    "iconColorInFrontmatterFieldName": "iconColor",
+    "iconsBackgroundCheckEnabled": false,
+    "iconsInNotesEnabled": true,
+    "iconsInLinksEnabled": true,
+    "iconIdentifier": ":",
+    "lucideIconPackType": "native",
+    "debugMode": false,
+    "useInternalPlugins": false
+  },
+  "02 - Logbooks": "LiBookText",
+  "01 - Projects": "LiWorkflow",
+  "00 - Daily Notes": "LiNotebook",
+  "04 - Dashboard": "LiLayoutDashboard",
+  "99 - Assets": "LiArchive",
+  "06 - Meta": "LiSettings2",
+  "03 - Education": "LiUniversity",
+  "02 - Logbooks/Test/CPU Detail & System Information.md": "LiFile",
+  "02 - Logbooks/Test/Thanks raf, great piece to test markdown on.md": "LiFile",
+  "02 - Logbooks/Test": "LiFolder",
+  "99 - Templates": "LiUniversity",
+  "docs": "LiActivitySquare",
+  "Excalidraw": "LiPencil"
+}

@@ -1,0 +1,22 @@
+/* Background texturing — Endfield grid pattern
+   Grid: 24px cells, + connectors at intersections, dimmer connecting lines
+   Dots: 12px (2:1 with grid, puts a mid-point dot in each cell half)
+   Diag: optional third layer — wired up but not applied by default        */
+
+:root {
+  --ef-tex-grid: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%3E%3Cline%20x1='0'%20y1='0'%20x2='3'%20y2='0'%20stroke='rgba(255,255,255,0.12)'%20stroke-width='1'/%3E%3Cline%20x1='21'%20y1='0'%20x2='24'%20y2='0'%20stroke='rgba(255,255,255,0.12)'%20stroke-width='1'/%3E%3Cline%20x1='0'%20y1='0'%20x2='0'%20y2='3'%20stroke='rgba(255,255,255,0.12)'%20stroke-width='1'/%3E%3Cline%20x1='0'%20y1='21'%20x2='0'%20y2='24'%20stroke='rgba(255,255,255,0.12)'%20stroke-width='1'/%3E%3Cline%20x1='4'%20y1='0'%20x2='20'%20y2='0'%20stroke='rgba(255,255,255,0.05)'%20stroke-width='1'/%3E%3Cline%20x1='0'%20y1='4'%20x2='0'%20y2='20'%20stroke='rgba(255,255,255,0.05)'%20stroke-width='1'/%3E%3C/svg%3E");
+  --ef-tex-dots: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='12'%3E%3Ccircle%20cx='0'%20cy='0'%20r='0.75'%20fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+  --ef-tex-diag: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='32'%3E%3Cline%20x1='0'%20y1='0'%20x2='32'%20y2='32'%20stroke='rgba(255,255,255,0.03)'%20stroke-width='1'/%3E%3C/svg%3E");
+}
+
+.workspace-leaf-content[data-type="markdown"] .cm-scroller,
+.workspace-leaf-content[data-type="markdown"] .markdown-preview-view {
+  background-image: var(--ef-tex-grid), var(--ef-tex-dots) !important;
+  background-size: 24px 24px, 12px 12px !important;
+  background-repeat: repeat !important;
+  background-attachment: local !important;
+}
+
+/* To add diagonals, swap the line above to:
+   background-image: var(--ef-tex-grid), var(--ef-tex-dots), var(--ef-tex-diag);
+   background-size: 24px 24px, 12px 12px, 32px 32px;                          */

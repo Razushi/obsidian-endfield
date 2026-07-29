@@ -1,0 +1,31 @@
+# === Per-machine state — these leak note paths, never commit ===
+workspace.json
+workspaces.json
+
+# === Plugin configs: deny by default, allow-list the safe ones ===
+# A new plugin's data.json may contain note paths. It stays ignored until
+# you look at it and add an exception below.
+plugins/*/data.json
+!plugins/banners-reloaded/data.json
+!plugins/calendar/data.json
+!plugins/cmdr/data.json
+!plugins/editor-width-slider/data.json
+!plugins/homepage/data.json
+!plugins/obsidian-hider/data.json
+!plugins/obsidian-hotkeys-for-specific-files/data.json
+!plugins/obsidian-icon-folder/data.json
+!plugins/obsidian-paste-image-rename/data.json
+!plugins/obsidian-text-format/data.json
+!plugins/table-editor-obsidian/data.json
+
+# Known-leaky, listed explicitly so it's obvious they're deliberate:
+#   keep-the-rhythm/data.json     320 note paths (writing stats)
+#   recent-files-obsidian/data.json  50 note paths
+
+# === Disabled plugins (59MB, not in community-plugins.json) ===
+plugins/asset-url-fix/
+plugins/typst/
+
+# === Never ===
+node_modules/
+.DS_Store
