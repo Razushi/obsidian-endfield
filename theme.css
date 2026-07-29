@@ -62,6 +62,13 @@
   --ef-icon-color:                     var(--ef-text-white);
   --ef-icon-disabled:                  var(--ef-chrome-text-faint);
 
+  /* --- Neutral primitives (raw palette; referenced only by tokens, never by rules) --- */
+  --ef-black:                          #0d0d0f;   /* darkest surface: tab pill rest, checkbox marker */
+  --ef-gray:                           #333333;   /* mid surface: tab pill hover */
+  --ef-ink:                            #1e1e22;   /* near-black text on light surfaces */
+  --ef-off-white:                      #f3f3f5;   /* bright UI text */
+  --ef-parchment:                      #e7e3e0;   /* Endfield light surface: active tab pill */
+
   /* --- Typography --- */
   --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
   --font-text:                        'Geist', -apple-system, 'Segoe UI', sans-serif;
@@ -112,19 +119,36 @@
   --tab-container-background: var(--ef-bg-panel);
 
   /* --- Editor tab pills --- */
-  --ef-tab-pill-bg:                   #0d0d0f;
-  --ef-tab-pill-bg-hover:             #333333;
-  --ef-tab-pill-bg-active:            #e7e3e0;
+  --ef-tab-pill-bg:                   var(--ef-black);
+  --ef-tab-pill-bg-hover:             var(--ef-gray);
+  --ef-tab-pill-bg-active:            var(--ef-parchment);
+  /* rgba tuning values below stay component-level (transparency, not palette) */
   --ef-tab-pill-border:               rgba(255,255,255,0.45);
   --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
   --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
   --ef-tab-pill-inner-border:         rgba(255,255,255,0.45);
   --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.45);
   --ef-tab-pill-font-weight:          600;
-  --ef-tab-pill-color:                #f3f3f5;
+  --ef-tab-pill-color:                var(--ef-off-white);
   --ef-tab-pill-color-hover:          var(--ef-icon-color);
-  --ef-tab-pill-color-active:         #1e1e22;
+  --ef-tab-pill-color-active:         var(--ef-ink);
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.35);
+
+  /* --- Component: tab close (×) button ---
+     Three-tier layering in action:  component → semantic → primitive.
+     e.g. --ef-tab-close-color → --ef-icon-color → --ef-text-white → #ffffff.
+     tabs.css references ONLY these, so the button retunes entirely from here. */
+  --ef-tab-close-size:                12px;                           /* ring diameter */
+  --ef-tab-close-glyph:               8px;                            /* × glyph box (inside the ring) */
+  --ef-tab-close-ring:                1px;                            /* ring thickness */
+  --ef-tab-close-stroke:              2px;                            /* × stroke thickness */
+  --ef-tab-close-gap:                 6px;                            /* gap from tab title */
+  --ef-tab-close-color:               var(--ef-icon-color);           /* inactive ring + × */
+  --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);/* active-tab ring + × */
+  --ef-tab-close-fill-hover:          var(--ef-icon-color);           /* inactive hover: disc fill */
+  --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);          /* inactive hover: × cut-out */
+  --ef-tab-close-fill-active-hover:   var(--ef-tab-pill-color-active);/* active hover: disc fill */
+  --ef-tab-close-cutout-active-hover: var(--ef-text-white);           /* active hover: × cut-out */
 
   /* --- Radius --- */
   --radius-s:  4px;
@@ -206,7 +230,7 @@
   --checkbox-radius:       3px;
   --checkbox-border-color: rgba(255,255,255,0.15);
   --checkbox-color:        #d4c800;
-  --checkbox-marker-color: #0d0d0f;
+  --checkbox-marker-color: var(--ef-black);
 
   /* --- Semantic accent tints (yellow-alpha) --- */
   --ef-accent-bg-faint:    rgba(212,200,0,0.04);  /* subtle tint: blockquotes, faint hovers */
@@ -907,19 +931,19 @@ div.view-content {
    old ...close-btn is kept as a harmless fallback for older builds. */
 .workspace-tab-header-inner-close-button,
 .workspace-tab-header-inner-close-btn {
-  color: var(--ef-chrome-text-faint);
-  opacity: 0;
+  color: var(--ef-tab-close-color);   /* visible on dark inactive tabs, not just on hover */
+  opacity: 1;            /* always visible, including inactive tabs */
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;        /* stop the flex row squishing width → keep it round */
   box-sizing: border-box;
-  width: 16px;
-  height: 16px;
+  width: var(--ef-tab-close-size);
+  height: var(--ef-tab-close-size);
   padding: 0;
-  margin-left: 6px;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
+  margin-left: var(--ef-tab-close-gap);
+  border: var(--ef-tab-close-ring) solid currentColor;
+  border-radius: 100%;
   background: transparent;
   box-shadow: none;
   transition: opacity 0.12s, color 0.12s, background 0.12s, border-color 0.12s;
@@ -928,18 +952,22 @@ div.view-content {
 /* Shrink the × so it sits cleanly inside the ring, crisp Endfield stroke. */
 .workspace-tab-header-inner-close-button svg,
 .workspace-tab-header-inner-close-btn svg {
-  width: 16px;
-  height: 16px;
+  width: var(--ef-tab-close-glyph);
+  height: var(--ef-tab-close-glyph);
   stroke: currentColor;
-  stroke-width: 1px;
+  stroke-width: var(--ef-tab-close-stroke);
 }
 
-/* Reveal on hovered/active tab (unchanged behaviour). */
-.workspace-tab-header:hover .workspace-tab-header-inner-close-button,
-.workspace-tab-header.is-active .workspace-tab-header-inner-close-button,
-.workspace-tab-header:hover .workspace-tab-header-inner-close-btn,
-.workspace-tab-header.is-active .workspace-tab-header-inner-close-btn {
-  opacity: 1;
+/* Always visible, on every tab. Obsidian's app.css hides the close button on
+   non-hovered/non-active tabs; it uses display/visibility (not just opacity),
+   so !important is needed to override it regardless of which property/specificity
+   Obsidian uses. The element is already in the DOM (hover reveals it), so this
+   is purely defeating the hide. */
+.workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-close-button,
+.workspace-split.mod-root .workspace-tab-header .workspace-tab-header-inner-close-btn {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Active (yellow) tab: black ring + × to echo the Confirm button. */
@@ -947,16 +975,16 @@ div.view-content {
 .workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-button,
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-btn {
-  color: var(--ef-tab-pill-color-active);
+  color: var(--ef-tab-close-color-active);
 }
 
 /* Button hover fills into a solid disc (Endfield press feel). Inactive tab:
    light disc, dark × cut-out. */
 .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-button:hover,
 .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-close-btn:hover {
-  color: var(--ef-tab-pill-bg);
-  background: var(--ef-icon-color);
-  border-color: var(--ef-icon-color);
+  color: var(--ef-tab-close-cutout-hover);
+  background: var(--ef-tab-close-fill-hover);
+  border-color: var(--ef-tab-close-fill-hover);
 }
 
 /* Active (yellow) tab hover: black disc, white × cut-out. Needs the
@@ -964,9 +992,9 @@ div.view-content {
    above (5 classes), otherwise the × stays black and vanishes on the disc. */
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-button:hover,
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn:hover {
-  color: #fff;
-  background: var(--ef-tab-pill-color-active);
-  border-color: var(--ef-tab-pill-color-active);
+  color: var(--ef-tab-close-cutout-active-hover);
+  background: var(--ef-tab-close-fill-active-hover);
+  border-color: var(--ef-tab-close-fill-active-hover);
 }
 
 /* New tab button */

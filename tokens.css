@@ -62,6 +62,13 @@
   --ef-icon-color:                     var(--ef-text-white);
   --ef-icon-disabled:                  var(--ef-chrome-text-faint);
 
+  /* --- Neutral primitives (raw palette; referenced only by tokens, never by rules) --- */
+  --ef-black:                          #0d0d0f;   /* darkest surface: tab pill rest, checkbox marker */
+  --ef-gray:                           #333333;   /* mid surface: tab pill hover */
+  --ef-ink:                            #1e1e22;   /* near-black text on light surfaces */
+  --ef-off-white:                      #f3f3f5;   /* bright UI text */
+  --ef-parchment:                      #e7e3e0;   /* Endfield light surface: active tab pill */
+
   /* --- Typography --- */
   --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
   --font-text:                        'Geist', -apple-system, 'Segoe UI', sans-serif;
@@ -112,19 +119,36 @@
   --tab-container-background: var(--ef-bg-panel);
 
   /* --- Editor tab pills --- */
-  --ef-tab-pill-bg:                   #0d0d0f;
-  --ef-tab-pill-bg-hover:             #333333;
-  --ef-tab-pill-bg-active:            #e7e3e0;
+  --ef-tab-pill-bg:                   var(--ef-black);
+  --ef-tab-pill-bg-hover:             var(--ef-gray);
+  --ef-tab-pill-bg-active:            var(--ef-parchment);
+  /* rgba tuning values below stay component-level (transparency, not palette) */
   --ef-tab-pill-border:               rgba(255,255,255,0.45);
   --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
   --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
   --ef-tab-pill-inner-border:         rgba(255,255,255,0.45);
   --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.45);
   --ef-tab-pill-font-weight:          600;
-  --ef-tab-pill-color:                #f3f3f5;
+  --ef-tab-pill-color:                var(--ef-off-white);
   --ef-tab-pill-color-hover:          var(--ef-icon-color);
-  --ef-tab-pill-color-active:         #1e1e22;
+  --ef-tab-pill-color-active:         var(--ef-ink);
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.35);
+
+  /* --- Component: tab close (×) button ---
+     Three-tier layering in action:  component → semantic → primitive.
+     e.g. --ef-tab-close-color → --ef-icon-color → --ef-text-white → #ffffff.
+     tabs.css references ONLY these, so the button retunes entirely from here. */
+  --ef-tab-close-size:                12px;                           /* ring diameter */
+  --ef-tab-close-glyph:               8px;                            /* × glyph box (inside the ring) */
+  --ef-tab-close-ring:                1px;                            /* ring thickness */
+  --ef-tab-close-stroke:              2px;                            /* × stroke thickness */
+  --ef-tab-close-gap:                 6px;                            /* gap from tab title */
+  --ef-tab-close-color:               var(--ef-icon-color);           /* inactive ring + × */
+  --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);/* active-tab ring + × */
+  --ef-tab-close-fill-hover:          var(--ef-icon-color);           /* inactive hover: disc fill */
+  --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);          /* inactive hover: × cut-out */
+  --ef-tab-close-fill-active-hover:   var(--ef-tab-pill-color-active);/* active hover: disc fill */
+  --ef-tab-close-cutout-active-hover: var(--ef-text-white);           /* active hover: × cut-out */
 
   /* --- Radius --- */
   --radius-s:  4px;
@@ -206,7 +230,7 @@
   --checkbox-radius:       3px;
   --checkbox-border-color: rgba(255,255,255,0.15);
   --checkbox-color:        #d4c800;
-  --checkbox-marker-color: #0d0d0f;
+  --checkbox-marker-color: var(--ef-black);
 
   /* --- Semantic accent tints (yellow-alpha) --- */
   --ef-accent-bg-faint:    rgba(212,200,0,0.04);  /* subtle tint: blockquotes, faint hovers */
