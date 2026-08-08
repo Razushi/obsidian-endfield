@@ -14,6 +14,7 @@ cat \
   "$DIR/content.css" \
   "$DIR/modals.css" \
   "$DIR/plugins.css" \
+  "$DIR/light.css" \
   > "$DIR/theme.css"
 
 echo "Built theme.css ($(wc -l < "$DIR/theme.css") lines)"

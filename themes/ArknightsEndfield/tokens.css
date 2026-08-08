@@ -267,8 +267,265 @@
   --semantic-brown:   #c7876e;
 }
 
-/* Light-mode table tokens (forward-compat if light theme ever added) */
+/* ============================================================
+   LIGHT MODE — Endfield "operations" light variant.
+
+   Mirrors EVERY token above: the structural rules in the other
+   modules are unscoped and read var(), and the .theme-dark defs
+   do NOT apply under .theme-light, so this block must be complete.
+
+   Design language (from the game's light menus): cool light-grey
+   base with a brighter near-white content surface, dark ink text,
+   depth carried by soft shadows (not borders), and the SAME yellow
+   accent — dark-on-light "chips" for tabs, exactly like the in-game
+   character/weapon panels. Yellow + blue hues are unchanged; only
+   how colour/shadow/layering is applied differs.
+
+   Non-colour tokens (sizes, radii, fonts, weights, transitions)
+   are identical to dark — repeated here only because .theme-light
+   needs its own copy.
+   ============================================================ */
 .theme-light {
+  /* --- Backgrounds (deep chrome → bright content) --- */
+  --background-primary:               #f2f2f4;
+  --background-primary-alt:           #fafafb;
+  --background-secondary:             #e4e4e8;
+  --background-secondary-alt:         #edeef1;
+
+  /* --- Theme-specific depth tokens --- */
+  --ef-bg-void:   #dadade;  /* titlebar, statusbar — deepest chrome */
+  --ef-bg-panel:  #e4e4e8;  /* file tree, right sidebar — mid chrome */
+  --ef-bg-editor: #f2f2f4;  /* outline, editor — bright content */
+  --ef-bg-ribbon: #dcdce1;  /* left ribbon */
+  --ef-bg-titlebar: var(--ef-bg-void);
+  --background-modifier-hover:        rgba(0,0,0,0.045);
+  --background-modifier-active-hover: rgba(212,200,0,0.16);
+  --background-modifier-border:       rgba(0,0,0,0.10);
+  --background-modifier-border-hover: rgba(0,0,0,0.16);
+  --background-modifier-error:        rgba(204,34,0,0.10);
+  --background-modifier-error-hover:  rgba(204,34,0,0.16);
+  --background-modifier-success:      rgba(40,140,60,0.14);
+
+  /* --- Text (dark ink) --- */
+  --text-normal:                      #1e1e22;
+  --text-muted:                       #5c5c64;
+  --text-faint:                       #9a9aa2;
+  --text-on-accent:                   #1a1808;  /* dark text on yellow fills */
+  --text-accent:                      #d4c800;
+  --text-accent-hover:                #a89e00;  /* hover darkens on light, not brightens */
+  --text-error:                       #d03030;
+  --text-warning:                     #c8641f;
+  --text-success:                     #3f9a52;
+  --text-selection:                   rgba(212,200,0,0.28);
+  --text-highlight-bg:                rgba(212,200,0,0.30);
+
+  /* --- Interactive --- */
+  --interactive-accent:               #d4c800;
+  --interactive-accent-hover:         #e0d400;
+  --interactive-accent-rgb:           212, 200, 0;
+  --interactive-normal:               #e4e4e8;
+  --interactive-hover:                #dcdce1;
+
+  /* --- Endfield accent aliases --- */
+  --ef-accent:                         var(--text-accent);
+  --ef-accent-hover:                   var(--text-accent-hover);
+  --ef-accent-rgb:                     var(--interactive-accent-rgb);
+  --ef-text-white:                     #ffffff;   /* kept white: used by dark tab-pill contexts */
+  --ef-icon-color:                     #26262b;   /* decoupled → dark ink for light chrome icons/labels */
+  --ef-icon-disabled:                  var(--ef-chrome-text-faint);
+
+  /* --- Neutral primitives --- tab pills stay DARK chips on light (in-game look) --- */
+  --ef-black:                          #17171a;
+  --ef-gray:                           #333333;
+  --ef-ink:                            #1e1e22;
+  --ef-off-white:                      #f3f3f5;
+  --ef-parchment:                      #eae6e2;
+
+  /* --- Typography --- */
+  --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
+  --font-text:                        'Geist', -apple-system, 'Segoe UI', sans-serif;
+  --font-monospace:                   'Fira Code', 'Courier New', monospace;
+  --font-text-size:                   14px;
+  --line-height-normal:               1.7;
+
+  /* --- UI chrome contrast --- */
+  --ef-chrome-text:                   #26262b;
+  --ef-chrome-text-muted:             #5c5c64;
+  --ef-chrome-text-faint:             #8a8a92;
+  --ef-ui-label-size:                 9px;
+  --ef-ui-size:                       12px;
+  --ef-ui-size-compact:               11px;
+
+  /* --- Heading sizes --- */
+  --h1-size:   1.75em;
+  --h2-size:   1.25em;
+  --h3-size:   1.05em;
+  --h4-size:   1em;
+  --h5-size:   0.9em;
+  --h6-size:   0.85em;
+
+  /* --- Heading colours --- */
+  --h1-color:  var(--text-normal);
+  --h2-color:  var(--text-normal);
+  --h3-color:  var(--text-normal);
+  --h4-color:  #d4c800;
+  --h5-color:  #6a6a72;
+  --h6-color:  #9a9aa2;
+
+  /* --- Heading weights --- */
+  --h1-weight: 700;
+  --h2-weight: 600;
+  --h3-weight: 600;
+  --h4-weight: 600;
+  --h5-weight: 500;
+  --h6-weight: 500;
+
+  /* --- Ribbon --- */
+  --ribbon-width: 44px;
+  --ef-titlebar-height: 32px;
+
+  /* --- Tab dividers --- */
+  --tab-divider-color:        transparent;
+  --tab-outline-color:        transparent;
+  --tab-curve:                0px;
+  --tab-container-background: var(--ef-bg-panel);
+
+  /* --- Editor tab pills (kept as dark chips; text/× stay light) --- */
+  --ef-tab-pill-bg:                   var(--ef-black);
+  --ef-tab-pill-bg-hover:             var(--ef-gray);
+  --ef-tab-pill-bg-active:            var(--ef-parchment);
+  --ef-tab-pill-border:               rgba(255,255,255,0.30);
+  --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
+  --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
+  --ef-tab-pill-inner-border:         rgba(255,255,255,0.30);
+  --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.35);
+  --ef-tab-pill-font-weight:          600;
+  --ef-tab-pill-color:                var(--ef-off-white);
+  --ef-tab-pill-color-hover:          #ffffff;
+  --ef-tab-pill-color-active:         var(--ef-ink);
+  --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.20);
+
+  /* --- Component: tab close (×) button --- light glyph on dark pill --- */
+  --ef-tab-close-size:                12px;
+  --ef-tab-close-glyph:               8px;
+  --ef-tab-close-ring:                1px;
+  --ef-tab-close-stroke:              2px;
+  --ef-tab-close-gap:                 6px;
+  --ef-tab-close-color:               #f3f3f5;
+  --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);
+  --ef-tab-close-fill-hover:          #f3f3f5;
+  --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);
+  --ef-tab-close-fill-active-hover:   var(--ef-tab-pill-color-active);
+  --ef-tab-close-cutout-active-hover: var(--ef-text-white);
+
+  /* --- Radius --- */
+  --radius-s:  4px;
+  --radius-m:  8px;
+  --radius-l:  12px;
+
+  /* --- Border --- */
+  --border-width: 1px;
+
+  /* --- Scrollbar --- */
+  --scrollbar-bg:              transparent;
+  --scrollbar-thumb-bg:        rgba(0,0,0,0.14);
+  --scrollbar-active-thumb-bg: rgba(0,0,0,0.26);
+
+  /* --- Indentation guides --- */
+  --indentation-guide-color:        rgba(0,0,0,0.07);
+  --indentation-guide-color-active: rgba(212,200,0,0.40);
+
+  /* --- Panel shadows (softer on light) --- */
+  --panel-shadow-right: 6px 0 16px rgba(0,0,0,0.10), 2px 0 6px rgba(0,0,0,0.08);
+  --panel-shadow-left:  -6px 0 16px rgba(0,0,0,0.10), -2px 0 6px rgba(0,0,0,0.09);
+
+  /* --- Bottom vignette --- */
+  --ef-bottom-vignette: rgba(0,0,0,0.10);
+
+  /* --- Button system --- */
+  --ef-btn-size:               24px;
+  --ef-btn-radius:              6px;
+  --ef-btn-transition:          color 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+
+  --ef-btn-toggle-color:        var(--ef-icon-color);
+  --ef-btn-toggle-color-hover:  #d4c800;
+  --ef-btn-toggle-bg-hover:     var(--ef-accent-bg-dim);
+  --ef-btn-toggle-ring-hover:   inset 0 0 0 1px rgba(212,200,0,0.55);
+  --ef-btn-toggle-color-on:     #1a1808;
+  --ef-btn-toggle-color-on-hover: #ffffff;  /* white text/icon on hover, matching dark */
+  --ef-btn-toggle-bg-on:        #d4c800;
+
+  --ef-btn-action-color:        var(--ef-icon-color);
+  --ef-btn-action-color-hover:  var(--ef-icon-color);
+  --ef-btn-action-bg-hover:     rgba(0,0,0,0.07);
+  --ef-btn-action-shadow-hover: 0 2px 6px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.5);
+
+  /* --- Header chrome --- */
+  --ef-header-label-color:      var(--ef-icon-color);
+  --ef-header-rule:             rgba(0,0,0,0.10);
+  --ef-header-rule-shadow:      0 4px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+
+  /* --- Content helpers --- */
+  --ef-table-font-size:         0.875rem;
+  --ef-completed-text:          #a0a0a8;
+
+  /* --- Nav --- */
+  --nav-item-size:           14px;
+  --nav-item-weight:         400;
+  --nav-item-color:          var(--ef-icon-color);
+  --nav-item-color-muted:    #5c5c64;
+  --nav-item-color-faint:    #8a8a92;
+  --nav-collapse-icon-color: var(--ef-icon-disabled);
+
+  /* --- Tags --- */
+  --tag-color:            #6a6a72;
+  --tag-background:       transparent;
+  --tag-background-hover: rgba(212,200,0,0.12);
+  --tag-border-color:     rgba(0,0,0,0.14);
+  --tag-border-color-hover: rgba(212,200,0,0.6);
+  --tag-color-hover:      #d4c800;
+  --tag-radius:           4px;
+  --tag-padding-x:        6px;
+  --tag-padding-y:        2px;
+  --tag-font-size:        0.8em;
+
+  /* --- Checkboxes --- */
+  --checkbox-radius:       3px;
+  --checkbox-border-color: rgba(0,0,0,0.28);
+  --checkbox-color:        #d4c800;
+  --checkbox-marker-color: var(--ef-black);
+
+  /* --- Semantic accent tints (yellow reads fainter on white → stronger alpha) --- */
+  --ef-accent-bg-faint:    rgba(212,200,0,0.10);
+  --ef-accent-bg-dim:      rgba(212,200,0,0.16);
+  --ef-accent-bg-active:   rgba(212,200,0,0.22);
+  --ef-accent-border:      rgba(212,200,0,0.55);
+
+  /* --- Semantic borders → dark-alpha on light --- */
+  --ef-border-faint:       rgba(0,0,0,0.06);
+  --ef-border-mid:         rgba(0,0,0,0.12);
+
+  /* --- Shared radius --- */
+  --ef-radius-pill:        999px;
+
+  /* --- Code --- */
+  --ef-code-size:          0.88em;
+
+  /* --- Tables --- */
   --table-border:     #ccc8c1;
   --table-header-bg:  #dedad4;
+
+  /* --- Semantic palette (tuned deeper for legibility on white) --- */
+  --semantic-red:     #cc3b3d;
+  --semantic-orange:  #d97e2a;
+  --semantic-yellow:  #b89e10;
+  --semantic-lime:    #4fa832;
+  --semantic-green:   #4f9a3e;
+  --semantic-teal:    #1f9e86;
+  --semantic-blue:    #1f7fd6;
+  --semantic-cyan:    #2c9aa8;
+  --semantic-purple:  #8a5fd0;
+  --semantic-pink:    #cc5f9e;
+  --semantic-magenta: #9e2f5a;
+  --semantic-brown:   #9e6247;
 }
