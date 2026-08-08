@@ -123,27 +123,36 @@
   --ef-tab-pill-bg-hover:             var(--ef-gray);
   --ef-tab-pill-bg-active:            var(--ef-parchment);
   /* rgba tuning values below stay component-level (transparency, not palette) */
-  --ef-tab-pill-border:               rgba(255,255,255,0.45);
-  --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
-  --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
-  --ef-tab-pill-inner-border:         rgba(255,255,255,0.45);
-  --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.45);
+  /* Rings split by role: INNER contrasts the pill FILL (and matches text/close);
+     OUTER contrasts the STRIP behind the pill. On the dark strip the outer ring
+     is off-white for BOTH states so it never blends in. Hover changes only bg,
+     so -hover equals rest. */
+  --ef-tab-pill-border:               var(--ef-off-white);  /* outer: vs dark strip */
+  --ef-tab-pill-border-hover:         var(--ef-off-white);
+  --ef-tab-pill-border-active:        var(--ef-ink);        /* both active outlines ink → matches the reference; parchment fill defines the edge vs the dark strip */
+  --ef-tab-pill-inner-border:         var(--ef-off-white);  /* inner: vs dark fill */
+  --ef-tab-pill-inner-border-active:  var(--ef-ink);        /* inner: vs parchment fill */
   --ef-tab-pill-font-weight:          600;
   --ef-tab-pill-color:                var(--ef-off-white);
-  --ef-tab-pill-color-hover:          var(--ef-icon-color);
+  --ef-tab-pill-color-hover:          var(--ef-off-white);
   --ef-tab-pill-color-active:         var(--ef-ink);
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.35);
+  /* Double-outline geometry — both rings share ONE thickness; gap is the pill
+     bg showing between them. Tune these two; the box-shadow formula in tabs.css
+     keeps outer + inner equal automatically. */
+  --ef-tab-ring:                      1px;
+  --ef-tab-ring-gap:                  2.5px;
 
   /* --- Component: tab close (×) button ---
      Three-tier layering in action:  component → semantic → primitive.
      e.g. --ef-tab-close-color → --ef-icon-color → --ef-text-white → #ffffff.
      tabs.css references ONLY these, so the button retunes entirely from here. */
   --ef-tab-close-size:                12px;                           /* ring diameter */
-  --ef-tab-close-glyph:               8px;                            /* × glyph box (inside the ring) */
+  --ef-tab-close-glyph:               10px;                            /* × glyph box (inside the ring) */
   --ef-tab-close-ring:                1px;                            /* ring thickness */
-  --ef-tab-close-stroke:              2px;                            /* × stroke thickness */
+  --ef-tab-close-stroke:              3px;                            /* × stroke thickness */
   --ef-tab-close-gap:                 6px;                            /* gap from tab title */
-  --ef-tab-close-color:               var(--ef-icon-color);           /* inactive ring + × */
+  --ef-tab-close-color:               var(--ef-off-white);            /* = the shared outline colour */
   --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);/* active-tab ring + × */
   --ef-tab-close-fill-hover:          var(--ef-icon-color);           /* inactive hover: disc fill */
   --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);          /* inactive hover: × cut-out */
@@ -394,24 +403,30 @@
   --ef-tab-pill-bg:                   var(--ef-black);
   --ef-tab-pill-bg-hover:             var(--ef-gray);
   --ef-tab-pill-bg-active:            var(--ef-parchment);
-  --ef-tab-pill-border:               rgba(255,255,255,0.30);
-  --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
-  --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
-  --ef-tab-pill-inner-border:         rgba(255,255,255,0.30);
-  --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.35);
+  /* OUTER ring contrasts the LIGHT strip (ink) for both states; INNER ring
+     contrasts the fill (off-white on the dark non-active fill, ink on the
+     parchment active fill). Hover changes only bg, so -hover equals rest. */
+  --ef-tab-pill-border:               var(--ef-ink);        /* outer: vs light strip */
+  --ef-tab-pill-border-hover:         var(--ef-ink);
+  --ef-tab-pill-border-active:        var(--ef-ink);         /* outer: vs light strip */
+  --ef-tab-pill-inner-border:         var(--ef-off-white);  /* inner: vs dark fill */
+  --ef-tab-pill-inner-border-active:  var(--ef-ink);        /* inner: vs parchment fill */
   --ef-tab-pill-font-weight:          600;
   --ef-tab-pill-color:                var(--ef-off-white);
-  --ef-tab-pill-color-hover:          #ffffff;
+  --ef-tab-pill-color-hover:          var(--ef-off-white);
   --ef-tab-pill-color-active:         var(--ef-ink);
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.20);
+  /* Double-outline geometry — shared with dark (see note there). */
+  --ef-tab-ring:                      1px;
+  --ef-tab-ring-gap:                  2.5px;
 
   /* --- Component: tab close (×) button --- light glyph on dark pill --- */
   --ef-tab-close-size:                12px;
-  --ef-tab-close-glyph:               8px;
+  --ef-tab-close-glyph:               10px;
   --ef-tab-close-ring:                1px;
-  --ef-tab-close-stroke:              2px;
+  --ef-tab-close-stroke:              3px;
   --ef-tab-close-gap:                 6px;
-  --ef-tab-close-color:               #f3f3f5;
+  --ef-tab-close-color:               var(--ef-off-white);
   --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);
   --ef-tab-close-fill-hover:          #f3f3f5;
   --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);
@@ -1068,6 +1083,7 @@ div.view-content {
   padding: 0 6px;
   gap: 0;
   align-items: center;
+  height: 44px;            /* taller strip so the pills can breathe */
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
@@ -1104,15 +1120,17 @@ div.view-content {
   color: var(--ef-tab-pill-color);
   border-radius: var(--ef-radius-pill);
   font-size: var(--ef-ui-size-compact);
-  padding: 5px 12px;
-  border: 1px solid var(--ef-tab-pill-border);
+  padding: 10px 12px;
+  border: none;
+  /* Both outlines drawn as inset rings so the outer can go sub-pixel:
+     outer 0.75px | bg gap | inner 0.5px (2.5px ring − 2px bg). */
   box-shadow:
-    inset 0 0 0 2px var(--ef-tab-pill-bg),
-    inset 0 0 0 3px var(--ef-tab-pill-inner-border),
-    var(--ef-tab-pill-drop-shadow);
+    inset 0 0 0 var(--ef-tab-ring) var(--ef-tab-pill-border),
+    inset 0 0 0 calc(var(--ef-tab-ring) + var(--ef-tab-ring-gap)) var(--ef-tab-pill-bg),
+    inset 0 0 0 calc(2 * var(--ef-tab-ring) + var(--ef-tab-ring-gap)) var(--ef-tab-pill-inner-border);
   position: relative;
   margin: 0 3px;
-  transition: color 0.12s, background 0.12s, border-color 0.12s;
+  transition: none;
   max-width: 200px;
 }
 
@@ -1127,22 +1145,20 @@ div.view-content {
 .workspace-split.mod-root .workspace-tab-header:hover {
   color: var(--ef-tab-pill-color-hover);
   background: var(--ef-tab-pill-bg-hover);
-  border-color: var(--ef-tab-pill-border-hover);
   box-shadow:
-    inset 0 0 0 2px var(--ef-tab-pill-bg-hover),
-    inset 0 0 0 3px var(--ef-tab-pill-inner-border),
-    var(--ef-tab-pill-drop-shadow);
+    inset 0 0 0 var(--ef-tab-ring) var(--ef-tab-pill-border-hover),
+    inset 0 0 0 calc(var(--ef-tab-ring) + var(--ef-tab-ring-gap)) var(--ef-tab-pill-bg-hover),
+    inset 0 0 0 calc(2 * var(--ef-tab-ring) + var(--ef-tab-ring-gap)) var(--ef-tab-pill-inner-border);
 }
 
 .workspace-split.mod-root .workspace-tab-header.is-active,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover {
   color: var(--ef-tab-pill-color-active) !important;
   background: var(--ef-tab-pill-bg-active);
-  border-color: var(--ef-tab-pill-border-active);
   box-shadow:
-    inset 0 0 0 2px var(--ef-tab-pill-bg-active),
-    inset 0 0 0 3px var(--ef-tab-pill-inner-border-active),
-    var(--ef-tab-pill-drop-shadow);
+    inset 0 0 0 var(--ef-tab-ring) var(--ef-tab-pill-border-active),
+    inset 0 0 0 calc(var(--ef-tab-ring) + var(--ef-tab-ring-gap)) var(--ef-tab-pill-bg-active),
+    inset 0 0 0 calc(2 * var(--ef-tab-ring) + var(--ef-tab-ring-gap)) var(--ef-tab-pill-inner-border-active);
 }
 
 .workspace-split.mod-root .workspace-tab-header-separator {
@@ -1170,6 +1186,14 @@ div.view-content {
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-title {
   color: var(--ef-tab-pill-color-active) !important;
+}
+
+/* Obsidian dims non-active tab titles when the window is focused; keep them at
+   full pill colour so inactive tabs read as clearly as active ones. */
+.workspace-split.mod-root .workspace-tab-header:not(.is-active),
+.workspace-split.mod-root .workspace-tab-header:not(.is-active) .workspace-tab-header-inner-title {
+  color: var(--ef-tab-pill-color) !important;
+  opacity: 1 !important;
 }
 
 /* Hide icon for Outline tabs */
@@ -1203,7 +1227,7 @@ div.view-content {
   border-radius: 100%;
   background: transparent;
   box-shadow: none;
-  transition: opacity 0.12s, color 0.12s, background 0.12s, border-color 0.12s;
+  transition: none;
 }
 
 /* Shrink the × so it sits cleanly inside the ring, crisp Endfield stroke. */
@@ -1233,6 +1257,14 @@ div.view-content {
 .workspace-split.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-close-btn,
 .workspace-split.mod-root .workspace-tab-header.is-active:hover .workspace-tab-header-inner-close-btn {
   color: var(--ef-tab-close-color-active);
+}
+
+/* Hovering the PILL must NOT recolour the × (Obsidian's default does). Re-assert
+   our colour, but exclude the ×'s own :hover so the disc-fill below still fires
+   when you hover the × directly. */
+.workspace-split.mod-root .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner-close-button:not(:hover),
+.workspace-split.mod-root .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner-close-btn:not(:hover) {
+  color: var(--ef-tab-close-color);
 }
 
 /* Button hover fills into a solid disc (Endfield press feel). Inactive tab:

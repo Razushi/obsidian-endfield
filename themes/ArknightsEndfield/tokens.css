@@ -123,27 +123,36 @@
   --ef-tab-pill-bg-hover:             var(--ef-gray);
   --ef-tab-pill-bg-active:            var(--ef-parchment);
   /* rgba tuning values below stay component-level (transparency, not palette) */
-  --ef-tab-pill-border:               rgba(255,255,255,0.45);
-  --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
-  --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
-  --ef-tab-pill-inner-border:         rgba(255,255,255,0.45);
-  --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.45);
+  /* Rings split by role: INNER contrasts the pill FILL (and matches text/close);
+     OUTER contrasts the STRIP behind the pill. On the dark strip the outer ring
+     is off-white for BOTH states so it never blends in. Hover changes only bg,
+     so -hover equals rest. */
+  --ef-tab-pill-border:               var(--ef-off-white);  /* outer: vs dark strip */
+  --ef-tab-pill-border-hover:         var(--ef-off-white);
+  --ef-tab-pill-border-active:        var(--ef-ink);        /* both active outlines ink → matches the reference; parchment fill defines the edge vs the dark strip */
+  --ef-tab-pill-inner-border:         var(--ef-off-white);  /* inner: vs dark fill */
+  --ef-tab-pill-inner-border-active:  var(--ef-ink);        /* inner: vs parchment fill */
   --ef-tab-pill-font-weight:          600;
   --ef-tab-pill-color:                var(--ef-off-white);
-  --ef-tab-pill-color-hover:          var(--ef-icon-color);
+  --ef-tab-pill-color-hover:          var(--ef-off-white);
   --ef-tab-pill-color-active:         var(--ef-ink);
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.35);
+  /* Double-outline geometry — both rings share ONE thickness; gap is the pill
+     bg showing between them. Tune these two; the box-shadow formula in tabs.css
+     keeps outer + inner equal automatically. */
+  --ef-tab-ring:                      1px;
+  --ef-tab-ring-gap:                  2.5px;
 
   /* --- Component: tab close (×) button ---
      Three-tier layering in action:  component → semantic → primitive.
      e.g. --ef-tab-close-color → --ef-icon-color → --ef-text-white → #ffffff.
      tabs.css references ONLY these, so the button retunes entirely from here. */
   --ef-tab-close-size:                12px;                           /* ring diameter */
-  --ef-tab-close-glyph:               8px;                            /* × glyph box (inside the ring) */
+  --ef-tab-close-glyph:               10px;                            /* × glyph box (inside the ring) */
   --ef-tab-close-ring:                1px;                            /* ring thickness */
-  --ef-tab-close-stroke:              2px;                            /* × stroke thickness */
+  --ef-tab-close-stroke:              3px;                            /* × stroke thickness */
   --ef-tab-close-gap:                 6px;                            /* gap from tab title */
-  --ef-tab-close-color:               var(--ef-icon-color);           /* inactive ring + × */
+  --ef-tab-close-color:               var(--ef-off-white);            /* = the shared outline colour */
   --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);/* active-tab ring + × */
   --ef-tab-close-fill-hover:          var(--ef-icon-color);           /* inactive hover: disc fill */
   --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);          /* inactive hover: × cut-out */
@@ -394,24 +403,30 @@
   --ef-tab-pill-bg:                   var(--ef-black);
   --ef-tab-pill-bg-hover:             var(--ef-gray);
   --ef-tab-pill-bg-active:            var(--ef-parchment);
-  --ef-tab-pill-border:               rgba(255,255,255,0.30);
-  --ef-tab-pill-border-hover:         rgba(255,255,255,0.18);
-  --ef-tab-pill-border-active:        rgba(60,60,64,0.9);
-  --ef-tab-pill-inner-border:         rgba(255,255,255,0.30);
-  --ef-tab-pill-inner-border-active:  rgba(0,0,0,0.35);
+  /* OUTER ring contrasts the LIGHT strip (ink) for both states; INNER ring
+     contrasts the fill (off-white on the dark non-active fill, ink on the
+     parchment active fill). Hover changes only bg, so -hover equals rest. */
+  --ef-tab-pill-border:               var(--ef-ink);        /* outer: vs light strip */
+  --ef-tab-pill-border-hover:         var(--ef-ink);
+  --ef-tab-pill-border-active:        var(--ef-ink);         /* outer: vs light strip */
+  --ef-tab-pill-inner-border:         var(--ef-off-white);  /* inner: vs dark fill */
+  --ef-tab-pill-inner-border-active:  var(--ef-ink);        /* inner: vs parchment fill */
   --ef-tab-pill-font-weight:          600;
   --ef-tab-pill-color:                var(--ef-off-white);
-  --ef-tab-pill-color-hover:          #ffffff;
+  --ef-tab-pill-color-hover:          var(--ef-off-white);
   --ef-tab-pill-color-active:         var(--ef-ink);
   --ef-tab-pill-drop-shadow:          0 2px 8px rgba(0,0,0,0.20);
+  /* Double-outline geometry — shared with dark (see note there). */
+  --ef-tab-ring:                      1px;
+  --ef-tab-ring-gap:                  2.5px;
 
   /* --- Component: tab close (×) button --- light glyph on dark pill --- */
   --ef-tab-close-size:                12px;
-  --ef-tab-close-glyph:               8px;
+  --ef-tab-close-glyph:               10px;
   --ef-tab-close-ring:                1px;
-  --ef-tab-close-stroke:              2px;
+  --ef-tab-close-stroke:              3px;
   --ef-tab-close-gap:                 6px;
-  --ef-tab-close-color:               #f3f3f5;
+  --ef-tab-close-color:               var(--ef-off-white);
   --ef-tab-close-color-active:        var(--ef-tab-pill-color-active);
   --ef-tab-close-fill-hover:          #f3f3f5;
   --ef-tab-close-cutout-hover:        var(--ef-tab-pill-bg);
