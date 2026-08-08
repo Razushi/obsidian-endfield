@@ -19,17 +19,16 @@ body.theme-light {
   --ef-sidebar-active-bg:  rgba(var(--ef-accent-rgb, 212,200,0),0.20); /* active tint */
 }
 
-/* Light mode: on a light surface yellow text alone doesn't out-rank the grey
-   hover pill, so the active item reads weaker than a hovered one. Give active a
-   PERSISTENT yellow tint (not just on hover) + bolder text so it clearly wins.
-   Dark mode keeps its transparent-at-rest active (yellow glows on near-black). */
-body.theme-light .nav-folder-title.is-active,
-body.theme-light .nav-file-title.is-active {
-  background-color: var(--ef-sidebar-active-bg) !important;
-}
+/* Light mode: background tinting is reserved for HOVER and the rail thickness is
+   fixed, so the active item is marked purely by colour + an underline on its
+   label. (Rail is already bright yellow vs the faded-yellow rest / dark hover
+   rails; text is already accent yellow.) Dark mode is unaffected. */
 body.theme-light .nav-folder-title.is-active .nav-folder-title-content,
 body.theme-light .nav-file-title.is-active .nav-file-title-content {
-  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--ef-accent, #d4c800);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
 }
 
 
