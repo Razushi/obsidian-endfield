@@ -2965,3 +2965,15 @@ img.banner-image {
 .theme-light .workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active .workspace-tab-header-inner {
   box-shadow: none !important;
 }
+
+
+/* ============================================================
+   TAB STRIP — match the bright editor/outline surface below it (instead
+   of the darker chrome grey), so the top strip reads as one white plane
+   with the content. Dark chip pills sit on it cleanly.
+   ============================================================ */
+.theme-light .workspace-split.mod-root .workspace-tab-header-container,
+.theme-light .workspace-tabs.mod-top-left-space,
+.theme-light .workspace-tabs.mod-top-right-space {
+  background: var(--ef-bg-editor);
+}
