@@ -9,6 +9,16 @@
   --ef-sidebar-active-bg: rgba(var(--ef-accent-rgb, 212,200,0),0.08);
 }
 
+/* Light mode: the dark-tuned state colours above go invisible/muddy on a light
+   surface. Retune only the state vars; hues (folder yellow, file blue) unchanged.
+   body.theme-light (0,1,1) deliberately outranks the :root block (0,1,0). */
+body.theme-light {
+  --ef-sidebar-rail:       rgba(212,200,0,0.55);  /* rest: faded yellow */
+  --ef-sidebar-hover-bg:   rgba(0,0,0,0.06);       /* whole-tab hover highlight */
+  --ef-sidebar-hover-rail: rgba(0,0,0,0.70);       /* hover cue: near-black rail */
+  --ef-sidebar-active-bg:  rgba(var(--ef-accent-rgb, 212,200,0),0.18); /* active tint */
+}
+
 
 /* Base */
 .nav-folder-title,
