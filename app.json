@@ -1,0 +1,18 @@
+{
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "99 - Assets/2026",
+  "promptDelete": false,
+  "useMarkdownLinks": true,
+  "newLinkFormat": "absolute",
+  "newFileLocation": "current",
+  "showLineNumber": true,
+  "showInlineTitle": true,
+  "readableLineLength": true,
+  "vimMode": false,
+  "strictLineBreaks": false,
+  "rightToLeft": false,
+  "propertiesInDocument": "visible",
+  "autoPairMarkdown": false,
+  "autoPairBrackets": false,
+  "spellcheck": true
+}

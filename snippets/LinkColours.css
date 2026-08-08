@@ -1,0 +1,182 @@
+/* --- Link Colors --- */
+/* @settings
+
+id: link-colors
+name: Link Colors
+settings:
+    -
+        id: link-colors-internal
+        title: Internal Links
+        type: variable-color
+        opacity: true
+        format: rgb
+        alt-format:
+            -
+                id: link-colors-internal-hsl
+                format: hsl
+        default: 'rgba(127, 109, 242, 1.0)'
+        description: Color of internal link text.
+    -
+        id: link-colors-unresolved
+        title: Unresolved Links
+        type: variable-color
+        opacity: true
+        format: rgb
+        alt-format:
+            -
+                id: link-colors-unresolved-hsl
+                format: hsl
+        default: 'rgba(127, 109, 242, 0.5)'
+        description: Color of unresolved link text.
+    -
+        id: link-colors-external
+        title: External Links
+        type: variable-color
+        opacity: true
+        format: rgb
+        alt-format:
+            -
+                id: link-colors-external-hsl
+                format: hsl
+        default: 'rgba(127, 109, 242, 1.0)'
+        description: Color of external link text.
+    -
+        id: link-colors-raw
+        title: Raw Links
+        type: variable-color
+        opacity: true
+        format: rgb
+        alt-format:
+            -
+                id: link-colors-raw-hsl
+                format: hsl
+        default: 'rgba(153, 153, 153, 1.0)'
+        description: Color of raw link text. (Raw links are links that do not have markdown syntax, such as "https://www.google.com" with no brackets.)
+    -
+        id: link-hover-menu-h
+        title: Hovers
+        type: heading
+        level: 2
+    -
+        id: link-hover-type
+        title: Hover Type
+        type: class-select
+        allowEmpty: false
+        default: link-hover-use-filter
+        options:
+            - link-hover-use-filter
+            - link-hover-use-colors
+    -
+        id: link-hover-filter-dark
+        title: Hover Filter in Dark Theme
+        type: variable-number
+        default: 150
+        format: percent
+        description: Brightness percentage relative to 100% (unchanged). Default 150%.
+    -
+        id: link-hover-filter-light
+        title: Hover Filter in Light Theme
+        type: variable-number
+        default: 66
+        format: percent
+        description: Brightness percentage relative to 100% (unchanged). Default 66%.
+    -
+        id: link-hover-internal-color
+        title: Hover Color for Internal Links
+        type: variable-themed-color
+        format: rgb
+        default-light: 'rgba(153, 153, 153, 1.0)'
+        default-dark: 'rgba(153, 153, 153, 1.0)'
+        description: Hover colors for internal links.
+    -
+        id: link-hover-unresolved-color
+        title: Hover Color for Unresolved Links
+        type: variable-themed-color
+        format: rgb
+        default-light: 'rgba(153, 153, 153, 1.0)'
+        default-dark: 'rgba(153, 153, 153, 1.0)'
+        description: Hover colors for unresolved links.
+    -
+        id: link-hover-external-color
+        title: Hover Color for External Links
+        type: variable-themed-color
+        format: rgb
+        default-light: 'rgba(153, 153, 153, 1.0)'
+        default-dark: 'rgba(153, 153, 153, 1.0)'
+        description: Hover colors for external links.
+*/
+body {
+    --link-colors-internal: rgba(127, 109, 242, 1.0);
+    --link-colors-unresolved: rgba(127, 109, 242, 0.5);
+    --link-colors-external: rgba(127, 109, 242, 1.0);
+    --link-colors-raw: rgba(153, 153, 153, 1.0);
+    --link-colors-header: rgba(127, 109, 242, 1.0);
+    --link-hover-filter-dark: 150%;
+    --link-hover-filter-light: 66%;
+}
+body.theme-dark.css-settings-manager {
+    --link-hover-internal-color: rgba(153, 153, 153, 1.0);
+    --link-hover-unresolved-color: rgba(153, 153, 153, 1.0);
+    --link-hover-external-color: rgba(153, 153, 153, 1.0);
+}
+body.theme-light.css-settings-manager {
+    --link-hover-internal-color: rgba(153, 153, 153, 1.0);
+    --link-hover-external-color: rgba(153, 153, 153, 1.0);
+}
+
+/* internal links */
+a.internal-link,
+.cm-hmd-internal-link {
+    color: var(--link-colors-internal) !important;
+}
+
+/* unresolved links */
+.markdown-rendered a.internal-link.is-unresolved,
+.cm-hmd-internal-link > .is-unresolved {
+    color: var(--link-colors-unresolved) !important;
+    opacity: 1;
+}
+.markdown-source-view.mod-cm6 .is-unresolved {
+    opacity: 1;
+}
+
+/* external links */
+a.external-link,
+.cm-line > .cm-link:not(.cm-hmd-barelink, .cm-hmd-barelink + *) {
+    color: var(--link-colors-external) !important;
+}
+
+/* raw links (links with no markdown syntax) */
+.cm-url > .cm-underline,
+a.external-link:not([aria-label]) {
+    color: var(--link-colors-raw) !important;
+}
+
+/* header and block links */
+a.internal-link[data-href^="#"] {
+    color: var(--link-colors-header) !important;
+}
+
+/* hover filter */
+.theme-dark :is(a, .internal-link:is(*,.is-unresolved), .cm-s-obsidian :is(.cm-link,.cm-hmd-internal-link)):hover {
+    filter: brightness(var(--link-hover-filter-dark));
+    text-decoration: none;
+}
+.theme-light :is(a, .internal-link:is(*,.is-unresolved), .cm-s-obsidian :is(.cm-link,.cm-hmd-internal-link)):hover {
+    filter: brightness(var(--link-hover-filter-light));
+    text-decoration: none;
+}
+
+/* hover colors */
+.link-hover-use-colors .cm-s-obsidian :is(a.internal-link, .cm-hmd-internal-link):hover {
+    filter: none;
+    color: var(--link-hover-internal-color) !important;
+}
+.link-hover-use-colors :is(.markdown-rendered a.internal-link.is-unresolved, .cm-hmd-internal-link > .is-unresolved):hover {
+    filter: none;
+    color: var(--link-hover-unresolved-color) !important;
+}
+.link-hover-use-colors :is(a.external-link, .cm-link:not(.cm-hmd-internal-link)):hover {
+    filter: none;
+    color: var(--link-hover-external-color) !important;
+}

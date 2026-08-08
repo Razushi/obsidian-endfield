@@ -1,0 +1,265 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD - SIDEBAR
+   Left/right sidebar containers, tab bars, file explorer, and outline.
+   ============================================================ */
+
+
+/* ============================================================
+   SIDEBAR CONTAINERS
+   ============================================================ */
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split {
+  background: var(--ef-bg-panel);
+  position: relative;
+}
+
+.workspace-split.mod-left-split {
+  z-index: 10;
+  box-shadow: var(--panel-shadow-right);
+  --ef-sidebar-tab-border: rgba(255,255,255,0.07);
+}
+
+.workspace-split.mod-right-split {
+  box-shadow: var(--panel-shadow-left);
+  --ef-sidebar-tab-border: rgba(255,255,255,0.05);
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-leaf {
+  background: var(--background-secondary);
+}
+
+
+/* ============================================================
+   SIDEBAR TAB BARS
+   ============================================================ */
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header-container {
+  background: var(--ef-bg-panel);
+  border-bottom: 1px solid var(--ef-sidebar-tab-border);
+}
+
+.workspace-split.mod-left-split .workspace-tab-header-container {
+  align-items: center;
+  padding: 0 8px;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header-container-inner {
+  display: flex;
+  width: 100%;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header {
+  color: var(--ef-btn-toggle-color);
+  padding: 5px;
+  border-radius: var(--ef-btn-radius);
+  position: relative;
+  top: 0;
+  transform: none;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-clip: padding-box;
+  transition: var(--ef-btn-transition);
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header svg {
+  color: currentColor;
+  stroke: currentColor;
+  width: 16px;
+  height: 16px;
+  transition: color 0.15s, stroke 0.15s;
+}
+
+/* Suppress Obsidian's inner hover highlight; the outer tab is the button. */
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header-inner,
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header-inner:hover,
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header:hover .workspace-tab-header-inner,
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover .workspace-tab-header-inner {
+  background: transparent !important;
+  border-radius: var(--ef-btn-radius);
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header:hover {
+  color: var(--ef-btn-toggle-color-hover);
+  background: var(--ef-btn-toggle-bg-hover);
+  box-shadow: var(--ef-btn-toggle-ring-hover);
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active {
+  color: var(--ef-btn-toggle-color-on);
+  background: var(--ef-btn-toggle-bg-on);
+  box-shadow: none;
+  border: none;
+  border-radius: var(--ef-btn-radius);
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover {
+  color: var(--ef-btn-toggle-color-on-hover);
+  background: var(--ef-btn-toggle-bg-on);
+  box-shadow: none;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active :is(.workspace-tab-header-inner-icon, svg) {
+  color: var(--ef-btn-toggle-color-on) !important;
+  stroke: currentColor !important;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active:hover :is(.workspace-tab-header-inner-icon, svg) {
+  color: var(--ef-btn-toggle-color-on-hover) !important;
+  stroke: currentColor !important;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active::after {
+  display: none;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header-new-tab {
+  margin-left: auto;
+  align-self: center;
+  color: var(--ef-btn-action-color);
+  transition: var(--ef-btn-transition);
+}
+
+.workspace-split.mod-left-split .workspace-tab-header-new-tab {
+  border-radius: 50%;
+  margin: 3px auto;
+  padding: 5px;
+  background: transparent;
+}
+
+.workspace-split.mod-right-split .workspace-tab-header-new-tab {
+  border-radius: var(--ef-btn-radius);
+  padding: 4px 6px;
+}
+
+.workspace-split:is(.mod-left-split, .mod-right-split) .workspace-tab-header-new-tab:hover {
+  color: var(--ef-btn-action-color-hover);
+  background: var(--ef-btn-action-bg-hover);
+  box-shadow: var(--ef-btn-action-shadow-hover);
+}
+
+
+/* ============================================================
+   FILE EXPLORER
+   ============================================================ */
+.search-input-container input {
+  background: var(--ef-border-faint);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  color: var(--ef-chrome-text);
+  font-family: var(--font-interface);
+  font-size: var(--ef-ui-size);
+}
+
+.search-input-container input::placeholder {
+  color: var(--ef-chrome-text-faint);
+}
+
+.search-input-container input:focus {
+  border-color: var(--ef-accent-border);
+  color: var(--text-normal);
+  outline: none;
+}
+
+/* Nav folder/file items: D-shape, sharp left and rounded right. */
+.nav-folder-title,
+.nav-file-title {
+  border-radius: 0 6px 6px 0;
+  margin-right: 8px;
+  padding: 4px 10px;
+  color: var(--nav-item-color);
+  font-size: var(--nav-item-size);
+  font-weight: var(--nav-item-weight);
+  line-height: 1.5;
+  transition: background 0.12s, color 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-folder-collapse-indicator {
+  color: var(--ef-chrome-text-faint);
+  flex-shrink: 0;
+  width: 14px;
+  transition: color 0.12s;
+}
+
+.nav-folder-title.is-active .nav-folder-collapse-indicator {
+  color: var(--ef-accent);
+}
+
+.nav-folder-children {
+  border-left: 1px solid var(--ef-border-faint);
+  margin-left: 14px;
+}
+
+.nav-file-title .nav-file-tag {
+  color: var(--ef-accent);
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+  margin-left: auto;
+}
+
+.nav-file-title.is-being-renamed {
+  background: rgba(var(--ef-accent-rgb),0.06);
+  color: var(--text-normal);
+}
+
+
+/* ============================================================
+   OUTLINE PANEL
+   ============================================================ */
+.workspace-leaf-content[data-type="outline"],
+.workspace-leaf-content[data-type="outline"] .view-content {
+  background: var(--ef-bg-editor);
+}
+
+.workspace-leaf-content[data-type="outline"] .view-content {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cpath d='M 32 0 L 0 0 0 32' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
+  background-repeat: repeat;
+}
+
+.outline-item {
+  font-size: var(--nav-item-size);
+  font-weight: var(--nav-item-weight);
+  color: var(--nav-item-color);
+  padding: 3px 10px;
+  border-radius: 0 4px 4px 0;
+  margin-right: 6px;
+  cursor: pointer;
+  line-height: 1.5;
+  transition: color 0.12s, background 0.12s;
+}
+
+.outline-item:hover {
+  color: #f0f0f0;
+}
+
+.outline-item.is-active {
+  color: var(--ef-accent);
+  background: transparent;
+  font-weight: 600;
+}
+
+.outline-item-children {
+  padding-left: 12px;
+}
+
+/* Heading level indentation in outline.
+   NOTE: data-depth may not match Obsidian's current DOM; verify before extending. */
+.outline-item[data-depth="1"] {
+  padding-left: 10px;
+}
+
+.outline-item[data-depth="2"] {
+  padding-left: 20px;
+  font-size: var(--nav-item-size);
+  color: var(--nav-item-color-muted);
+}
+
+.outline-item[data-depth="3"] {
+  padding-left: 30px;
+  font-size: var(--nav-item-size);
+  color: var(--nav-item-color-faint);
+}

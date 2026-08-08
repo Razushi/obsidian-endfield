@@ -1,0 +1,457 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — CONTENT
+   All in-note content formatting: blockquotes, tables, code,
+   tasks, links, tags, images, lists, inline formatting, hr.
+   ============================================================ */
+
+
+/* ============================================================
+   BLOCKQUOTES
+   ============================================================ */
+.markdown-rendered blockquote {
+  border: none;
+  border-left: 2px solid var(--ef-accent);
+  background: var(--ef-accent-bg-faint);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 16px;
+  margin: 14px 0;
+  color: #999;
+  font-style: normal;
+}
+
+.markdown-rendered blockquote p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* Nested blockquote */
+.markdown-rendered blockquote blockquote {
+  border-left-color: rgba(var(--ef-accent-rgb),0.4);
+  background: rgba(var(--ef-accent-rgb),0.02);
+  margin: 8px 0;
+}
+
+
+/* ============================================================
+   TABLES (Vestige style)
+   Flat bordered cells, doubled borders at adjacent edges.
+   No zebra striping, hover states, or rounded corners.
+   ============================================================ */
+.markdown-rendered table,
+.markdown-source-view.mod-cm6 .cm-table-widget table {
+  width: 100%;
+  margin: 16px 0;
+  font-size: var(--ef-table-font-size);
+  font-family: var(--font-text);
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+.markdown-rendered th,
+.markdown-rendered td,
+.markdown-source-view.mod-cm6 .cm-table-widget th,
+.markdown-source-view.mod-cm6 .cm-table-widget td {
+  padding: 8px 12px;
+  border: 1px solid var(--table-border);
+  text-align: left;
+  vertical-align: top;
+  color: var(--text-normal);
+  line-height: 1.6;
+  background: var(--background-primary);
+}
+
+/* Cell inner wrappers must be transparent so the cell's own background shows.
+   Obsidian injects content wrappers in some rendered tables, and without this
+   longer/wrapped cells end up with an opaque inner element that blocks the
+   cell background on only some cells (the ones with enough content to wrap). */
+.markdown-rendered table th > *,
+.markdown-rendered table td > * {
+  background: transparent;
+}
+
+.markdown-rendered table th,
+.markdown-rendered table thead tr:first-child > *,
+.markdown-source-view.mod-cm6 .cm-table-widget th {
+  background: var(--table-header-bg);
+  font-family: var(--font-text);
+  font-weight: bold;
+  color: var(--text-normal);
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: var(--ef-table-font-size);
+}
+
+/* Live preview: kill the active-line yellow tint inside table widgets.
+   Otherwise clicking a cell paints it yellow via .cm-activeLine. */
+.cm-table-widget .cm-activeLine,
+.markdown-source-view.mod-cm6 .cm-table-widget .cm-activeLine {
+  background: transparent;
+}
+
+/* Live preview: preserve cell styling when a cell becomes active/edited.
+   Obsidian swaps cell content for an editable span that drops the table's
+   background and line-height — re-apply them. */
+.markdown-source-view.mod-cm6 .cm-table-widget td,
+.markdown-source-view.mod-cm6 .cm-table-widget td *,
+.markdown-source-view.mod-cm6 .cm-table-widget.cm-active td,
+.markdown-source-view.mod-cm6 .cm-active .cm-table-widget td {
+  background: var(--background-primary);
+  font-family: var(--font-text);
+  font-size: var(--ef-table-font-size);
+  line-height: 1.6;
+}
+
+.markdown-source-view.mod-cm6 .cm-table-widget th,
+.markdown-source-view.mod-cm6 .cm-table-widget th *,
+.markdown-source-view.mod-cm6 .cm-table-widget.cm-active th,
+.markdown-source-view.mod-cm6 .cm-active .cm-table-widget th {
+  background: var(--table-header-bg);
+  font-family: var(--font-text);
+  font-size: var(--ef-table-font-size);
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+/* Inline code */
+.markdown-rendered code {
+  font-family: var(--font-monospace);
+  font-size: var(--ef-code-size);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 1px 5px;
+  color: #e0e0e0;
+}
+
+/* Code block */
+.markdown-rendered pre {
+  background: var(--ef-bg-void);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin: 14px 0;
+  overflow-x: auto;
+}
+
+.markdown-rendered pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: var(--font-monospace);
+  font-size: var(--ef-code-size);
+  line-height: 1.65;
+  color: #ccc;
+}
+
+
+
+/* ============================================================
+   TASKS / CHECKBOXES
+   ============================================================ */
+input[type="checkbox"].task-list-item-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 6px;
+  flex-shrink: 0;
+  transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
+}
+
+input[type="checkbox"].task-list-item-checkbox:hover {
+  border-color: rgba(var(--ef-accent-rgb),0.5);
+}
+
+input[type="checkbox"].task-list-item-checkbox:checked {
+  background: rgba(var(--ef-accent-rgb),0.12);
+  border-color: var(--ef-accent);
+  box-shadow: 0 0 6px rgba(var(--ef-accent-rgb),0.28);
+}
+
+input[type="checkbox"].task-list-item-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 5px;
+  height: 8px;
+  border: 2px solid var(--ef-accent);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+/* Reading view */
+.markdown-rendered ul li,
+.markdown-rendered ol li {
+  color: var(--text-normal);
+}
+
+/* Live preview (CM6) — list lines and their markers */
+.markdown-source-view.mod-cm6 .HyperMD-list-line {
+  color: var(--text-normal);
+}
+
+.markdown-source-view.mod-cm6 .cm-list-1,
+.markdown-source-view.mod-cm6 .cm-list-2,
+.markdown-source-view.mod-cm6 .cm-list-3 {
+  color: var(--text-normal);
+}
+
+
+/* Completed task text */
+.task-list-item.is-checked .task-list-item-inner,
+li[data-task="x"] > p {
+  color: var(--ef-completed-text);
+  text-decoration: line-through;
+  text-decoration-color: var(--ef-completed-text);
+}
+
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+.markdown-rendered a.internal-link,
+.markdown-rendered a.external-link {
+  color: var(--ef-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(var(--ef-accent-rgb),0.3);
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.markdown-rendered a.internal-link:hover,
+.markdown-rendered a.external-link:hover {
+  color: var(--ef-accent-hover);
+  border-bottom-color: var(--ef-accent);
+}
+
+/* Unresolved (red-link) */
+.markdown-rendered a.is-unresolved {
+  color: #555;
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+.markdown-rendered a.is-unresolved:hover {
+  color: #888;
+}
+
+/* External link icon */
+.markdown-rendered a.external-link::after {
+  content: '↗';
+  font-size: 0.75em;
+  margin-left: 2px;
+  opacity: 0.5;
+}
+
+
+/* ============================================================
+   TAGS
+   ============================================================ */
+.tag {
+  font-size: 0.8em;
+  background: transparent;
+  border: 1px solid var(--ef-border-mid);
+  border-radius: 4px;
+  color: #888;
+  padding: 1px 6px;
+  text-decoration: none;
+  font-family: var(--font-interface);
+  transition: color 0.12s, border-color 0.12s, background 0.12s;
+}
+
+.tag:hover {
+  color: var(--ef-accent);
+  border-color: var(--ef-accent-border);
+  background: rgba(var(--ef-accent-rgb),0.05);
+}
+
+
+/* ============================================================
+   IMAGES
+   ============================================================ */
+.markdown-rendered img {
+  border-radius: 8px;
+  max-width: 100%;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.3);
+  margin: 12px 0;
+}
+
+
+/* ============================================================
+   LISTS + INLINE FORMATTING
+   ============================================================ */
+.markdown-rendered ul,
+.markdown-rendered ol {
+  padding-left: 22px;
+  margin: 8px 0;
+}
+
+.markdown-rendered li {
+  margin-bottom: 4px;
+  line-height: 1.7;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--text-normal);
+  margin-inline-start: 0;
+}
+
+/* Obsidian wraps list item text in <p> tags in reading view.
+   Without this, paragraph margins stack inside each li and inflate the spacing. */
+.markdown-rendered li > p {
+  margin: 0;
+  line-height: inherit;
+  font-size: inherit;
+}
+
+.markdown-rendered ul li::marker {
+  color: var(--ef-accent);
+}
+
+.markdown-rendered ol li::marker {
+  color: #888;
+  font-family: var(--font-text);
+  font-size: var(--ef-code-size);
+}
+
+/* Bold */
+.markdown-rendered strong {
+  color: #f0f0f0;
+  font-weight: 700;
+}
+
+/* Italic */
+.markdown-rendered em {
+  color: #ccc;
+}
+
+/* Highlight */
+.markdown-rendered mark {
+  background: rgba(var(--ef-accent-rgb),0.22);
+  color: #f0f0f0;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Strikethrough */
+.markdown-rendered del {
+  color: #444;
+  text-decoration-color: #444;
+}
+
+
+/* ============================================================
+   GFM CALLOUTS
+   GitHub-flavored alerts (note/tip/important/warning/caution):
+   accent bar, colored label, no icon. Excludes `|label` metadata
+   callouts (those use the speaker-dialogue layout snippet).
+   ============================================================ */
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]),
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) {
+  background: transparent;
+  border: none;
+  border-left: 3px solid var(--gfm-accent);
+  border-radius: 0;
+  padding: 0 0 0 1rem;
+  margin: 1rem 0;
+  mix-blend-mode: normal;
+  backdrop-filter: none;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-title,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-title {
+  padding: 0 0 0.25rem 0;
+  background: transparent;
+  color: var(--gfm-accent);
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) .callout-title-inner,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) .callout-title-inner {
+  font-weight: 500;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-title > .callout-icon {
+  display: none;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-content,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-content {
+  padding: 0;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child,
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"]) > .callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+.callout[data-callout="note"]:not([data-callout-metadata*="label"])      { --gfm-accent: var(--semantic-blue);   }
+.callout[data-callout="tip"]:not([data-callout-metadata*="label"])       { --gfm-accent: var(--semantic-green);  }
+.callout[data-callout="important"]:not([data-callout-metadata*="label"]) { --gfm-accent: var(--semantic-purple); }
+.callout[data-callout="warning"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-yellow); }
+.callout[data-callout="caution"]:not([data-callout-metadata*="label"])   { --gfm-accent: var(--semantic-red);    }
+
+
+/* ============================================================
+   HORIZONTAL RULES
+   ============================================================ */
+.markdown-rendered hr {
+  border: none;
+  border-top: 2px solid var(--ef-accent);
+  width: 66%;
+  margin: 24px auto;
+  position: relative;
+}
+
+/* Subtle center diamond on hr */
+.markdown-rendered hr::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  color: var(--ef-accent);
+  background: var(--background-primary);
+  padding: 0 6px;
+}

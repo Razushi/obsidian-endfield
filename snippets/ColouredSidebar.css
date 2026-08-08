@@ -1,0 +1,227 @@
+/* Sidebar file/folder items - Endfield interaction states */
+
+:root {
+  --ef-folder-color: var(--ef-accent, #d4c800);
+  --ef-file-color: #5b9bd5;
+  --ef-sidebar-rail: #4a4500;
+  --ef-sidebar-hover-bg: rgba(255,255,255,0.1);
+  --ef-sidebar-hover-rail: rgba(255,255,255,1);
+  --ef-sidebar-active-bg: rgba(var(--ef-accent-rgb, 212,200,0),0.08);
+}
+
+
+/* Base */
+.nav-folder-title,
+.nav-file-title {
+  background-color: transparent !important;
+  box-shadow: inset 3px 0 0 var(--ef-sidebar-rail);
+}
+
+/* The box-shadow rail above is kept for non-file-explorer nav panes (recent
+   files, etc.), which are flat and don't drift. The vault index overrides it
+   with a wrapper-anchored ::after rail below. */
+
+.nav-folder-title {
+  color: var(--ef-folder-color);
+}
+
+.nav-file-title {
+  color: var(--ef-file-color);
+}
+
+.nav-folder-title-content,
+.nav-file-title-content {
+  color: var(--text-normal, #e8e8e8);
+}
+
+.nav-file-tag {
+  color: var(--ef-file-color);
+}
+
+.nav-folder-title:not([data-path*="/"]) {
+  text-transform: uppercase;
+}
+
+
+/* ── Vault-index accent rail ─────────────────────────────────────────────
+   Per-item rails, but anchored to ONE X so they always line up.
+
+   Why not per-row box-shadow: Obsidian indents each nested row with an inline
+   negative margin (-19px/level). At fractional zoom that rounds to a different
+   device pixel on every row, so a rail drawn at each row's own left edge
+   staggers sub-pixel per depth — the jagged column you saw. The only stable
+   coordinate is the tree content wrapper's left (a single element = a single
+   rounding), which happens to sit exactly at the rows' left edge.
+
+   So each row's rail is an ::after positioned ABSOLUTELY against the wrapper
+   (left:0), giving every rail the same X regardless of depth or zoom. The row
+   stays position:static so the wrapper is the containing block; vertical
+   centering falls out of the row's own flex `align-items:center`. ::after (not
+   ::before) because nested folders already use ::before for their icon. */
+.workspace-leaf-content[data-type="file-explorer"] .nav-files-container > div:first-child {
+  position: relative;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .tree-item-self {
+  position: static;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .tree-item-self::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 2em;
+  background: var(--ef-sidebar-rail);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Vault index draws its rail via ::after above, so drop the box-shadow rail
+   here (it's the drifting one). Kept for other nav panes via the base rule. */
+.workspace-leaf-content[data-type="file-explorer"] .nav-folder-title,
+.workspace-leaf-content[data-type="file-explorer"] .nav-file-title {
+  box-shadow: none !important;
+}
+
+
+/* Hover */
+.nav-folder-title:not(.is-active):hover,
+.nav-file-title:not(.is-active):hover {
+  background-color: var(--ef-sidebar-hover-bg) !important;
+  box-shadow: inset 3px 0 0 var(--ef-sidebar-hover-rail);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .nav-folder-title:not(.is-active):hover::after,
+.workspace-leaf-content[data-type="file-explorer"] .nav-file-title:not(.is-active):hover::after {
+  background: var(--ef-sidebar-hover-rail);
+}
+
+
+/* Active */
+.nav-folder-title.is-active,
+.nav-file-title.is-active {
+  background-color: transparent !important;
+  border-radius: 0 6px 6px 0;
+  box-shadow: inset 3px 0 0 var(--ef-accent, #d4c800);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .nav-folder-title.is-active::after,
+.workspace-leaf-content[data-type="file-explorer"] .nav-file-title.is-active::after {
+  background: var(--ef-accent, #d4c800);
+}
+
+.nav-folder-title.is-active .nav-folder-title-content,
+.nav-file-title.is-active .nav-file-title-content {
+  color: var(--ef-accent, #d4c800);
+}
+
+
+/* Active + hover */
+.nav-folder-title.is-active:hover,
+.nav-file-title.is-active:hover {
+  background-color: var(--ef-sidebar-active-bg) !important;
+  box-shadow: inset 3px 0 0 var(--ef-accent, #d4c800);
+}
+
+.nav-folder-title.is-active:hover .nav-folder-title-content,
+.nav-file-title.is-active:hover .nav-file-title-content {
+  color: var(--ef-accent, #d4c800);
+}
+
+
+/* Keep file-tree glyphs/tags stable while row text/background states change. */
+.nav-folder-title,
+.nav-folder-title:hover,
+.nav-folder-title.is-active,
+.nav-folder-title.is-active:hover {
+  color: var(--ef-folder-color) !important;
+}
+
+.nav-file-title,
+.nav-file-title:hover,
+.nav-file-title.is-active,
+.nav-file-title.is-active:hover {
+  color: var(--ef-file-color) !important;
+}
+
+.nav-folder-title > svg,
+.nav-folder-title > .svg-icon {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.nav-folder-title .nav-folder-collapse-indicator,
+.nav-folder-title:hover .nav-folder-collapse-indicator,
+.nav-folder-title.is-active .nav-folder-collapse-indicator,
+.nav-folder-title.is-active:hover .nav-folder-collapse-indicator,
+.nav-folder-title .collapse-icon,
+.nav-folder-title:hover .collapse-icon,
+.nav-folder-title.is-active .collapse-icon,
+.nav-folder-title.is-active:hover .collapse-icon {
+  color: var(--ef-chrome-text-faint, #8b8b94) !important;
+  stroke: currentColor !important;
+}
+
+.nav-folder-title .nav-folder-collapse-indicator svg,
+.nav-folder-title .nav-folder-collapse-indicator .svg-icon,
+.nav-folder-title .collapse-icon svg,
+.nav-folder-title .collapse-icon .svg-icon {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+
+.nav-file-title svg,
+.nav-file-title .svg-icon,
+.nav-file-title:hover svg,
+.nav-file-title:hover .svg-icon,
+.nav-file-title.is-active svg,
+.nav-file-title.is-active .svg-icon,
+.nav-file-title.is-active:hover svg,
+.nav-file-title.is-active:hover .svg-icon {
+  color: var(--ef-file-color) !important;
+  stroke: currentColor !important;
+}
+
+.nav-file-title .nav-file-tag,
+.nav-file-title:hover .nav-file-tag,
+.nav-file-title.is-active .nav-file-tag,
+.nav-file-title.is-active:hover .nav-file-tag {
+  color: var(--ef-file-color) !important;
+}
+
+
+/* ── Folder chevrons: hide for all levels ───────────────────────────────── */
+
+.nav-files-container .tree-item-icon.collapse-icon {
+  display: none !important;
+}
+
+
+/* ── Non-top-level folder: custom open/closed icons ────────────────────── */
+
+/* Hide the original Lucide folder SVG (inside .tree-item-icon inside title) */
+.nav-folder-title[data-path*="/"] .tree-item-icon,
+.nav-folder-title[data-path*="/"] svg.lucide-folder,
+.nav-folder-title[data-path*="/"] svg.lucide-folder-open {
+  display: none !important;
+}
+
+/* Closed icon (default / collapsed) — lucide folder-closed */
+.nav-folder-title[data-path*="/"]::before {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4c800' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/%3E%3Cpath d='M2 10h20'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* Open icon — lucide folder-open */
+.nav-folder:not(.is-collapsed) > .nav-folder-title[data-path*="/"]::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4c800' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
+}

@@ -1,0 +1,356 @@
+/* ============================================================
+   ENDFIELD UI CHROME
+   Injects sidebar panel labels and shared nav-button styling.
+
+   Toggle: Settings -> Appearance -> CSS snippets
+   ============================================================ */
+
+
+/* ============================================================
+   PANEL HEADERS
+   ============================================================ */
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .view-header {
+  background: transparent;
+  border-bottom: none;
+  min-height: 34px;
+  padding: 8px 10px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  box-shadow: none;
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .view-header::before {
+  display: block;
+  order: 1;
+  font-size: var(--ef-ui-size);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--ef-header-label-color, #ffffff);
+  font-family: var(--font-interface);
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-header::before {
+  content: none;
+}
+
+.workspace-leaf-content[data-type="outline"] .view-header::before {
+  content: '// Outline';
+}
+
+.workspace-leaf-content[data-type="bookmarks"] .view-header::before {
+  content: '// Bookmarks';
+}
+
+.workspace-leaf-content[data-type="tag"] .view-header::before {
+  content: '// Tags';
+}
+
+.workspace-leaf-content[data-type="all-properties"] .view-header::before {
+  content: '// Properties';
+}
+
+.workspace-leaf-content[data-type="search"] .view-header::before {
+  content: '// Search';
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .view-header::after {
+  content: none;
+  display: none;
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) :is(.view-header-title-container, .view-header-title) {
+  display: none;
+}
+
+.workspace-leaf.mod-active
+  .workspace-leaf-content:is([data-type="file-explorer"], [data-type="outline"])
+  .view-header::before {
+  color: var(--ef-header-label-color, #ffffff);
+}
+
+
+/* ============================================================
+   SHARED NAV BUTTONS
+   ============================================================ */
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .nav-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 4px;
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .nav-action-button {
+  padding: 5px;
+  border-radius: var(--ef-btn-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: var(--ef-btn-toggle-color);
+  background: transparent;
+  transition: var(--ef-btn-transition);
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .nav-action-button svg {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  stroke: currentColor;
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .nav-action-button:hover {
+  box-shadow: var(--ef-btn-toggle-ring-hover);
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .nav-action-button.is-active {
+  color: var(--ef-btn-toggle-color-on);
+  background: var(--ef-btn-toggle-bg-on);
+}
+
+.workspace-leaf-content:is(
+  [data-type="file-explorer"],
+  [data-type="outline"],
+  [data-type="bookmarks"],
+  [data-type="tag"],
+  [data-type="all-properties"],
+  [data-type="search"]
+) .nav-action-button.is-active:hover {
+  color: var(--ef-btn-toggle-color-on-hover);
+  background: var(--ef-btn-toggle-bg-on);
+}
+
+
+/* ============================================================
+   FILE EXPLORER
+   ============================================================ */
+/* nav-header is the action-button bar above the tree. Keeping it sticky stops
+   file tree rows bleeding through the controls while scrolling. */
+.workspace-leaf-content[data-type="file-explorer"] .nav-header {
+  background: var(--background-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .nav-action-button:nth-child(1),
+.workspace-leaf-content[data-type="file-explorer"] .nav-action-button:nth-child(2) {
+  display: none;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .nav-files-container::before {
+  content: '// Vault Index';
+  display: block;
+  font-size: var(--ef-ui-size);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--ef-header-label-color, #ffffff);
+  font-family: var(--font-interface);
+  white-space: nowrap;
+  padding: 8px 10px 4px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--background-secondary);
+  box-shadow: 0 -100px 0 100px var(--background-secondary);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions {
+  order: 3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: auto;
+  width: 28px;
+  max-height: 24px;
+  padding: 28px 4px 4px;
+  overflow: hidden;
+  gap: 2px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: max-height 0.14s ease, background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover,
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within {
+  width: 34px;
+  max-height: 320px;
+  background: var(--background-primary-alt);
+  border-color: var(--ef-border-mid);
+  box-shadow: inset 0 0 0 1px var(--ef-border-faint),
+              0 8px 20px rgba(0,0,0,0.42);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions::before {
+  content: '▾';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--ef-icon-color);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--ef-border-mid);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px var(--ef-border-faint);
+  font-size: 20px;
+  line-height: 1;
+  transform: translateY(-1px);
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover::before,
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within::before {
+  color: var(--ef-accent);
+  background: var(--ef-accent-bg-dim);
+  border-color: rgba(var(--ef-accent-rgb),0.28);
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions .view-action {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  color: var(--ef-icon-color);
+  border-radius: 6px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: color 0.12s, background 0.12s, opacity 0.12s;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:hover .view-action,
+.workspace-leaf-content[data-type="file-explorer"] .view-actions:focus-within .view-action {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.workspace-leaf-content[data-type="file-explorer"] .view-actions .view-action:hover {
+  color: var(--ef-accent);
+  background: var(--ef-accent-bg-active);
+}
+
+
+/* ============================================================
+   OUTLINE
+   ============================================================ */
+.workspace-leaf-content[data-type="outline"] .view-header {
+  padding-left: 20px;
+}
+
+.workspace-leaf-content[data-type="outline"] .view-header-nav-buttons,
+.workspace-leaf-content[data-type="outline"] .view-actions {
+  display: none;
+}
+
+
+/* ============================================================
+   SEARCH PANEL INLINE BUTTONS
+   ============================================================ */
+.workspace-leaf-content[data-type="search"] .search-row .clickable-icon {
+  padding: 5px;
+  border-radius: var(--ef-btn-radius);
+  color: var(--ef-btn-toggle-color);
+  background: transparent;
+  transition: var(--ef-btn-transition);
+}
+
+.workspace-leaf-content[data-type="search"] .search-row .clickable-icon svg {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  stroke: currentColor;
+}
+
+.workspace-leaf-content[data-type="search"] .search-row .clickable-icon:hover {
+  background: transparent;
+  box-shadow: var(--ef-btn-toggle-ring-hover);
+}
+
+.workspace-leaf-content[data-type="search"] .search-row .clickable-icon.is-active {
+  color: var(--ef-btn-toggle-color-on);
+  background: var(--ef-btn-toggle-bg-on);
+  box-shadow: none;
+}
+
+.workspace-leaf-content[data-type="search"] .search-row .clickable-icon.is-active:hover {
+  color: var(--ef-btn-toggle-color-on-hover);
+  background: var(--ef-btn-toggle-bg-on);
+}

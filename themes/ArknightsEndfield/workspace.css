@@ -1,0 +1,256 @@
+/* ============================================================
+   ARKNIGHTS: ENDFIELD — WORKSPACE
+   Body, titlebar, dot-grid root, left ribbon,
+   sidebar toggle, status bar, scrollbars.
+   ============================================================ */
+
+
+/* ============================================================
+   WORKSPACE CHROME
+   ============================================================ */
+.theme-dark body {
+  font-family: var(--font-text);
+  font-size: var(--font-text-size);
+  line-height: var(--line-height-normal);
+  background: var(--background-primary);
+}
+
+.workspace {
+  background: var(--background-primary);
+}
+
+/* Windows titlebar — unified with tab strip */
+.titlebar {
+  background: var(--ef-bg-titlebar);
+  border-bottom: none;
+}
+
+.titlebar-text {
+  color: var(--ef-chrome-text-faint);
+  font-size: 11px;
+  font-family: var(--font-interface);
+}
+
+.titlebar-button.mod-logo {
+  display: none;
+}
+
+/* Window control buttons — transparent container so each button is visually separate */
+.titlebar-button-container,
+.is-focused .titlebar-button-container,
+.is-hidden .titlebar-button-container {
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 8px;
+}
+
+.titlebar-button,
+.is-hidden .titlebar-button {
+  background: transparent !important;
+  color: var(--ef-icon-color);
+  opacity: 1;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  max-height: 24px;
+  padding: 0 !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: color 0.12s, background 0.12s, box-shadow 0.12s;
+}
+
+.titlebar-button svg,
+.is-hidden .titlebar-button svg {
+  color: currentColor;
+  fill: currentColor;
+  stroke: currentColor;
+  opacity: 1;
+}
+
+.titlebar-button:hover {
+  color: var(--ef-text-white);
+  background: var(--ef-btn-action-bg-hover) !important;
+  box-shadow: var(--ef-btn-action-shadow-hover);
+}
+
+.titlebar-button.mod-close:hover {
+  background: rgba(204, 34, 0, 0.55) !important;
+}
+
+
+/* Dot-grid texture on the root editor split only */
+.workspace-split.mod-root {
+  position: relative;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-color: var(--background-primary);
+}
+
+
+/* ============================================================
+   LEFT RIBBON (icon rail)
+   ============================================================ */
+.workspace-ribbon {
+  background: transparent;
+}
+
+.workspace-ribbon.mod-left,
+.workspace-ribbon.mod-left.is-collapsed {
+  background: var(--ef-bg-ribbon) !important;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 6px 0 28px rgba(0,0,0,0.75), 2px 0 8px rgba(0,0,0,0.55);
+  outline: none;
+}
+
+/* This line, removes a fuckass underline of the ribbon toggle button when obsidian is unfocused. */ 
+.workspace-ribbon.mod-left::before {
+  background: var(--ef-bg-ribbon);
+}
+
+.workspace-ribbon.mod-right {
+  display: none;
+}
+
+/* Circle button tight around default icon size — no SVG override */
+.workspace-ribbon.mod-left .side-dock-ribbon-tab,
+.workspace-ribbon.mod-left .side-dock-ribbon-action {
+  color: var(--nav-item-color);
+  border-radius: 50%;
+  margin: 3px auto;
+  padding: 5px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.workspace-ribbon.mod-left .side-dock-ribbon-tab:hover,
+.workspace-ribbon.mod-left .side-dock-ribbon-action:hover {
+  color: var(--ef-text-white);
+  background: var(--ef-btn-action-bg-hover);
+  box-shadow: var(--ef-btn-action-shadow-hover);
+}
+
+.workspace-ribbon.mod-left .side-dock-ribbon-tab.is-active,
+.workspace-ribbon.mod-left .side-dock-ribbon-action.is-active {
+  color: var(--ef-text-white);
+  background: var(--ef-btn-action-bg-hover);
+  border-radius: 50%;
+}
+
+/* Ribbon toggle button */
+.workspace-ribbon-collapse-btn {
+  color: var(--ef-icon-disabled);
+  transition: color 0.15s;
+}
+.workspace-ribbon-collapse-btn:hover {
+  color: var(--ef-icon-color);
+}
+
+/* Sidebar toggle button — restored to the pre-refactor treatment */
+.sidebar-toggle-button.mod-left {
+  background: var(--ef-bg-ribbon);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  margin: 3px auto;
+  padding: 5px;
+}
+
+.sidebar-toggle-button.mod-left::before,
+.sidebar-toggle-button.mod-left::after {
+  display: none;
+}
+
+
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+.status-bar {
+  background: var(--ef-bg-ribbon);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  height: 22px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.status-bar-item {
+  color: var(--ef-chrome-text-faint);
+  font-size: var(--ef-ui-size-compact);
+  font-family: var(--font-monospace);
+  padding: 0 6px;
+  transition: color 0.12s;
+}
+
+.status-bar-item.mod-clickable:hover {
+  color: var(--ef-chrome-text);
+}
+
+/* Word / char count — yellow */
+.status-bar-item.plugin-word-count {
+  color: var(--ef-accent);
+}
+
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-active-thumb-bg);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+/* ============================================================
+   NEW TAB PAGE
+   ============================================================ */
+.workspace-leaf-content[data-type="new-tab"] .view-content,
+.workspace-leaf-content[data-type="empty"] .view-content {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='144'%20height='144'%3E%3Cline%20x1='66'%20y1='72'%20x2='78'%20y2='72'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3Cline%20x1='72'%20y1='66'%20x2='72'%20y2='78'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3Cline%20x1='0'%20y1='72'%20x2='62'%20y2='72'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3Cline%20x1='82'%20y1='72'%20x2='144'%20y2='72'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3Cline%20x1='72'%20y1='0'%20x2='72'%20y2='62'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3Cline%20x1='72'%20y1='82'%20x2='72'%20y2='144'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='144'%20height='144'%3E%3Cline%20x1='0'%20y1='0'%20x2='66'%20y2='66'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3Cline%20x1='78'%20y1='78'%20x2='144'%20y2='144'%20stroke='rgba(255,255,255,0.04)'%20stroke-width='0.5'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='144'%20height='144'%3E%3Cline%20x1='16'%20y1='0'%20x2='0'%20y2='16'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='32'%20y1='0'%20x2='0'%20y2='32'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='48'%20y1='0'%20x2='0'%20y2='48'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='64'%20y1='0'%20x2='0'%20y2='64'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='80'%20y1='0'%20x2='0'%20y2='80'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='96'%20y1='0'%20x2='0'%20y2='96'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='112'%20y1='0'%20x2='0'%20y2='112'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='128'%20y1='0'%20x2='0'%20y2='128'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='144'%20y1='0'%20x2='78'%20y2='66'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3Cline%20x1='66'%20y1='78'%20x2='0'%20y2='144'%20stroke='rgba(255,255,255,0.02)'%20stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 18px 18px, 144px 144px, 144px 144px, 144px 144px;
+  background-position: 9px 9px, 72px 72px, 72px 72px, 72px 72px;
+  background-repeat: repeat;
+  background-attachment: local;
+}
+
+
+/* ============================================================
+   VIEW CONTENT — global 3px dot-grid texture
+   O X X O X X — 2×2 filled squares, 1px gaps
+   ============================================================ */
+div.view-content {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='3'%3E%3Crect x='0' y='0' width='1' height='3' fill='rgba(255,255,255,0.01)'/%3E%3Crect x='0' y='0' width='3' height='1' fill='rgba(255,255,255,0.01)'/%3E%3C/svg%3E");
+  background-size: 3px 3px;
+  background-repeat: repeat;
+}
