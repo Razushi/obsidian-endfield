@@ -16,7 +16,20 @@ body.theme-light {
   --ef-sidebar-rail:       rgba(212,200,0,0.55);  /* rest: faded yellow */
   --ef-sidebar-hover-bg:   rgba(0,0,0,0.06);       /* whole-tab hover highlight */
   --ef-sidebar-hover-rail: rgba(0,0,0,0.70);       /* hover cue: near-black rail */
-  --ef-sidebar-active-bg:  rgba(var(--ef-accent-rgb, 212,200,0),0.18); /* active tint */
+  --ef-sidebar-active-bg:  rgba(var(--ef-accent-rgb, 212,200,0),0.20); /* active tint */
+}
+
+/* Light mode: on a light surface yellow text alone doesn't out-rank the grey
+   hover pill, so the active item reads weaker than a hovered one. Give active a
+   PERSISTENT yellow tint (not just on hover) + bolder text so it clearly wins.
+   Dark mode keeps its transparent-at-rest active (yellow glows on near-black). */
+body.theme-light .nav-folder-title.is-active,
+body.theme-light .nav-file-title.is-active {
+  background-color: var(--ef-sidebar-active-bg) !important;
+}
+body.theme-light .nav-folder-title.is-active .nav-folder-title-content,
+body.theme-light .nav-file-title.is-active .nav-file-title-content {
+  font-weight: 600;
 }
 
 
