@@ -348,7 +348,7 @@
   --ef-gray:                           #333333;
   --ef-ink:                            #1e1e22;
   --ef-off-white:                      #f3f3f5;
-  --ef-parchment:                      #eae6e2;
+  --ef-parchment:                      #ffffff;  /* active pill: crisp white (was egg-toned #eae6e2) */
 
   /* --- Typography --- */
   --font-interface:                   'Geist', -apple-system, 'Segoe UI', sans-serif;
