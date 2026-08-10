@@ -27,5 +27,7 @@ plugins/asset-url-fix/
 plugins/typst/
 
 # === Never ===
+# Claude Code worktrees live here and are ~300MB
+.claude/
 node_modules/
 .DS_Store
