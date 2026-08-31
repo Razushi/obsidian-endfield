@@ -1,9 +1,9 @@
 {
   "id": "daily-note-no-flicker",
   "name": "Daily Note No Flicker",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "minAppVersion": "1.5.0",
-  "description": "Focuses an already-open note instead of reopening it (which makes Mononote bounce and flicker). Covers today's daily note plus any paths listed in data.json.",
+  "description": "Focuses an already-open daily note before falling back to Obsidian's Daily Notes command.",
   "author": "Razushi",
   "isDesktopOnly": false
 }
