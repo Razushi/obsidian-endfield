@@ -9,6 +9,7 @@ plugins/*/data.json
 !plugins/banners-reloaded/data.json
 !plugins/calendar/data.json
 !plugins/cmdr/data.json
+!plugins/daily-note-no-flicker/data.json
 !plugins/editor-width-slider/data.json
 !plugins/homepage/data.json
 !plugins/obsidian-hider/data.json
