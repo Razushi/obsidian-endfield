@@ -11,10 +11,11 @@ module.exports = class DailyNoteNoFlickerPlugin extends Plugin {
     });
 
     // One command per configured path, so each can get its own hotkey.
+    // The id is the bare path, matching "Hotkeys for specific files".
     const data = (await this.loadData()) || {};
     for (const path of data.files || []) {
       this.addCommand({
-        id: `open-file:${path}`,
+        id: path,
         name: `Open ${path} without flicker`,
         callback: () => this.focusOrOpen(path),
       });
