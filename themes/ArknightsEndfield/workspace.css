@@ -35,15 +35,26 @@
   display: none;
 }
 
-/* Window control buttons — transparent container so each button is visually separate */
+/* Window controls like Firefox / native Windows: minimise, maximise and close are
+   full-height squares, side by side, flush with the top-right corner.
+   --frame-right-space is the room Obsidian keeps clear at the right of the tab
+   bar for them; 3 x 46px = 138px. */
+body.mod-windows {
+  --frame-right-space: 138px;
+  /* Windows with no tab bar (Settings, pop-outs) get the tab-strip height so the
+     full-height buttons fit there too. The main window uses the tab bar. */
+  --titlebar-height: var(--header-height, 40px);
+}
+
 .titlebar-button-container,
 .is-focused .titlebar-button-container,
 .is-hidden .titlebar-button-container {
   background: transparent !important;
   display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 0 8px;
+  height: var(--titlebar-height);
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
 }
 
 .titlebar-button,
@@ -51,14 +62,14 @@
   background: transparent !important;
   color: var(--ef-icon-color);
   opacity: 1;
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  max-height: 24px;
+  width: 46px !important;
+  min-width: 46px;
+  max-width: 46px;
+  height: 100% !important;
+  min-height: 100%;
+  max-height: none;
   padding: 0 !important;
-  border-radius: 50%;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,7 +92,9 @@
 }
 
 .titlebar-button.mod-close:hover {
-  background: rgba(204, 34, 0, 0.55) !important;
+  background: #c42b1c !important;  /* Windows close red */
+  box-shadow: none;
+  color: #ffffff;
 }
 
 

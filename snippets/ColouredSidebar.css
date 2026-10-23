@@ -220,30 +220,69 @@ body.theme-light .nav-file-title.is-active .nav-file-title-content {
 }
 
 
-/* ── Non-top-level folder: custom open/closed icons ────────────────────── */
+/* ── Default icons: every folder (open/closed) and every file ─────────
+   Drawn by CSS, so they show as soon as Obsidian opens (Iconize only draws
+   after the vault has loaded). The SVGs are masks: their colour comes from
+   --ef-folder-color / --ef-file-color, so there's no hex inside them.
+   An icon set with Iconize on one folder or file (.iconize-icon) replaces the
+   default for that item. Keep Iconize's catch-all rules ("all folders",
+   "all files") off, or they replace every default and the open/closed swap
+   is lost. */
 
 /* Hide the original Lucide folder SVG (inside .tree-item-icon inside title) */
-.nav-folder-title[data-path*="/"] .tree-item-icon,
-.nav-folder-title[data-path*="/"] svg.lucide-folder,
-.nav-folder-title[data-path*="/"] svg.lucide-folder-open {
+.nav-folder-title .tree-item-icon,
+.nav-folder-title svg.lucide-folder,
+.nav-folder-title svg.lucide-folder-open {
   display: none !important;
 }
 
-/* Closed icon (default / collapsed) — lucide folder-closed */
-.nav-folder-title[data-path*="/"]::before {
+.nav-folder-title::before,
+.nav-file-title::before {
   content: '';
   display: block;
   width: 16px;
   height: 16px;
   min-width: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4c800' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/%3E%3Cpath d='M2 10h20'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  margin-right: 4px;  /* same gap as Iconize's extraMargin (right: 4) */
   flex-shrink: 0;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
-/* Open icon — lucide folder-open */
-.nav-folder:not(.is-collapsed) > .nav-folder-title[data-path*="/"]::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4c800' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
+/* Folder, closed (lucide folder-closed) */
+.nav-folder-title::before {
+  background-color: var(--ef-folder-color);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/%3E%3Cpath d='M2 10h20'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'/%3E%3Cpath d='M2 10h20'/%3E%3C/svg%3E");
+}
+
+/* Folder, open (lucide folder-open) */
+.nav-folder:not(.is-collapsed) > .nav-folder-title::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2'/%3E%3C/svg%3E");
+}
+
+/* File (lucide file) */
+.nav-file-title::before {
+  background-color: var(--ef-file-color);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/%3E%3Cpath d='M14 2v4a2 2 0 0 0 2 2h4'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/%3E%3Cpath d='M14 2v4a2 2 0 0 0 2 2h4'/%3E%3C/svg%3E");
+}
+
+/* Same left padding for files as for folders. Obsidian gives folders
+   (.tree-item-self.mod-collapsible) --nav-item-parent-padding (24px left),
+   which beats the theme's `padding: 4px 10px`; files only got the theme's
+   10px, so they sat 14px left of sibling folders and looked un-nested. */
+.workspace-leaf-content[data-type="file-explorer"] .nav-file-title.tree-item-self {
+  padding: var(--nav-item-parent-padding);
+}
+
+/* Iconize override wins: hide the default on that one item */
+.nav-folder-title:has(.iconize-icon)::before,
+.nav-file-title:has(.iconize-icon)::before {
+  display: none;
 }
